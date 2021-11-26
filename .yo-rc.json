@@ -40,6 +40,8 @@
     "devServerPort": 4200,
     "clientPackageManager": "npm",
     "languages": ["es", "en", "pt-br"],
-    "enableGradleEnterprise": false
+    "enableGradleEnterprise": false,
+    "lastLiquibaseTimestamp": 1637959336000,
+    "entities": ["Film"]
   }
 }

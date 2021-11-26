@@ -1,0 +1,45 @@
+{
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "unique", "minlength", "maxlength"],
+      "fieldValidateRulesMinlength": "2",
+      "fieldValidateRulesMaxlength": "30"
+    },
+    {
+      "fieldName": "genre",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "minlength", "maxlength"],
+      "fieldValidateRulesMinlength": "5",
+      "fieldValidateRulesMaxlength": "30"
+    },
+    {
+      "fieldName": "urlImage",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "image",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "duration",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "active",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "date",
+      "fieldType": "LocalDate"
+    }
+  ],
+  "relationships": [],
+  "service": "serviceImpl",
+  "dto": "mapstruct",
+  "jpaMetamodelFiltering": false,
+  "readOnly": false,
+  "pagination": "pagination",
+  "name": "Film",
+  "changelogDate": "20211126204216"
+}

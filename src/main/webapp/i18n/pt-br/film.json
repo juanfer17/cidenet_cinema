@@ -1,0 +1,29 @@
+{
+  "cinemaCidenetApp": {
+    "film": {
+      "home": {
+        "title": "Films",
+        "refreshListLabel": "Atualizar lista",
+        "createLabel": "Criar novo Film",
+        "createOrEditLabel": "Criar ou editar Film",
+        "notFound": "Nenhum Film encontrado"
+      },
+      "created": "Um novo Film foi criado com o identificador {{ param }}",
+      "updated": "Um Film foi atualizado com o identificador {{ param }}",
+      "deleted": "Um Film foi excluído com o identificador {{ param }}",
+      "delete": {
+        "question": "Tem certeza de que deseja excluir Film {{ id }}?"
+      },
+      "detail": {
+        "title": "Film"
+      },
+      "id": "ID",
+      "name": "Name",
+      "genre": "Genre",
+      "urlImage": "Url Image",
+      "duration": "Duration",
+      "active": "Active",
+      "date": "Date"
+    }
+  }
+}
