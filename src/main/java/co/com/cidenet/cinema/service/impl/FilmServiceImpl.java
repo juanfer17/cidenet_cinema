@@ -5,6 +5,7 @@ import co.com.cidenet.cinema.repository.FilmRepository;
 import co.com.cidenet.cinema.service.FilmService;
 import co.com.cidenet.cinema.service.dto.FilmDTO;
 import co.com.cidenet.cinema.service.mapper.FilmMapper;
+import java.util.List;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -72,5 +73,14 @@ public class FilmServiceImpl implements FilmService {
     public void delete(Long id) {
         log.debug("Request to delete Film : {}", id);
         filmRepository.deleteById(id);
+    }
+
+    @Override
+    public List<Film> getActiveFilms() {
+        List<Film> dataQuery = filmRepository.findByActive(true);
+        dataQuery.forEach(data -> {
+            System.out.println(data.getName());
+        });
+        return dataQuery;
     }
 }

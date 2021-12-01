@@ -74,6 +74,13 @@ export class FilmService {
     return filmCollection;
   }
 
+  queryActive(): Observable<EntityArrayResponseType> {
+    const options = createRequestOption();
+    return this.http
+      .get<IFilm[]>(this.resourceUrl + '/active', { params: options, observe: 'response' })
+      .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
+  }
+
   protected convertDateFromClient(film: IFilm): IFilm {
     return Object.assign({}, film, {
       date: film.date?.isValid() ? film.date.format(DATE_FORMAT) : undefined,

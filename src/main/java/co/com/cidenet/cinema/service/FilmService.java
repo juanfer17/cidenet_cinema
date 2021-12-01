@@ -1,6 +1,8 @@
 package co.com.cidenet.cinema.service;
 
+import co.com.cidenet.cinema.domain.Film;
 import co.com.cidenet.cinema.service.dto.FilmDTO;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -47,4 +49,6 @@ public interface FilmService {
      * @param id the id of the entity.
      */
     void delete(Long id);
+
+    List<Film> getActiveFilms();
 }

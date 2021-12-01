@@ -1,5 +1,6 @@
 package co.com.cidenet.cinema.web.rest;
 
+import co.com.cidenet.cinema.domain.Film;
 import co.com.cidenet.cinema.repository.FilmRepository;
 import co.com.cidenet.cinema.service.FilmService;
 import co.com.cidenet.cinema.service.dto.FilmDTO;
@@ -179,5 +180,12 @@ public class FilmResource {
             .noContent()
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
             .build();
+    }
+
+    @GetMapping("/films/active")
+    public ResponseEntity<List<Film>> getActiveFilms() {
+        log.debug("REST request to get a page of Films");
+        List<Film> page = filmService.getActiveFilms();
+        return ResponseEntity.ok().body(page);
     }
 }

@@ -1,6 +1,8 @@
 package co.com.cidenet.cinema.repository;
 
 import co.com.cidenet.cinema.domain.Film;
+import java.util.List;
+import java.util.Optional;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;
 
@@ -9,4 +11,6 @@ import org.springframework.stereotype.Repository;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface FilmRepository extends JpaRepository<Film, Long> {}
+public interface FilmRepository extends JpaRepository<Film, Long> {
+    List<Film> findByActive(Boolean active);
+}

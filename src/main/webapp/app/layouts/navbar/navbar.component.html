@@ -43,6 +43,7 @@
           <li>
             <a
               class="dropdown-item"
+              *jhiHasAnyAuthority="'ROLE_ADMIN'"
               routerLink="film"
               routerLinkActive="active"
               [routerLinkActiveOptions]="{ exact: true }"
