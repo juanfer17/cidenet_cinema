@@ -1,0 +1,28 @@
+{
+  "cinemaCidenetApp": {
+    "room": {
+      "home": {
+        "title": "Rooms",
+        "refreshListLabel": "Refrescar lista",
+        "createLabel": "Crear nuevo Room",
+        "createOrEditLabel": "Crear o editar Room",
+        "notFound": "Ningún Rooms encontrado"
+      },
+      "created": "Un nuevo Room ha sido creado con el identificador {{ param }}",
+      "updated": "Un Room ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Room ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Room {{ id }}?"
+      },
+      "detail": {
+        "title": "Room"
+      },
+      "id": "ID",
+      "roomName": "Room Name",
+      "roomType": "Room Type",
+      "row": "Row",
+      "column": "Column",
+      "statusRoom": "Status Room"
+    }
+  }
+}

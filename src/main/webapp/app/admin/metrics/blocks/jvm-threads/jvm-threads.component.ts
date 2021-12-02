@@ -7,6 +7,7 @@ import { MetricsModalThreadsComponent } from '../metrics-modal-threads/metrics-m
 @Component({
   selector: 'jhi-jvm-threads',
   templateUrl: './jvm-threads.component.html',
+  styleUrls: ['../../metrics.component.scss'],
 })
 export class JvmThreadsComponent {
   threadStats = {

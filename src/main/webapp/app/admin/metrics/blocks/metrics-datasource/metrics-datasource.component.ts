@@ -6,6 +6,7 @@ import { filterNaN } from 'app/core/util/operators';
 @Component({
   selector: 'jhi-metrics-datasource',
   templateUrl: './metrics-datasource.component.html',
+  styleUrls: ['../../metrics.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MetricsDatasourceComponent {

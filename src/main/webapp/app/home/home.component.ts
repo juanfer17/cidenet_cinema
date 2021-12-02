@@ -7,7 +7,7 @@ import { AccountService } from 'app/core/auth/account.service';
 import { Account } from 'app/core/auth/account.model';
 import { IFilm } from 'app/entities/film/film.model';
 import { FilmService } from 'app/entities/film/service/film.service';
-import { ASC, DESC, ITEMS_PER_PAGE, SORT } from 'app/config/pagination.constants';
+import { ASC, DESC, ITEMS_PER_PAGE } from 'app/config/pagination.constants';
 
 @Component({
   selector: 'jhi-home',

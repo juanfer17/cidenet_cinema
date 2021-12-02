@@ -1,0 +1,44 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="functionFilm">
+      <h2 data-cy="functionFilmDetailsHeading"><span jhiTranslate="cinemaCidenetApp.functionFilm.detail.title">Function Film</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ functionFilm.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="cinemaCidenetApp.functionFilm.dateFunction">Date Function</span></dt>
+        <dd>
+          <span>{{ functionFilm.dateFunction | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="cinemaCidenetApp.functionFilm.room">Room</span></dt>
+        <dd>
+          <div *ngIf="functionFilm.room">
+            <a [routerLink]="['/room', functionFilm.room?.id, 'view']">{{ functionFilm.room?.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="cinemaCidenetApp.functionFilm.film">Film</span></dt>
+        <dd>
+          <div *ngIf="functionFilm.film">
+            <a [routerLink]="['/film', functionFilm.film?.id, 'view']">{{ functionFilm.film?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/function-film', functionFilm.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

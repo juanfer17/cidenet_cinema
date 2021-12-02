@@ -1,0 +1,26 @@
+{
+  "cinemaCidenetApp": {
+    "functionFilm": {
+      "home": {
+        "title": "Function Films",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Function Film",
+        "createOrEditLabel": "Create or edit a Function Film",
+        "notFound": "No Function Films found"
+      },
+      "created": "A new Function Film is created with identifier {{ param }}",
+      "updated": "A Function Film is updated with identifier {{ param }}",
+      "deleted": "A Function Film is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Function Film {{ id }}?"
+      },
+      "detail": {
+        "title": "Function Film"
+      },
+      "id": "ID",
+      "dateFunction": "Date Function",
+      "room": "Room",
+      "film": "Film"
+    }
+  }
+}

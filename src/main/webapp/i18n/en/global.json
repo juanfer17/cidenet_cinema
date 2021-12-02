@@ -8,6 +8,9 @@
       "entities": {
         "main": "Options",
         "film": "Film",
+        "room": "Room",
+        "functionFilm": "Function Film",
+        "booking": "Booking",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

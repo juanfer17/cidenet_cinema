@@ -1,0 +1,108 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-function-film-heading"
+        data-cy="FunctionFilmCreateUpdateHeading"
+        jhiTranslate="cinemaCidenetApp.functionFilm.home.createOrEditLabel"
+      >
+        Create or edit a Function Film
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="cinemaCidenetApp.functionFilm.dateFunction" for="field_dateFunction"
+            >Date Function</label
+          >
+          <div class="input-group">
+            <input
+              id="field_dateFunction"
+              data-cy="dateFunction"
+              type="text"
+              class="form-control"
+              name="dateFunction"
+              ngbDatepicker
+              #dateFunctionDp="ngbDatepicker"
+              formControlName="dateFunction"
+            />
+            <span class="input-group-append">
+              <button type="button" class="btn btn-secondary" (click)="dateFunctionDp.toggle()">
+                <fa-icon icon="calendar-alt"></fa-icon>
+              </button>
+            </span>
+          </div>
+          <div
+            *ngIf="editForm.get('dateFunction')!.invalid && (editForm.get('dateFunction')!.dirty || editForm.get('dateFunction')!.touched)"
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('dateFunction')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="cinemaCidenetApp.functionFilm.room" for="field_room">Room</label>
+          <select class="form-control" id="field_room" data-cy="room" name="room" formControlName="room">
+            <option *ngIf="!editForm.get('room')!.value" [ngValue]="null" selected></option>
+            <option
+              [ngValue]="roomOption.id === editForm.get('room')!.value?.id ? editForm.get('room')!.value : roomOption"
+              *ngFor="let roomOption of roomsSharedCollection; trackBy: trackRoomById"
+            >
+              {{ roomOption.id }}
+            </option>
+          </select>
+        </div>
+        <div *ngIf="editForm.get(['room'])!.invalid && (editForm.get(['room'])!.dirty || editForm.get(['room'])!.touched)">
+          <small class="form-text text-danger" *ngIf="editForm.get(['room'])?.errors?.required" jhiTranslate="entity.validation.required">
+            This field is required.
+          </small>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="cinemaCidenetApp.functionFilm.film" for="field_film">Film</label>
+          <select class="form-control" id="field_film" data-cy="film" name="film" formControlName="film">
+            <option *ngIf="editForm.get(['film'])!.value == null" [ngValue]="null" selected></option>
+            <option
+              [ngValue]="filmOption.id === editForm.get('film')!.value?.id ? editForm.get('film')!.value : filmOption"
+              *ngFor="let filmOption of filmsCollection; trackBy: trackFilmById"
+            >
+              {{ filmOption.id }}
+            </option>
+          </select>
+        </div>
+        <div *ngIf="editForm.get(['film'])!.invalid && (editForm.get(['film'])!.dirty || editForm.get(['film'])!.touched)">
+          <small class="form-text text-danger" *ngIf="editForm.get(['film'])?.errors?.required" jhiTranslate="entity.validation.required">
+            This field is required.
+          </small>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

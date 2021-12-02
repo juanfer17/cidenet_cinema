@@ -7,6 +7,7 @@ import { Metrics, Thread } from './metrics.model';
 @Component({
   selector: 'jhi-metrics',
   templateUrl: './metrics.component.html',
+  styleUrls: ['./metrics.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MetricsComponent implements OnInit {

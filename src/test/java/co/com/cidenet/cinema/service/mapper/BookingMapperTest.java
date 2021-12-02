@@ -5,12 +5,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class FilmMapperTest {
+class BookingMapperTest {
 
-    private FilmMapper filmMapper;
+    private BookingMapper bookingMapper;
 
     @BeforeEach
     public void setUp() {
-        filmMapper = new FilmMapperImpl();
+        bookingMapper = new BookingMapperImpl();
     }
 }

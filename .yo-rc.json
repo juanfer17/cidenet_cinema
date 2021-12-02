@@ -41,7 +41,7 @@
     "clientPackageManager": "npm",
     "languages": ["es", "en", "pt-br"],
     "enableGradleEnterprise": false,
-    "lastLiquibaseTimestamp": 1637959336000,
-    "entities": ["Film"]
+    "lastLiquibaseTimestamp": 1638477727000,
+    "entities": ["Film", "Room", "FunctionFilm", "Booking"]
   }
 }

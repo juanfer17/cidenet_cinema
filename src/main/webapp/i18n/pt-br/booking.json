@@ -1,0 +1,27 @@
+{
+  "cinemaCidenetApp": {
+    "booking": {
+      "home": {
+        "title": "Bookings",
+        "refreshListLabel": "Atualizar lista",
+        "createLabel": "Criar novo Booking",
+        "createOrEditLabel": "Criar ou editar Booking",
+        "notFound": "Nenhum Booking encontrado"
+      },
+      "created": "Um novo Booking foi criado com o identificador {{ param }}",
+      "updated": "Um Booking foi atualizado com o identificador {{ param }}",
+      "deleted": "Um Booking foi excluído com o identificador {{ param }}",
+      "delete": {
+        "question": "Tem certeza de que deseja excluir Booking {{ id }}?"
+      },
+      "detail": {
+        "title": "Booking"
+      },
+      "id": "ID",
+      "chairLocation": "Chair Location",
+      "status": "Status",
+      "user": "User",
+      "functionFilm": "Function Film"
+    }
+  }
+}
