@@ -14,6 +14,7 @@ import { DataUtils } from 'app/core/util/data-util.service';
 @Component({
   selector: 'jhi-film',
   templateUrl: './film.component.html',
+  styleUrls: ['./film.component.scss'],
 })
 export class FilmComponent implements OnInit {
   films?: IFilm[];

@@ -16,24 +16,24 @@ Navbar
   .dropdown-item.active,
   .dropdown-item.active:focus,
   .dropdown-item.active:hover {
-    background-color: #2c275f;
+    background-color: #191829;
   }
 
   .dropdown-item.active {
-    background-color: #37335f;
+    background-color: #191829;
   }
   .dropdown-item:hover {
-    background-color: #4d4886;
+    background-color: #191829;
   }
 
   ul {
-    background-color: #2c275f;
+    background: linear-gradient(to bottom, #191829, #1a1920);
   }
 
   ul.navbar-nav {
     .nav-item {
       margin-left: 0.5em;
-      background-color: #2c275f;
+      background: linear-gradient(to bottom, #191829, #1a1920);
       color: black;
     }
   }
@@ -50,7 +50,7 @@ Navbar
 }
 
 .navbar-color {
-  background-color: #2c275f;
+  background: linear-gradient(to bottom, #18162e, rgb(26, 26, 26));
   color: white;
 }
 

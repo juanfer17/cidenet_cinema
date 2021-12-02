@@ -73,10 +73,6 @@ Generic styles
   opacity: 1;
 }
 
-.footer {
-  border-top: 1px solid rgba(0, 0, 0, 0.125);
-}
-
 .hand,
 [jhisortby] {
   cursor: pointer;
@@ -171,3 +167,18 @@ ui bootstrap tweaks
 }
 
 /* jhipster-needle-scss-add-main JHipster will add new css style */
+
+.footer {
+  border-top: 1px solid rgba(0, 0, 0, 0.125);
+  background: linear-gradient(to bottom, #000000, #18162e);
+  color: white;
+}
+
+.logo-footer {
+  height: 200px;
+  width: 200px;
+  display: inline-block;
+  vertical-align: middle;
+  background: url('../images/cinema_cidenet.png') no-repeat center center;
+  background-size: contain;
+}

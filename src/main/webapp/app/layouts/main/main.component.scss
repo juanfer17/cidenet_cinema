@@ -1,0 +1,22 @@
+.container-fluid {
+}
+
+.card {
+}
+
+.jh-card {
+  margin-top: 0px;
+  padding: 0px;
+  display: flex;
+  justify-content: center;
+  color: white;
+  font-weight: 500;
+  background-color: #ffffff10;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.container-fluid {
+  background: url('../../../content/images/cine-background.jpg');
+  background-size: cover;
+}
