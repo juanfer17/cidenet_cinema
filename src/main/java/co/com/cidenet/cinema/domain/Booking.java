@@ -28,7 +28,6 @@ public class Booking implements Serializable {
     private String status;
 
     @OneToOne(optional = false)
-    @NotNull
     @MapsId
     @JoinColumn(name = "id")
     private User user;

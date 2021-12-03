@@ -1,6 +1,8 @@
 package co.com.cidenet.cinema.service.impl;
 
+import co.com.cidenet.cinema.domain.Booking;
 import co.com.cidenet.cinema.domain.FunctionFilm;
+import co.com.cidenet.cinema.repository.BookingRepository;
 import co.com.cidenet.cinema.repository.FilmRepository;
 import co.com.cidenet.cinema.repository.FunctionFilmRepository;
 import co.com.cidenet.cinema.service.FunctionFilmService;
@@ -9,6 +11,7 @@ import co.com.cidenet.cinema.service.mapper.FunctionFilmMapper;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -29,14 +32,18 @@ public class FunctionFilmServiceImpl implements FunctionFilmService {
 
     private final FilmRepository filmRepository;
 
+    private final BookingRepository bookingRepository;
+
     public FunctionFilmServiceImpl(
         FunctionFilmRepository functionFilmRepository,
         FunctionFilmMapper functionFilmMapper,
-        FilmRepository filmRepository
+        FilmRepository filmRepository,
+        BookingRepository bookingRepository
     ) {
         this.functionFilmRepository = functionFilmRepository;
         this.functionFilmMapper = functionFilmMapper;
         this.filmRepository = filmRepository;
+        this.bookingRepository = bookingRepository;
     }
 
     @Override
@@ -46,6 +53,7 @@ public class FunctionFilmServiceImpl implements FunctionFilmService {
         Long filmId = functionFilmDTO.getFilm().getId();
         filmRepository.findById(filmId).ifPresent(functionFilm::film);
         functionFilm = functionFilmRepository.save(functionFilm);
+        createChairAvailable(functionFilm);
         return functionFilmMapper.toDto(functionFilm);
     }
 
@@ -82,5 +90,18 @@ public class FunctionFilmServiceImpl implements FunctionFilmService {
     public void delete(Long id) {
         log.debug("Request to delete FunctionFilm : {}", id);
         functionFilmRepository.deleteById(id);
+    }
+
+    private void createChairAvailable(FunctionFilm function) {
+        String chairName = "abcdefghijklmnopqrstuvwxyz";
+        for (int i = 0; i <= function.getRoom().getColumn(); i++) {
+            for (int j = 0; j <= function.getRoom().getRow(); j++) {
+                Booking booking = new Booking();
+                booking.setFunctionFilm(function);
+                booking.setStatus("Available");
+                booking.setChairLocation(chairName.indent(i) + "-" + j);
+                bookingRepository.save(booking);
+            }
+        }
     }
 }
