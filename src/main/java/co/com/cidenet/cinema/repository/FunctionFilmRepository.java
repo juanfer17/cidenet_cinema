@@ -1,6 +1,7 @@
 package co.com.cidenet.cinema.repository;
 
 import co.com.cidenet.cinema.domain.FunctionFilm;
+import java.util.List;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;
 
@@ -9,4 +10,6 @@ import org.springframework.stereotype.Repository;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface FunctionFilmRepository extends JpaRepository<FunctionFilm, Long> {}
+public interface FunctionFilmRepository extends JpaRepository<FunctionFilm, Long> {
+    List<FunctionFilm> findByFilmId(Long id);
+}

@@ -18,7 +18,7 @@ public class BookingDTO implements Serializable {
     @NotNull
     private String status;
 
-    private UserDTO user;
+    private Long user;
 
     private FunctionFilmDTO functionFilm;
 
@@ -46,11 +46,11 @@ public class BookingDTO implements Serializable {
         this.status = status;
     }
 
-    public UserDTO getUser() {
+    public Long getUser() {
         return user;
     }
 
-    public void setUser(UserDTO user) {
+    public void setUser(Long user) {
         this.user = user;
     }
 

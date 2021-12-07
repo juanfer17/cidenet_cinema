@@ -61,7 +61,13 @@
             {{ film.name }}
           </span>
           <div class="desc">
-            {{ film.duration }}
+            <h1 style="font-size: 14px">Duracion: {{ film.duration }} min</h1>
+            <h1 style="font-size: 14px">Genero: {{ film.genre }}</h1>
+
+            <button [routerLink]="['/film', film.id, 'view']">
+              RESERVAR
+              <span></span>
+            </button>
           </div>
         </div>
       </div>

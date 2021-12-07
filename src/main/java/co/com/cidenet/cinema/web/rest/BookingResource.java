@@ -1,5 +1,6 @@
 package co.com.cidenet.cinema.web.rest;
 
+import co.com.cidenet.cinema.domain.Booking;
 import co.com.cidenet.cinema.repository.BookingRepository;
 import co.com.cidenet.cinema.service.BookingService;
 import co.com.cidenet.cinema.service.dto.BookingDTO;
@@ -60,9 +61,6 @@ public class BookingResource {
         log.debug("REST request to save Booking : {}", bookingDTO);
         if (bookingDTO.getId() != null) {
             throw new BadRequestAlertException("A new booking cannot already have an ID", ENTITY_NAME, "idexists");
-        }
-        if (Objects.isNull(bookingDTO.getUser())) {
-            throw new BadRequestAlertException("Invalid association value provided", ENTITY_NAME, "null");
         }
         BookingDTO result = bookingService.save(bookingDTO);
         return ResponseEntity
@@ -182,5 +180,11 @@ public class BookingResource {
             .noContent()
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
             .build();
+    }
+
+    @GetMapping("/bookings/byFunction/{id}")
+    public ResponseEntity<List<Booking>> getBookingByFunction(@PathVariable Long id) {
+        log.debug("REST request to Booking by Function: {}", id);
+        return ResponseEntity.ok().body(bookingService.bookingByFunction(id));
     }
 }

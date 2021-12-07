@@ -39,7 +39,7 @@
           <th scope="col" jhiSortBy="status">
             <span jhiTranslate="cinemaCidenetApp.booking.status">Status</span> <fa-icon icon="sort"></fa-icon>
           </th>
-          <th scope="col" jhiSortBy="user.login">
+          <th scope="col" jhiSortBy="user">
             <span jhiTranslate="cinemaCidenetApp.booking.user">User</span> <fa-icon icon="sort"></fa-icon>
           </th>
           <th scope="col" jhiSortBy="functionFilm.id">
@@ -55,9 +55,7 @@
           </td>
           <td>{{ booking.chairLocation }}</td>
           <td>{{ booking.status }}</td>
-          <td>
-            {{ booking.user?.login }}
-          </td>
+          <td>{{ booking.user }}</td>
           <td>
             <div *ngIf="booking.functionFilm">
               <a [routerLink]="['/function-film', booking.functionFilm?.id, 'view']">{{ booking.functionFilm?.id }}</a>

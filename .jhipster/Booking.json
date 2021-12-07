@@ -11,19 +11,13 @@
       "fieldName": "status",
       "fieldType": "String",
       "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "user",
+      "fieldType": "Long"
     }
   ],
   "relationships": [
-    {
-      "relationshipName": "user",
-      "otherEntityName": "user",
-      "relationshipType": "one-to-one",
-      "relationshipValidateRules": ["required"],
-      "otherEntityField": "login",
-      "ownerSide": true,
-      "id": true,
-      "otherEntityRelationshipName": "booking"
-    },
     {
       "relationshipName": "functionFilm",
       "otherEntityName": "functionFilm",

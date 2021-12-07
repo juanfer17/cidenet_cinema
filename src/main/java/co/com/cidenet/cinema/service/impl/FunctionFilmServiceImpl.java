@@ -8,6 +8,7 @@ import co.com.cidenet.cinema.repository.FunctionFilmRepository;
 import co.com.cidenet.cinema.service.FunctionFilmService;
 import co.com.cidenet.cinema.service.dto.FunctionFilmDTO;
 import co.com.cidenet.cinema.service.mapper.FunctionFilmMapper;
+import java.util.List;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -92,14 +93,19 @@ public class FunctionFilmServiceImpl implements FunctionFilmService {
         functionFilmRepository.deleteById(id);
     }
 
+    @Override
+    public List<FunctionFilm> functionByFilm(Long id) {
+        return functionFilmRepository.findByFilmId(id);
+    }
+
     private void createChairAvailable(FunctionFilm function) {
         String chairName = "abcdefghijklmnopqrstuvwxyz";
         for (int i = 0; i <= function.getRoom().getColumn(); i++) {
-            for (int j = 0; j <= function.getRoom().getRow(); j++) {
+            for (int j = 1; j <= function.getRoom().getRow(); j++) {
                 Booking booking = new Booking();
                 booking.setFunctionFilm(function);
                 booking.setStatus("Available");
-                booking.setChairLocation(chairName.indent(i) + "-" + j);
+                booking.setChairLocation(chairName.charAt(i) + "-" + j);
                 bookingRepository.save(booking);
             }
         }

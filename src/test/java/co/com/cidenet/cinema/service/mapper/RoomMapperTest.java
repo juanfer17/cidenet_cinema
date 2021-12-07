@@ -5,12 +5,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class BookingMapperTest {
+class RoomMapperTest {
 
-    private BookingMapper bookingMapper;
+    private RoomMapper roomMapper;
 
     @BeforeEach
     public void setUp() {
-        bookingMapper = new BookingMapperImpl();
+        roomMapper = new RoomMapperImpl();
     }
 }

@@ -7,8 +7,6 @@ import { finalize, map } from 'rxjs/operators';
 
 import { IBooking, Booking } from '../booking.model';
 import { BookingService } from '../service/booking.service';
-import { IUser } from 'app/entities/user/user.model';
-import { UserService } from 'app/entities/user/user.service';
 import { IFunctionFilm } from 'app/entities/function-film/function-film.model';
 import { FunctionFilmService } from 'app/entities/function-film/service/function-film.service';
 
@@ -19,20 +17,18 @@ import { FunctionFilmService } from 'app/entities/function-film/service/function
 export class BookingUpdateComponent implements OnInit {
   isSaving = false;
 
-  usersSharedCollection: IUser[] = [];
   functionFilmsSharedCollection: IFunctionFilm[] = [];
 
   editForm = this.fb.group({
     id: [],
     chairLocation: [null, [Validators.required, Validators.minLength(1), Validators.maxLength(4)]],
     status: [null, [Validators.required]],
-    user: [null, Validators.required],
+    user: [],
     functionFilm: [null, Validators.required],
   });
 
   constructor(
     protected bookingService: BookingService,
-    protected userService: UserService,
     protected functionFilmService: FunctionFilmService,
     protected activatedRoute: ActivatedRoute,
     protected fb: FormBuilder
@@ -58,10 +54,6 @@ export class BookingUpdateComponent implements OnInit {
     } else {
       this.subscribeToSaveResponse(this.bookingService.create(booking));
     }
-  }
-
-  trackUserById(index: number, item: IUser): number {
-    return item.id!;
   }
 
   trackFunctionFilmById(index: number, item: IFunctionFilm): number {
@@ -96,7 +88,6 @@ export class BookingUpdateComponent implements OnInit {
       functionFilm: booking.functionFilm,
     });
 
-    this.usersSharedCollection = this.userService.addUserToCollectionIfMissing(this.usersSharedCollection, booking.user);
     this.functionFilmsSharedCollection = this.functionFilmService.addFunctionFilmToCollectionIfMissing(
       this.functionFilmsSharedCollection,
       booking.functionFilm
@@ -104,12 +95,6 @@ export class BookingUpdateComponent implements OnInit {
   }
 
   protected loadRelationshipsOptions(): void {
-    this.userService
-      .query()
-      .pipe(map((res: HttpResponse<IUser[]>) => res.body ?? []))
-      .pipe(map((users: IUser[]) => this.userService.addUserToCollectionIfMissing(users, this.editForm.get('user')!.value)))
-      .subscribe((users: IUser[]) => (this.usersSharedCollection = users));
-
     this.functionFilmService
       .query()
       .pipe(map((res: HttpResponse<IFunctionFilm[]>) => res.body ?? []))

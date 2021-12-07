@@ -23,6 +23,7 @@ describe('Booking Service', () => {
       id: 0,
       chairLocation: 'AAAAAAA',
       status: 'AAAAAAA',
+      user: 0,
     };
   });
 
@@ -60,6 +61,7 @@ describe('Booking Service', () => {
           id: 1,
           chairLocation: 'BBBBBB',
           status: 'BBBBBB',
+          user: 1,
         },
         elemDefault
       );
@@ -93,6 +95,7 @@ describe('Booking Service', () => {
           id: 1,
           chairLocation: 'BBBBBB',
           status: 'BBBBBB',
+          user: 1,
         },
         elemDefault
       );
@@ -144,7 +147,7 @@ describe('Booking Service', () => {
       });
 
       it('should add only unique Booking to an array', () => {
-        const bookingArray: IBooking[] = [{ id: 123 }, { id: 456 }, { id: 34078 }];
+        const bookingArray: IBooking[] = [{ id: 123 }, { id: 456 }, { id: 4194 }];
         const bookingCollection: IBooking[] = [{ id: 123 }];
         expectedResult = service.addBookingToCollectionIfMissing(bookingCollection, ...bookingArray);
         expect(expectedResult).toHaveLength(3);

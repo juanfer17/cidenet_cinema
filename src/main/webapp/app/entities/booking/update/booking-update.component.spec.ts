@@ -9,9 +9,6 @@ import { of, Subject } from 'rxjs';
 
 import { BookingService } from '../service/booking.service';
 import { IBooking, Booking } from '../booking.model';
-
-import { IUser } from 'app/entities/user/user.model';
-import { UserService } from 'app/entities/user/user.service';
 import { IFunctionFilm } from 'app/entities/function-film/function-film.model';
 import { FunctionFilmService } from 'app/entities/function-film/service/function-film.service';
 
@@ -22,7 +19,6 @@ describe('Booking Management Update Component', () => {
   let fixture: ComponentFixture<BookingUpdateComponent>;
   let activatedRoute: ActivatedRoute;
   let bookingService: BookingService;
-  let userService: UserService;
   let functionFilmService: FunctionFilmService;
 
   beforeEach(() => {
@@ -37,32 +33,12 @@ describe('Booking Management Update Component', () => {
     fixture = TestBed.createComponent(BookingUpdateComponent);
     activatedRoute = TestBed.inject(ActivatedRoute);
     bookingService = TestBed.inject(BookingService);
-    userService = TestBed.inject(UserService);
     functionFilmService = TestBed.inject(FunctionFilmService);
 
     comp = fixture.componentInstance;
   });
 
   describe('ngOnInit', () => {
-    it('Should call User query and add missing value', () => {
-      const booking: IBooking = { id: 456 };
-      const user: IUser = { id: 61694 };
-      booking.user = user;
-
-      const userCollection: IUser[] = [{ id: 99539 }];
-      jest.spyOn(userService, 'query').mockReturnValue(of(new HttpResponse({ body: userCollection })));
-      const additionalUsers = [user];
-      const expectedCollection: IUser[] = [...additionalUsers, ...userCollection];
-      jest.spyOn(userService, 'addUserToCollectionIfMissing').mockReturnValue(expectedCollection);
-
-      activatedRoute.data = of({ booking });
-      comp.ngOnInit();
-
-      expect(userService.query).toHaveBeenCalled();
-      expect(userService.addUserToCollectionIfMissing).toHaveBeenCalledWith(userCollection, ...additionalUsers);
-      expect(comp.usersSharedCollection).toEqual(expectedCollection);
-    });
-
     it('Should call FunctionFilm query and add missing value', () => {
       const booking: IBooking = { id: 456 };
       const functionFilm: IFunctionFilm = { id: 45015 };
@@ -87,8 +63,6 @@ describe('Booking Management Update Component', () => {
 
     it('Should update editForm', () => {
       const booking: IBooking = { id: 456 };
-      const user: IUser = { id: 42301 };
-      booking.user = user;
       const functionFilm: IFunctionFilm = { id: 42406 };
       booking.functionFilm = functionFilm;
 
@@ -96,7 +70,6 @@ describe('Booking Management Update Component', () => {
       comp.ngOnInit();
 
       expect(comp.editForm.value).toEqual(expect.objectContaining(booking));
-      expect(comp.usersSharedCollection).toContain(user);
       expect(comp.functionFilmsSharedCollection).toContain(functionFilm);
     });
   });
@@ -166,14 +139,6 @@ describe('Booking Management Update Component', () => {
   });
 
   describe('Tracking relationships identifiers', () => {
-    describe('trackUserById', () => {
-      it('Should return tracked User primary key', () => {
-        const entity = { id: 123 };
-        const trackResult = comp.trackUserById(0, entity);
-        expect(trackResult).toEqual(entity.id);
-      });
-    });
-
     describe('trackFunctionFilmById', () => {
       it('Should return tracked FunctionFilm primary key', () => {
         const entity = { id: 123 };

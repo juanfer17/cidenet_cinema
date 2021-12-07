@@ -1,5 +1,6 @@
 package co.com.cidenet.cinema.web.rest;
 
+import co.com.cidenet.cinema.domain.FunctionFilm;
 import co.com.cidenet.cinema.repository.FunctionFilmRepository;
 import co.com.cidenet.cinema.service.FunctionFilmService;
 import co.com.cidenet.cinema.service.dto.FunctionFilmDTO;
@@ -183,5 +184,11 @@ public class FunctionFilmResource {
             .noContent()
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
             .build();
+    }
+
+    @GetMapping("/function-films/view/{id}")
+    public ResponseEntity<List<FunctionFilm>> functionByFilm(@PathVariable Long id) {
+        log.debug("REST request to find Film by Function : {}", id);
+        return ResponseEntity.ok().body(functionFilmService.functionByFilm(id));
     }
 }

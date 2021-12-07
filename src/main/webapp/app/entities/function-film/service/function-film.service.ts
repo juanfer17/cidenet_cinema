@@ -79,6 +79,13 @@ export class FunctionFilmService {
     return functionFilmCollection;
   }
 
+  findByFilm(req: number): Observable<EntityArrayResponseType> {
+    const options = createRequestOption(req);
+    return this.http
+      .get<IFunctionFilm[]>(`${this.resourceUrl}/view/${req}`, { params: options, observe: 'response' })
+      .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
+  }
+
   protected convertDateFromClient(functionFilm: IFunctionFilm): IFunctionFilm {
     return Object.assign({}, functionFilm, {
       dateFunction: functionFilm.dateFunction?.isValid() ? functionFilm.dateFunction.format(DATE_FORMAT) : undefined,

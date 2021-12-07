@@ -2,10 +2,10 @@ package co.com.cidenet.cinema.service.impl;
 
 import co.com.cidenet.cinema.domain.Booking;
 import co.com.cidenet.cinema.repository.BookingRepository;
-import co.com.cidenet.cinema.repository.UserRepository;
 import co.com.cidenet.cinema.service.BookingService;
 import co.com.cidenet.cinema.service.dto.BookingDTO;
 import co.com.cidenet.cinema.service.mapper.BookingMapper;
+import java.util.List;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,20 +27,15 @@ public class BookingServiceImpl implements BookingService {
 
     private final BookingMapper bookingMapper;
 
-    private final UserRepository userRepository;
-
-    public BookingServiceImpl(BookingRepository bookingRepository, BookingMapper bookingMapper, UserRepository userRepository) {
+    public BookingServiceImpl(BookingRepository bookingRepository, BookingMapper bookingMapper) {
         this.bookingRepository = bookingRepository;
         this.bookingMapper = bookingMapper;
-        this.userRepository = userRepository;
     }
 
     @Override
     public BookingDTO save(BookingDTO bookingDTO) {
         log.debug("Request to save Booking : {}", bookingDTO);
         Booking booking = bookingMapper.toEntity(bookingDTO);
-        Long userId = bookingDTO.getUser().getId();
-        userRepository.findById(userId).ifPresent(booking::user);
         booking = bookingRepository.save(booking);
         return bookingMapper.toDto(booking);
     }
@@ -78,5 +73,10 @@ public class BookingServiceImpl implements BookingService {
     public void delete(Long id) {
         log.debug("Request to delete Booking : {}", id);
         bookingRepository.deleteById(id);
+    }
+
+    @Override
+    public List<Booking> bookingByFunction(Long id) {
+        return bookingRepository.findByFunctionFilmId(id);
     }
 }

@@ -15,22 +15,21 @@ public class Booking implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
     @NotNull
     @Size(min = 1, max = 4)
-    @Column(name = "chair_location", length = 4, nullable = false, unique = true)
+    @Column(name = "chair_location", length = 4)
     private String chairLocation;
 
     @NotNull
     @Column(name = "status", nullable = false)
     private String status;
 
-    @OneToOne(optional = false)
-    @MapsId
-    @JoinColumn(name = "id")
-    private User user;
+    @Column(name = "user")
+    private Long user;
 
     @ManyToOne(optional = false)
     @NotNull
@@ -78,17 +77,17 @@ public class Booking implements Serializable {
         this.status = status;
     }
 
-    public User getUser() {
+    public Long getUser() {
         return this.user;
     }
 
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public Booking user(User user) {
+    public Booking user(Long user) {
         this.setUser(user);
         return this;
+    }
+
+    public void setUser(Long user) {
+        this.user = user;
     }
 
     public FunctionFilm getFunctionFilm() {
@@ -130,6 +129,7 @@ public class Booking implements Serializable {
             "id=" + getId() +
             ", chairLocation='" + getChairLocation() + "'" +
             ", status='" + getStatus() + "'" +
+            ", user=" + getUser() +
             "}";
     }
 }

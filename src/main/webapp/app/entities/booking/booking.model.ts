@@ -1,11 +1,10 @@
-import { IUser } from 'app/entities/user/user.model';
 import { IFunctionFilm } from 'app/entities/function-film/function-film.model';
 
 export interface IBooking {
   id?: number;
   chairLocation?: string;
   status?: string;
-  user?: IUser;
+  user?: number | null;
   functionFilm?: IFunctionFilm;
 }
 
@@ -14,7 +13,7 @@ export class Booking implements IBooking {
     public id?: number,
     public chairLocation?: string,
     public status?: string,
-    public user?: IUser,
+    public user?: number | null,
     public functionFilm?: IFunctionFilm
   ) {}
 }
