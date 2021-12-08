@@ -57,4 +57,9 @@ export class BookingService {
     }
     return bookingCollection;
   }
+
+  bookingByFunction(req: number): Observable<EntityArrayResponseType> {
+    const options = createRequestOption(req);
+    return this.http.get<IBooking[]>(`${this.resourceUrl}/byFunction/${req}`, { params: options, observe: 'response' });
+  }
 }

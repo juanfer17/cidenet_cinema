@@ -15,6 +15,7 @@ public class FunctionFilm implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
@@ -26,10 +27,7 @@ public class FunctionFilm implements Serializable {
     @NotNull
     private Room room;
 
-    @OneToOne(optional = false)
-    @NotNull
-    @MapsId
-    @JoinColumn(name = "id")
+    @ManyToOne
     private Film film;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here

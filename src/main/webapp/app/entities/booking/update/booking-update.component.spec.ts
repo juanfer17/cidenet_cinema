@@ -41,10 +41,10 @@ describe('Booking Management Update Component', () => {
   describe('ngOnInit', () => {
     it('Should call FunctionFilm query and add missing value', () => {
       const booking: IBooking = { id: 456 };
-      const functionFilm: IFunctionFilm = { id: 45015 };
+      const functionFilm: IFunctionFilm = { id: 57170 };
       booking.functionFilm = functionFilm;
 
-      const functionFilmCollection: IFunctionFilm[] = [{ id: 33978 }];
+      const functionFilmCollection: IFunctionFilm[] = [{ id: 85034 }];
       jest.spyOn(functionFilmService, 'query').mockReturnValue(of(new HttpResponse({ body: functionFilmCollection })));
       const additionalFunctionFilms = [functionFilm];
       const expectedCollection: IFunctionFilm[] = [...additionalFunctionFilms, ...functionFilmCollection];
@@ -63,7 +63,7 @@ describe('Booking Management Update Component', () => {
 
     it('Should update editForm', () => {
       const booking: IBooking = { id: 456 };
-      const functionFilm: IFunctionFilm = { id: 42406 };
+      const functionFilm: IFunctionFilm = { id: 77799 };
       booking.functionFilm = functionFilm;
 
       activatedRoute.data = of({ booking });

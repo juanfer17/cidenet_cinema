@@ -16,6 +16,5 @@ public interface FunctionFilmMapper extends EntityMapper<FunctionFilmDTO, Functi
     @Named("id")
     @BeanMapping(ignoreByDefault = true)
     @Mapping(target = "id", source = "id")
-    @Mapping(target = "film", source = "film")
     FunctionFilmDTO toDtoId(FunctionFilm functionFilm);
 }

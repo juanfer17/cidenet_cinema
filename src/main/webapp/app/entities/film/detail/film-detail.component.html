@@ -45,6 +45,7 @@
             <div class="funcion" *ngFor="let function of functionFilms">
               {{ function.dateFunction }}
               {{ function.room?.roomType }}
+              <button (click)="queryChairByFunction(function.id)">RESERVAR</button>
             </div>
           </div>
         </div>

@@ -17,12 +17,8 @@
     {
       "relationshipName": "film",
       "otherEntityName": "film",
-      "relationshipType": "one-to-one",
-      "relationshipValidateRules": ["required"],
-      "otherEntityField": "id",
-      "ownerSide": true,
-      "id": true,
-      "otherEntityRelationshipName": "functionFilm"
+      "relationshipType": "many-to-one",
+      "otherEntityField": "y"
     }
   ],
   "service": "serviceImpl",

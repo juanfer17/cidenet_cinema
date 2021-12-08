@@ -14,7 +14,7 @@
                                  referencedColumnNames="id"
                                  referencedTableName="room"/>
 
-        <addForeignKeyConstraint baseColumnNames="id"
+        <addForeignKeyConstraint baseColumnNames="film_id"
                                  baseTableName="function_film"
                                  constraintName="fk_function_film__film_id"
                                  referencedColumnNames="id"
