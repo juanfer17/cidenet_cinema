@@ -63,6 +63,8 @@ export class FilmDetailComponent implements OnInit {
           this.bookings = dataResponse.body;
           this.bookings.forEach(element => {
             // eslint-disable-next-line no-console
+            console.log('Ubicacion de la silla:');
+            // eslint-disable-next-line no-console
             console.log(element.chairLocation);
           });
         }
