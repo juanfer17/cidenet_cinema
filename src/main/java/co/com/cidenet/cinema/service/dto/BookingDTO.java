@@ -20,6 +20,7 @@ public class BookingDTO implements Serializable {
 
     private Long user;
 
+    private String login;
     private FunctionFilmDTO functionFilm;
 
     public Long getId() {
@@ -60,6 +61,14 @@ public class BookingDTO implements Serializable {
 
     public void setFunctionFilm(FunctionFilmDTO functionFilm) {
         this.functionFilm = functionFilm;
+    }
+
+    public String getLogin() {
+        return this.login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
     }
 
     @Override

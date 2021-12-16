@@ -6,6 +6,7 @@ export interface IBooking {
   status?: string;
   user?: number | null;
   functionFilm?: IFunctionFilm;
+  login?: string;
 }
 
 export class Booking implements IBooking {

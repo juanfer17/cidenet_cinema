@@ -1,10 +1,13 @@
 package co.com.cidenet.cinema.service.impl;
 
 import co.com.cidenet.cinema.domain.Booking;
+import co.com.cidenet.cinema.domain.User;
 import co.com.cidenet.cinema.repository.BookingRepository;
+import co.com.cidenet.cinema.repository.UserRepository;
 import co.com.cidenet.cinema.service.BookingService;
 import co.com.cidenet.cinema.service.dto.BookingDTO;
 import co.com.cidenet.cinema.service.mapper.BookingMapper;
+import co.com.cidenet.cinema.service.mapper.UtilMapperBooking;
 import java.util.List;
 import java.util.Optional;
 import org.slf4j.Logger;
@@ -27,9 +30,12 @@ public class BookingServiceImpl implements BookingService {
 
     private final BookingMapper bookingMapper;
 
-    public BookingServiceImpl(BookingRepository bookingRepository, BookingMapper bookingMapper) {
+    private final UserRepository userRepository;
+
+    public BookingServiceImpl(BookingRepository bookingRepository, BookingMapper bookingMapper, UserRepository userRepository) {
         this.bookingRepository = bookingRepository;
         this.bookingMapper = bookingMapper;
+        this.userRepository = userRepository;
     }
 
     @Override
@@ -78,5 +84,19 @@ public class BookingServiceImpl implements BookingService {
     @Override
     public List<Booking> bookingByFunction(Long id) {
         return bookingRepository.findByFunctionFilmId(id);
+    }
+
+    @Override
+    public List<Booking> bookingChairConfirm(List<BookingDTO> chairSelected) {
+        User user = userRepository.findOneByLogin(chairSelected.get(0).getLogin()).get();
+
+        chairSelected.forEach(data -> {
+            data.setStatus("Reserved");
+            data.setUser(user.getId());
+        });
+
+        UtilMapperBooking bookingMapper = new UtilMapperBooking();
+        List<Booking> booking = bookingMapper.convertListToEntity(chairSelected);
+        return bookingRepository.saveAll(booking);
     }
 }

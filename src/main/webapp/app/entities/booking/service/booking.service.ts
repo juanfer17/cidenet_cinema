@@ -41,6 +41,10 @@ export class BookingService {
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
+  createBookingList(booking: IBooking[]): Observable<EntityArrayResponseType> {
+    return this.http.post<IBooking[]>(`${this.resourceUrl}/confirm`, booking, { observe: 'response' });
+  }
+
   addBookingToCollectionIfMissing(bookingCollection: IBooking[], ...bookingsToCheck: (IBooking | null | undefined)[]): IBooking[] {
     const bookings: IBooking[] = bookingsToCheck.filter(isPresent);
     if (bookings.length > 0) {

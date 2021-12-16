@@ -187,4 +187,12 @@ public class BookingResource {
         log.debug("REST request to Booking by Function: {}", id);
         return ResponseEntity.ok().body(bookingService.bookingByFunction(id));
     }
+
+    @PostMapping("/bookings/confirm")
+    public ResponseEntity<List<Booking>> updateBookingList(@Valid @RequestBody List<BookingDTO> bookingDTO) throws URISyntaxException {
+        log.debug("REST request to save Booking : {}", bookingDTO);
+
+        List<Booking> result = bookingService.bookingChairConfirm(bookingDTO);
+        return ResponseEntity.ok().body(result);
+    }
 }

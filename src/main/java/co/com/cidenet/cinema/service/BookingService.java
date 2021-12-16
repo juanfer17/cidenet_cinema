@@ -51,4 +51,6 @@ public interface BookingService {
     void delete(Long id);
 
     List<Booking> bookingByFunction(Long id);
+
+    List<Booking> bookingChairConfirm(List<BookingDTO> chairSelected);
 }
