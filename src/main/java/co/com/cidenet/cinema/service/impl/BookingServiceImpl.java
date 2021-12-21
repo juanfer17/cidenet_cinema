@@ -78,7 +78,10 @@ public class BookingServiceImpl implements BookingService {
     @Override
     public void delete(Long id) {
         log.debug("Request to delete Booking : {}", id);
-        bookingRepository.deleteById(id);
+        Booking booking = bookingRepository.getById(id);
+        booking.setUser(null);
+        booking.setStatus("Available");
+        bookingRepository.save(booking);
     }
 
     @Override
@@ -98,5 +101,23 @@ public class BookingServiceImpl implements BookingService {
         UtilMapperBooking bookingMapper = new UtilMapperBooking();
         List<Booking> booking = bookingMapper.convertListToEntity(chairSelected);
         return bookingRepository.saveAll(booking);
+    }
+
+    @Override
+    public Page<BookingDTO> bookingByUserPage(String user, Pageable pageable) {
+        User userData = userRepository.findOneByLogin(user).get();
+        return bookingRepository.findByUser(userData.getId(), pageable).map(bookingMapper::toDto);
+    }
+
+    @Override
+    public void deleteAll(Long id) {
+        log.debug("Request to delete All Booking : {}", id);
+        Booking booking = bookingRepository.getById(id);
+        List<Booking> bookingList = bookingRepository.findByFunctionFilmIdAndUser(booking.getFunctionFilm().getId(), booking.getUser());
+        bookingList.forEach(data -> {
+            data.setUser(null);
+            data.setStatus("Available");
+        });
+        bookingRepository.saveAll(bookingList);
     }
 }

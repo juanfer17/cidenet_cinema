@@ -66,4 +66,13 @@ export class BookingService {
     const options = createRequestOption(req);
     return this.http.get<IBooking[]>(`${this.resourceUrl}/byFunction/${req}`, { params: options, observe: 'response' });
   }
+
+  queryByUser(user: string, req?: any): Observable<EntityArrayResponseType> {
+    const options = createRequestOption(req);
+    return this.http.get<IBooking[]>(`${this.resourceUrl}/user/${user}`, { params: options, observe: 'response' });
+  }
+
+  deleteAll(id: number): Observable<HttpResponse<{}>> {
+    return this.http.delete(`${this.resourceUrl}/all/${id}`, { observe: 'response' });
+  }
 }

@@ -195,4 +195,22 @@ public class BookingResource {
         List<Booking> result = bookingService.bookingChairConfirm(bookingDTO);
         return ResponseEntity.ok().body(result);
     }
+
+    @GetMapping("/bookings/user/{user}")
+    public ResponseEntity<List<BookingDTO>> getAllBookingsByUser(@PathVariable String user, Pageable pageable) {
+        log.debug("REST request to get a page of Bookings");
+        Page<BookingDTO> page = bookingService.bookingByUserPage(user, pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
+
+    @DeleteMapping("/bookings/all/{id}")
+    public ResponseEntity<Void> deleteAllByFunction(@PathVariable Long id) {
+        log.debug("REST request to delete Booking : {}", id);
+        bookingService.deleteAll(id);
+        return ResponseEntity
+            .noContent()
+            .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
+            .build();
+    }
 }

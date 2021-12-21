@@ -9,6 +9,11 @@ import { IBooking } from '../booking.model';
 import { ASC, DESC, ITEMS_PER_PAGE, SORT } from 'app/config/pagination.constants';
 import { BookingService } from '../service/booking.service';
 import { BookingDeleteDialogComponent } from '../delete/booking-delete-dialog.component';
+import { Account } from 'app/core/auth/account.model';
+import { AccountService } from 'app/core/auth/account.service';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { DeleteAllComponent } from '../delete-all/delete-all.component';
 
 @Component({
   selector: 'jhi-booking',
@@ -24,37 +29,49 @@ export class BookingComponent implements OnInit {
   predicate!: string;
   ascending!: boolean;
   ngbPaginationPage = 1;
+  account: Account | null = null;
+
+  private readonly destroy$ = new Subject<void>();
 
   constructor(
     protected bookingService: BookingService,
     protected activatedRoute: ActivatedRoute,
     protected router: Router,
-    protected modalService: NgbModal
+    protected modalService: NgbModal,
+    private accountService: AccountService
   ) {}
 
   loadPage(page?: number, dontNavigate?: boolean): void {
     this.isLoading = true;
     const pageToLoad: number = page ?? this.page ?? 1;
+    const user = this.account?.login;
 
-    this.bookingService
-      .query({
-        page: pageToLoad - 1,
-        size: this.itemsPerPage,
-        sort: this.sort(),
-      })
-      .subscribe(
-        (res: HttpResponse<IBooking[]>) => {
-          this.isLoading = false;
-          this.onSuccess(res.body, res.headers, pageToLoad, !dontNavigate);
-        },
-        () => {
-          this.isLoading = false;
-          this.onError();
-        }
-      );
+    if (user !== undefined) {
+      this.bookingService
+        .queryByUser(user, {
+          page: pageToLoad - 1,
+          size: this.itemsPerPage,
+          sort: this.sort(),
+        })
+        .subscribe(
+          (res: HttpResponse<IBooking[]>) => {
+            this.isLoading = false;
+            this.onSuccess(res.body, res.headers, pageToLoad, !dontNavigate);
+          },
+          () => {
+            this.isLoading = false;
+            this.onError();
+          }
+        );
+    }
   }
 
   ngOnInit(): void {
+    this.accountService
+      .getAuthenticationState()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(account => (this.account = account));
+
     this.handleNavigation();
   }
 
@@ -64,6 +81,17 @@ export class BookingComponent implements OnInit {
 
   delete(booking: IBooking): void {
     const modalRef = this.modalService.open(BookingDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
+    modalRef.componentInstance.booking = booking;
+    // unsubscribe not needed because closed completes on modal close
+    modalRef.closed.subscribe(reason => {
+      if (reason === 'deleted') {
+        this.loadPage();
+      }
+    });
+  }
+
+  deleteAll(booking: IBooking): void {
+    const modalRef = this.modalService.open(DeleteAllComponent, { size: 'lg', backdrop: 'static' });
     modalRef.componentInstance.booking = booking;
     // unsubscribe not needed because closed completes on modal close
     modalRef.closed.subscribe(reason => {
