@@ -116,15 +116,18 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" jhiTranslate="cinemaCidenetApp.room.statusRoom" for="field_statusRoom">Status Room</label>
-          <input
-            type="checkbox"
-            class="form-check"
-            name="statusRoom"
-            id="field_statusRoom"
-            data-cy="statusRoom"
-            formControlName="statusRoom"
-          />
+          <div class="custom-control custom-switch">
+            <input
+              type="checkbox"
+              class="custom-control-input"
+              id="customSwitch1"
+              name="statusRoom"
+              data-cy="statusRoom"
+              formControlName="statusRoom"
+            />
+            <label class="custom-control-label" for="customSwitch1" jhiTranslate="cinemaCidenetApp.film.active">Status Room</label>
+          </div>
+
           <div *ngIf="editForm.get('statusRoom')!.invalid && (editForm.get('statusRoom')!.dirty || editForm.get('statusRoom')!.touched)">
             <small
               class="form-text text-danger"

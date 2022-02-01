@@ -59,9 +59,8 @@
           <td>{{ film.genre }}</td>
           <td>
             <a *ngIf="film.urlImage" (click)="openFile(film.urlImage, film.urlImageContentType)">
-              <img [src]="'data:' + film.urlImageContentType + ';base64,' + film.urlImage" style="max-height: 30px" alt="film image" />
+              <img [src]="'data:' + film.urlImageContentType + ';base64,' + film.urlImage" style="max-height: 200px" alt="film image" />
             </a>
-            <span *ngIf="film.urlImage">{{ film.urlImageContentType }}, {{ byteSize(film.urlImage) }}</span>
           </td>
           <td>{{ film.duration }}</td>
           <td>{{ film.active }}</td>

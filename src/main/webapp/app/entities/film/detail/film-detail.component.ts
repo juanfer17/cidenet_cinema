@@ -23,6 +23,7 @@ export class FilmDetailComponent implements OnInit {
   bookings?: IBooking[];
   bookingSelected?: IBooking[] = [];
   account: Account | null = null;
+  success = false;
 
   private readonly destroy$ = new Subject<void>();
 
@@ -92,7 +93,9 @@ export class FilmDetailComponent implements OnInit {
   confirmChairSelected(): void {
     if (this.bookingSelected !== undefined) {
       this.bookingService.createBookingList(this.bookingSelected).subscribe(dataResponse => {
-        alert(`Sillas reservadas`);
+        // eslint-disable-next-line no-console
+        console.log(`Sillas reservadas`);
+        this.success = true;
       });
     }
   }

@@ -32,7 +32,7 @@
           <span>{{ film.date | formatMediumDate }}</span>
           <br />
 
-          <span>Descipcion: </span>
+          <span>Descripcion: </span>
           <span
             >Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur, facilis tempora similique ipsa sed provident! Corporis
             perspiciatis vel debitis ipsam perferendis quas, aliquam necessitatibus at iure reiciendis, dolores obcaecati alias.</span
@@ -46,38 +46,20 @@
               {{ function.dateFunction }}
               {{ function.room?.roomType }}
 
-              <div class="modal" id="staticBackdrop" tabindex="-1">
-                <div class="modal-dialog">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title">Modal title</h5>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
-                    <div class="modal-body">
-                      <p>Modal body text goes here.</p>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                      <button type="button" class="btn btn-primary">Save changes</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
               <button
                 type="button"
                 (click)="queryChairByFunction(function.id)"
                 class="btn btn-primary"
                 data-toggle="modal"
-                data-target="#modal1"
+                data-target="#modal-selection"
                 data-backdrop="false"
               >
                 Seleccionar Sillas
               </button>
+
               <br />
               <br />
+
               <!-- Button trigger modal -->
             </div>
           </div>
@@ -86,10 +68,17 @@
       <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
         <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Atras</span>
       </button>
+      <br />
+      <br />
+      <div class="alert alert-success" *ngIf="success">
+        <strong>Reserva realizada con exito!</strong>
+      </div>
     </div>
   </div>
 
-  <div class="modal fade" tabindex="-1" id="modal1">
+  <!-- Modal seleccion de sillas-->
+
+  <div class="modal fade" tabindex="-1" id="modal-selection">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -98,6 +87,8 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
+        <div class="screen"></div>
+        <div class="screen-text"><h3>PANTALLA</h3></div>
         <div class="modal-body">
           <div *ngFor="let booking of bookings">
             <div class="chairs">
@@ -116,7 +107,17 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal" data-backdrop="false">Cerrar</button>
-          <button type="button" class="btn btn-primary" (click)="confirmChairSelected()">Confirmar Reserva</button>
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-toggle="modal"
+            data-target="#modal-confirm"
+            data-backdrop="false"
+            data-dismiss="modal"
+            (click)="confirmChairSelected()"
+          >
+            Confirmar Reserva
+          </button>
         </div>
       </div>
     </div>

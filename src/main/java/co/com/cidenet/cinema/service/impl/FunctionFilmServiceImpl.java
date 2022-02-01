@@ -100,7 +100,7 @@ public class FunctionFilmServiceImpl implements FunctionFilmService {
 
     private void createChairAvailable(FunctionFilm function) {
         String chairName = "abcdefghijklmnopqrstuvwxyz";
-        for (int i = 1; i <= function.getRoom().getColumn(); i++) {
+        for (int i = 0; i <= function.getRoom().getColumn(); i++) {
             for (int j = 1; j <= function.getRoom().getRow(); j++) {
                 Booking booking = new Booking();
                 booking.setFunctionFilm(function);

@@ -18,6 +18,7 @@
 .modal {
   color: black;
   background-color: rgba(0, 0, 0, 0.76);
+  overflow: hidden;
 }
 
 .btn-primary {
@@ -39,8 +40,14 @@
   width: 80px;
   font-size: 20px;
   background-color: #3c3774;
-  border-radius: 10%;
+  border-top-left-radius: 70%;
+  border-top-right-radius: 70%;
+  border-bottom-right-radius: 10%;
+  border-bottom-left-radius: 10%;
   border: 1px solid white;
+  margin-bottom: 10px;
+  border: 1px solid white;
+  color: white;
 }
 
 .modal-footer {
@@ -83,4 +90,24 @@ input[type='radio'] {
   padding: 0;
   margin-top: 7px;
   margin-right: 5px;
+}
+
+.screen {
+  display: flex;
+  align-items: center;
+  width: 700px;
+  height: 20px;
+  border-radius: 30%;
+  background: #2a2a2a;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-left: 8%;
+}
+
+.screen-text {
+  display: flex;
+  color: #61616160;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 30px;
 }
