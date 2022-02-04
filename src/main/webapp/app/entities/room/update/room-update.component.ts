@@ -22,6 +22,7 @@ export class RoomUpdateComponent implements OnInit {
     row: [null, [Validators.required, Validators.min(1)]],
     column: [null, [Validators.required, Validators.min(1)]],
     statusRoom: [null, [Validators.required]],
+    bookingPrice: [null, [Validators.required]],
   });
 
   constructor(protected roomService: RoomService, protected activatedRoute: ActivatedRoute, protected fb: FormBuilder) {}
@@ -73,6 +74,7 @@ export class RoomUpdateComponent implements OnInit {
       row: room.row,
       column: room.column,
       statusRoom: room.statusRoom,
+      bookingPrice: room.bookingPrice,
     });
   }
 
@@ -85,6 +87,7 @@ export class RoomUpdateComponent implements OnInit {
       row: this.editForm.get(['row'])!.value,
       column: this.editForm.get(['column'])!.value,
       statusRoom: this.editForm.get(['statusRoom'])!.value,
+      bookingPrice: this.editForm.get(['bookingPrice'])!.value,
     };
   }
 }

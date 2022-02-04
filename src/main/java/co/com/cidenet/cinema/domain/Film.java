@@ -47,6 +47,11 @@ public class Film implements Serializable {
     @Column(name = "date")
     private LocalDate date;
 
+    @NotNull
+    @Size(min = 50, max = 500)
+    @Column(name = "description", length = 500, nullable = false)
+    private String description;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
     public Long getId() {
@@ -153,6 +158,19 @@ public class Film implements Serializable {
         this.date = date;
     }
 
+    public String getDescription() {
+        return this.description;
+    }
+
+    public Film description(String description) {
+        this.setDescription(description);
+        return this;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
@@ -184,6 +202,7 @@ public class Film implements Serializable {
             ", duration=" + getDuration() +
             ", active='" + getActive() + "'" +
             ", date='" + getDate() + "'" +
+            ", description='" + getDescription() + "'" +
             "}";
     }
 }

@@ -176,7 +176,7 @@ describe('FunctionFilm Service', () => {
       });
 
       it('should add only unique FunctionFilm to an array', () => {
-        const functionFilmArray: IFunctionFilm[] = [{ id: 123 }, { id: 456 }, { id: 25635 }];
+        const functionFilmArray: IFunctionFilm[] = [{ id: 123 }, { id: 456 }, { id: 3515 }];
         const functionFilmCollection: IFunctionFilm[] = [{ id: 123 }];
         expectedResult = service.addFunctionFilmToCollectionIfMissing(functionFilmCollection, ...functionFilmArray);
         expect(expectedResult).toHaveLength(3);

@@ -5,6 +5,7 @@ export interface IRoom {
   row?: number;
   column?: number;
   statusRoom?: boolean;
+  bookingPrice?: number;
 }
 
 export class Room implements IRoom {
@@ -14,7 +15,8 @@ export class Room implements IRoom {
     public roomType?: string,
     public row?: number,
     public column?: number,
-    public statusRoom?: boolean
+    public statusRoom?: boolean,
+    public bookingPrice?: number
   ) {
     this.statusRoom = this.statusRoom ?? false;
   }

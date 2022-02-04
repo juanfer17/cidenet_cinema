@@ -15,7 +15,7 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="chair_location" type="varchar(4)">
-                <constraints uniqueConstraintName="ux_booking__chair_location" />
+                <constraints nullable="false" unique="true" uniqueConstraintName="ux_booking__chair_location" />
             </column>
             <column name="status" type="varchar(255)">
                 <constraints nullable="false" />

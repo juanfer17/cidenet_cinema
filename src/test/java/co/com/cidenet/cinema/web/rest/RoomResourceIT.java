@@ -46,6 +46,9 @@ class RoomResourceIT {
     private static final Boolean DEFAULT_STATUS_ROOM = false;
     private static final Boolean UPDATED_STATUS_ROOM = true;
 
+    private static final Double DEFAULT_BOOKING_PRICE = 1D;
+    private static final Double UPDATED_BOOKING_PRICE = 2D;
+
     private static final String ENTITY_API_URL = "/api/rooms";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
@@ -78,7 +81,8 @@ class RoomResourceIT {
             .roomType(DEFAULT_ROOM_TYPE)
             .row(DEFAULT_ROW)
             .column(DEFAULT_COLUMN)
-            .statusRoom(DEFAULT_STATUS_ROOM);
+            .statusRoom(DEFAULT_STATUS_ROOM)
+            .bookingPrice(DEFAULT_BOOKING_PRICE);
         return room;
     }
 
@@ -94,7 +98,8 @@ class RoomResourceIT {
             .roomType(UPDATED_ROOM_TYPE)
             .row(UPDATED_ROW)
             .column(UPDATED_COLUMN)
-            .statusRoom(UPDATED_STATUS_ROOM);
+            .statusRoom(UPDATED_STATUS_ROOM)
+            .bookingPrice(UPDATED_BOOKING_PRICE);
         return room;
     }
 
@@ -122,6 +127,7 @@ class RoomResourceIT {
         assertThat(testRoom.getRow()).isEqualTo(DEFAULT_ROW);
         assertThat(testRoom.getColumn()).isEqualTo(DEFAULT_COLUMN);
         assertThat(testRoom.getStatusRoom()).isEqualTo(DEFAULT_STATUS_ROOM);
+        assertThat(testRoom.getBookingPrice()).isEqualTo(DEFAULT_BOOKING_PRICE);
     }
 
     @Test
@@ -235,6 +241,24 @@ class RoomResourceIT {
 
     @Test
     @Transactional
+    void checkBookingPriceIsRequired() throws Exception {
+        int databaseSizeBeforeTest = roomRepository.findAll().size();
+        // set the field null
+        room.setBookingPrice(null);
+
+        // Create the Room, which fails.
+        RoomDTO roomDTO = roomMapper.toDto(room);
+
+        restRoomMockMvc
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(roomDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<Room> roomList = roomRepository.findAll();
+        assertThat(roomList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     void getAllRooms() throws Exception {
         // Initialize the database
         roomRepository.saveAndFlush(room);
@@ -249,7 +273,8 @@ class RoomResourceIT {
             .andExpect(jsonPath("$.[*].roomType").value(hasItem(DEFAULT_ROOM_TYPE)))
             .andExpect(jsonPath("$.[*].row").value(hasItem(DEFAULT_ROW)))
             .andExpect(jsonPath("$.[*].column").value(hasItem(DEFAULT_COLUMN)))
-            .andExpect(jsonPath("$.[*].statusRoom").value(hasItem(DEFAULT_STATUS_ROOM.booleanValue())));
+            .andExpect(jsonPath("$.[*].statusRoom").value(hasItem(DEFAULT_STATUS_ROOM.booleanValue())))
+            .andExpect(jsonPath("$.[*].bookingPrice").value(hasItem(DEFAULT_BOOKING_PRICE.doubleValue())));
     }
 
     @Test
@@ -268,7 +293,8 @@ class RoomResourceIT {
             .andExpect(jsonPath("$.roomType").value(DEFAULT_ROOM_TYPE))
             .andExpect(jsonPath("$.row").value(DEFAULT_ROW))
             .andExpect(jsonPath("$.column").value(DEFAULT_COLUMN))
-            .andExpect(jsonPath("$.statusRoom").value(DEFAULT_STATUS_ROOM.booleanValue()));
+            .andExpect(jsonPath("$.statusRoom").value(DEFAULT_STATUS_ROOM.booleanValue()))
+            .andExpect(jsonPath("$.bookingPrice").value(DEFAULT_BOOKING_PRICE.doubleValue()));
     }
 
     @Test
@@ -295,7 +321,8 @@ class RoomResourceIT {
             .roomType(UPDATED_ROOM_TYPE)
             .row(UPDATED_ROW)
             .column(UPDATED_COLUMN)
-            .statusRoom(UPDATED_STATUS_ROOM);
+            .statusRoom(UPDATED_STATUS_ROOM)
+            .bookingPrice(UPDATED_BOOKING_PRICE);
         RoomDTO roomDTO = roomMapper.toDto(updatedRoom);
 
         restRoomMockMvc
@@ -315,6 +342,7 @@ class RoomResourceIT {
         assertThat(testRoom.getRow()).isEqualTo(UPDATED_ROW);
         assertThat(testRoom.getColumn()).isEqualTo(UPDATED_COLUMN);
         assertThat(testRoom.getStatusRoom()).isEqualTo(UPDATED_STATUS_ROOM);
+        assertThat(testRoom.getBookingPrice()).isEqualTo(UPDATED_BOOKING_PRICE);
     }
 
     @Test
@@ -394,7 +422,7 @@ class RoomResourceIT {
         Room partialUpdatedRoom = new Room();
         partialUpdatedRoom.setId(room.getId());
 
-        partialUpdatedRoom.roomType(UPDATED_ROOM_TYPE).row(UPDATED_ROW).column(UPDATED_COLUMN);
+        partialUpdatedRoom.roomType(UPDATED_ROOM_TYPE).row(UPDATED_ROW).column(UPDATED_COLUMN).bookingPrice(UPDATED_BOOKING_PRICE);
 
         restRoomMockMvc
             .perform(
@@ -413,6 +441,7 @@ class RoomResourceIT {
         assertThat(testRoom.getRow()).isEqualTo(UPDATED_ROW);
         assertThat(testRoom.getColumn()).isEqualTo(UPDATED_COLUMN);
         assertThat(testRoom.getStatusRoom()).isEqualTo(DEFAULT_STATUS_ROOM);
+        assertThat(testRoom.getBookingPrice()).isEqualTo(UPDATED_BOOKING_PRICE);
     }
 
     @Test
@@ -432,7 +461,8 @@ class RoomResourceIT {
             .roomType(UPDATED_ROOM_TYPE)
             .row(UPDATED_ROW)
             .column(UPDATED_COLUMN)
-            .statusRoom(UPDATED_STATUS_ROOM);
+            .statusRoom(UPDATED_STATUS_ROOM)
+            .bookingPrice(UPDATED_BOOKING_PRICE);
 
         restRoomMockMvc
             .perform(
@@ -451,6 +481,7 @@ class RoomResourceIT {
         assertThat(testRoom.getRow()).isEqualTo(UPDATED_ROW);
         assertThat(testRoom.getColumn()).isEqualTo(UPDATED_COLUMN);
         assertThat(testRoom.getStatusRoom()).isEqualTo(UPDATED_STATUS_ROOM);
+        assertThat(testRoom.getBookingPrice()).isEqualTo(UPDATED_BOOKING_PRICE);
     }
 
     @Test

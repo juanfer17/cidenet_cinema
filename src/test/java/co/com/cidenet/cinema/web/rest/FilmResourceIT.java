@@ -54,6 +54,9 @@ class FilmResourceIT {
     private static final LocalDate DEFAULT_DATE = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_DATE = LocalDate.now(ZoneId.systemDefault());
 
+    private static final String DEFAULT_DESCRIPTION = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
+    private static final String UPDATED_DESCRIPTION = "BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB";
+
     private static final String ENTITY_API_URL = "/api/films";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
@@ -88,7 +91,8 @@ class FilmResourceIT {
             .urlImageContentType(DEFAULT_URL_IMAGE_CONTENT_TYPE)
             .duration(DEFAULT_DURATION)
             .active(DEFAULT_ACTIVE)
-            .date(DEFAULT_DATE);
+            .date(DEFAULT_DATE)
+            .description(DEFAULT_DESCRIPTION);
         return film;
     }
 
@@ -106,7 +110,8 @@ class FilmResourceIT {
             .urlImageContentType(UPDATED_URL_IMAGE_CONTENT_TYPE)
             .duration(UPDATED_DURATION)
             .active(UPDATED_ACTIVE)
-            .date(UPDATED_DATE);
+            .date(UPDATED_DATE)
+            .description(UPDATED_DESCRIPTION);
         return film;
     }
 
@@ -136,6 +141,7 @@ class FilmResourceIT {
         assertThat(testFilm.getDuration()).isEqualTo(DEFAULT_DURATION);
         assertThat(testFilm.getActive()).isEqualTo(DEFAULT_ACTIVE);
         assertThat(testFilm.getDate()).isEqualTo(DEFAULT_DATE);
+        assertThat(testFilm.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
     }
 
     @Test
@@ -213,6 +219,24 @@ class FilmResourceIT {
 
     @Test
     @Transactional
+    void checkDescriptionIsRequired() throws Exception {
+        int databaseSizeBeforeTest = filmRepository.findAll().size();
+        // set the field null
+        film.setDescription(null);
+
+        // Create the Film, which fails.
+        FilmDTO filmDTO = filmMapper.toDto(film);
+
+        restFilmMockMvc
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(filmDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<Film> filmList = filmRepository.findAll();
+        assertThat(filmList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     void getAllFilms() throws Exception {
         // Initialize the database
         filmRepository.saveAndFlush(film);
@@ -229,7 +253,8 @@ class FilmResourceIT {
             .andExpect(jsonPath("$.[*].urlImage").value(hasItem(Base64Utils.encodeToString(DEFAULT_URL_IMAGE))))
             .andExpect(jsonPath("$.[*].duration").value(hasItem(DEFAULT_DURATION)))
             .andExpect(jsonPath("$.[*].active").value(hasItem(DEFAULT_ACTIVE.booleanValue())))
-            .andExpect(jsonPath("$.[*].date").value(hasItem(DEFAULT_DATE.toString())));
+            .andExpect(jsonPath("$.[*].date").value(hasItem(DEFAULT_DATE.toString())))
+            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)));
     }
 
     @Test
@@ -250,7 +275,8 @@ class FilmResourceIT {
             .andExpect(jsonPath("$.urlImage").value(Base64Utils.encodeToString(DEFAULT_URL_IMAGE)))
             .andExpect(jsonPath("$.duration").value(DEFAULT_DURATION))
             .andExpect(jsonPath("$.active").value(DEFAULT_ACTIVE.booleanValue()))
-            .andExpect(jsonPath("$.date").value(DEFAULT_DATE.toString()));
+            .andExpect(jsonPath("$.date").value(DEFAULT_DATE.toString()))
+            .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION));
     }
 
     @Test
@@ -279,7 +305,8 @@ class FilmResourceIT {
             .urlImageContentType(UPDATED_URL_IMAGE_CONTENT_TYPE)
             .duration(UPDATED_DURATION)
             .active(UPDATED_ACTIVE)
-            .date(UPDATED_DATE);
+            .date(UPDATED_DATE)
+            .description(UPDATED_DESCRIPTION);
         FilmDTO filmDTO = filmMapper.toDto(updatedFilm);
 
         restFilmMockMvc
@@ -301,6 +328,7 @@ class FilmResourceIT {
         assertThat(testFilm.getDuration()).isEqualTo(UPDATED_DURATION);
         assertThat(testFilm.getActive()).isEqualTo(UPDATED_ACTIVE);
         assertThat(testFilm.getDate()).isEqualTo(UPDATED_DATE);
+        assertThat(testFilm.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
     }
 
     @Test
@@ -405,6 +433,7 @@ class FilmResourceIT {
         assertThat(testFilm.getDuration()).isEqualTo(DEFAULT_DURATION);
         assertThat(testFilm.getActive()).isEqualTo(UPDATED_ACTIVE);
         assertThat(testFilm.getDate()).isEqualTo(UPDATED_DATE);
+        assertThat(testFilm.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
     }
 
     @Test
@@ -426,7 +455,8 @@ class FilmResourceIT {
             .urlImageContentType(UPDATED_URL_IMAGE_CONTENT_TYPE)
             .duration(UPDATED_DURATION)
             .active(UPDATED_ACTIVE)
-            .date(UPDATED_DATE);
+            .date(UPDATED_DATE)
+            .description(UPDATED_DESCRIPTION);
 
         restFilmMockMvc
             .perform(
@@ -447,6 +477,7 @@ class FilmResourceIT {
         assertThat(testFilm.getDuration()).isEqualTo(UPDATED_DURATION);
         assertThat(testFilm.getActive()).isEqualTo(UPDATED_ACTIVE);
         assertThat(testFilm.getDate()).isEqualTo(UPDATED_DATE);
+        assertThat(testFilm.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
     }
 
     @Test

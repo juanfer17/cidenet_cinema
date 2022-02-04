@@ -66,13 +66,15 @@
       "validate": {
         "newpassword": {
           "required": "Se requiere que ingrese una contraseña.",
-          "minlength": "Se requiere que su contraseña tenga por lo menos 4 caracteres",
+          "invalid": "Su contraseña es incorrecta, se requiere mayusculas y minusculas",
+          "minlength": "Se requiere que su contraseña tenga por lo menos 5 caracteres",
           "maxlength": "Su contraseña no puede tener más de 50 caracteres",
           "strength": "Seguridad de la contraseña:"
         },
         "confirmpassword": {
           "required": "Se requiere que confirme la contraseña.",
-          "minlength": "Se requiere que su contraseña de confirmación tenga por lo menos 4 caracteres",
+          "invalid": "Su contraseña es incorrecta, se requiere mayusculas y minusculas",
+          "minlength": "Se requiere que su contraseña de confirmación tenga por lo menos 5 caracteres",
           "maxlength": "Su contraseña de confirmación no puede tener más de 50 caracteres"
         },
         "email": {

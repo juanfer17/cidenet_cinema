@@ -32,6 +32,13 @@
     {
       "fieldName": "date",
       "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "minlength", "maxlength"],
+      "fieldValidateRulesMinlength": "50",
+      "fieldValidateRulesMaxlength": "500"
     }
   ],
   "relationships": [],

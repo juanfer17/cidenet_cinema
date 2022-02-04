@@ -32,6 +32,7 @@ describe('Film Service', () => {
       duration: 0,
       active: false,
       date: currentDate,
+      description: 'AAAAAAA',
     };
   });
 
@@ -84,6 +85,7 @@ describe('Film Service', () => {
           duration: 1,
           active: true,
           date: currentDate.format(DATE_FORMAT),
+          description: 'BBBBBB',
         },
         elemDefault
       );
@@ -141,6 +143,7 @@ describe('Film Service', () => {
           duration: 1,
           active: true,
           date: currentDate.format(DATE_FORMAT),
+          description: 'BBBBBB',
         },
         elemDefault
       );
@@ -197,7 +200,7 @@ describe('Film Service', () => {
       });
 
       it('should add only unique Film to an array', () => {
-        const filmArray: IFilm[] = [{ id: 123 }, { id: 456 }, { id: 5470 }];
+        const filmArray: IFilm[] = [{ id: 123 }, { id: 456 }, { id: 4005 }];
         const filmCollection: IFilm[] = [{ id: 123 }];
         expectedResult = service.addFilmToCollectionIfMissing(filmCollection, ...filmArray);
         expect(expectedResult).toHaveLength(3);

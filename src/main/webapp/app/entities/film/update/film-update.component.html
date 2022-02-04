@@ -115,6 +115,36 @@
         </div>
 
         <div class="form-group">
+          <label class="form-control-label" for="field_description">Descripcion</label>
+          <input type="text" class="form-control" name="name" id="field_description" data-cy="description" formControlName="description" />
+          <div *ngIf="editForm.get('description')!.invalid && (editForm.get('description')!.dirty || editForm.get('description')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('description')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('description')?.errors?.minlength"
+              jhiTranslate="entity.validation.minlength"
+              [translateValues]="{ min: 50 }"
+            >
+              This field is required to be at least 50 characters.
+            </small>
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('description')?.errors?.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+              [translateValues]="{ max: 500 }"
+            >
+              This field cannot be longer than 500 characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
           <label class="form-control-label" jhiTranslate="cinemaCidenetApp.film.duration" for="field_duration">Duration</label>
           <input type="number" class="form-control" name="duration" id="field_duration" data-cy="duration" formControlName="duration" />
           <div *ngIf="editForm.get('duration')!.invalid && (editForm.get('duration')!.dirty || editForm.get('duration')!.touched)">

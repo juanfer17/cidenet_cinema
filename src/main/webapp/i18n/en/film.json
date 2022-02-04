@@ -23,7 +23,8 @@
       "urlImage": "Url Image",
       "duration": "Duration",
       "active": "Active",
-      "date": "Date"
+      "date": "Date",
+      "description": "Description"
     }
   }
 }

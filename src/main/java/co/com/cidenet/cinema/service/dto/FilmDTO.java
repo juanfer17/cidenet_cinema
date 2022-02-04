@@ -33,6 +33,10 @@ public class FilmDTO implements Serializable {
 
     private LocalDate date;
 
+    @NotNull
+    @Size(min = 50, max = 500)
+    private String description;
+
     public Long getId() {
         return id;
     }
@@ -97,6 +101,14 @@ public class FilmDTO implements Serializable {
         this.date = date;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -129,6 +141,7 @@ public class FilmDTO implements Serializable {
             ", duration=" + getDuration() +
             ", active='" + getActive() + "'" +
             ", date='" + getDate() + "'" +
+            ", description='" + getDescription() + "'" +
             "}";
     }
 }

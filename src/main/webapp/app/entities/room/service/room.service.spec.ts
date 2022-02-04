@@ -26,6 +26,7 @@ describe('Room Service', () => {
       row: 0,
       column: 0,
       statusRoom: false,
+      bookingPrice: 0,
     };
   });
 
@@ -66,6 +67,7 @@ describe('Room Service', () => {
           row: 1,
           column: 1,
           statusRoom: true,
+          bookingPrice: 1,
         },
         elemDefault
       );
@@ -83,6 +85,7 @@ describe('Room Service', () => {
       const patchObject = Object.assign(
         {
           column: 1,
+          bookingPrice: 1,
         },
         new Room()
       );
@@ -107,6 +110,7 @@ describe('Room Service', () => {
           row: 1,
           column: 1,
           statusRoom: true,
+          bookingPrice: 1,
         },
         elemDefault
       );
@@ -158,7 +162,7 @@ describe('Room Service', () => {
       });
 
       it('should add only unique Room to an array', () => {
-        const roomArray: IRoom[] = [{ id: 123 }, { id: 456 }, { id: 60693 }];
+        const roomArray: IRoom[] = [{ id: 123 }, { id: 456 }, { id: 40853 }];
         const roomCollection: IRoom[] = [{ id: 123 }];
         expectedResult = service.addRoomToCollectionIfMissing(roomCollection, ...roomArray);
         expect(expectedResult).toHaveLength(3);

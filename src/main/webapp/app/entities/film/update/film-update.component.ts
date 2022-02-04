@@ -27,6 +27,7 @@ export class FilmUpdateComponent implements OnInit {
     duration: [null, [Validators.required]],
     active: [],
     date: [],
+    description: [null, [Validators.required, Validators.minLength(50), Validators.maxLength(500)]],
   });
 
   constructor(
@@ -112,6 +113,7 @@ export class FilmUpdateComponent implements OnInit {
       duration: film.duration,
       active: film.active,
       date: film.date,
+      description: film.description,
     });
   }
 
@@ -126,6 +128,7 @@ export class FilmUpdateComponent implements OnInit {
       duration: this.editForm.get(['duration'])!.value,
       active: this.editForm.get(['active'])!.value,
       date: this.editForm.get(['date'])!.value,
+      description: this.editForm.get(['description'])!.value,
     };
   }
 }

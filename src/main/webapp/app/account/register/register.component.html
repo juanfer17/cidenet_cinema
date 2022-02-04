@@ -148,10 +148,18 @@
 
             <small
               class="form-text text-danger"
+              *ngIf="registerForm.get('password')?.errors?.invalid"
+              jhiTranslate="global.messages.validate.newpassword.invalid"
+            >
+              Your password is invalid, lower and upercase required.
+            </small>
+
+            <small
+              class="form-text text-danger"
               *ngIf="registerForm.get('password')?.errors?.minlength"
               jhiTranslate="global.messages.validate.newpassword.minlength"
             >
-              Your password is required to be at least 4 characters.
+              Your password is required to be at least 5 characters .
             </small>
 
             <small

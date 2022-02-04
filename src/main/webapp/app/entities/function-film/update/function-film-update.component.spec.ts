@@ -62,22 +62,23 @@ describe('FunctionFilm Management Update Component', () => {
       expect(comp.roomsSharedCollection).toEqual(expectedCollection);
     });
 
-    it('Should call film query and add missing value', () => {
+    it('Should call Film query and add missing value', () => {
       const functionFilm: IFunctionFilm = { id: 456 };
       const film: IFilm = { id: 12545 };
       functionFilm.film = film;
 
       const filmCollection: IFilm[] = [{ id: 63970 }];
       jest.spyOn(filmService, 'query').mockReturnValue(of(new HttpResponse({ body: filmCollection })));
-      const expectedCollection: IFilm[] = [film, ...filmCollection];
+      const additionalFilms = [film];
+      const expectedCollection: IFilm[] = [...additionalFilms, ...filmCollection];
       jest.spyOn(filmService, 'addFilmToCollectionIfMissing').mockReturnValue(expectedCollection);
 
       activatedRoute.data = of({ functionFilm });
       comp.ngOnInit();
 
       expect(filmService.query).toHaveBeenCalled();
-      expect(filmService.addFilmToCollectionIfMissing).toHaveBeenCalledWith(filmCollection, film);
-      expect(comp.filmsCollection).toEqual(expectedCollection);
+      expect(filmService.addFilmToCollectionIfMissing).toHaveBeenCalledWith(filmCollection, ...additionalFilms);
+      expect(comp.filmsSharedCollection).toEqual(expectedCollection);
     });
 
     it('Should update editForm', () => {
@@ -92,7 +93,7 @@ describe('FunctionFilm Management Update Component', () => {
 
       expect(comp.editForm.value).toEqual(expect.objectContaining(functionFilm));
       expect(comp.roomsSharedCollection).toContain(room);
-      expect(comp.filmsCollection).toContain(film);
+      expect(comp.filmsSharedCollection).toContain(film);
     });
   });
 

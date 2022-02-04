@@ -46,6 +46,9 @@
           <th scope="col" jhiSortBy="statusRoom">
             <span jhiTranslate="cinemaCidenetApp.room.statusRoom">Status Room</span> <fa-icon icon="sort"></fa-icon>
           </th>
+          <th scope="col" jhiSortBy="bookingPrice">
+            <span jhiTranslate="cinemaCidenetApp.room.bookingPrice">Booking Price</span> <fa-icon icon="sort"></fa-icon>
+          </th>
           <th scope="col"></th>
         </tr>
       </thead>
@@ -59,6 +62,7 @@
           <td>{{ room.row }}</td>
           <td>{{ room.column }}</td>
           <td>{{ room.statusRoom }}</td>
+          <td>{{ room.bookingPrice }}</td>
           <td class="text-right">
             <div class="btn-group">
               <button type="submit" [routerLink]="['/room', room.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">

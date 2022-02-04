@@ -34,6 +34,10 @@
         <dd>
           <span>{{ room.statusRoom }}</span>
         </dd>
+        <dt><span jhiTranslate="cinemaCidenetApp.room.bookingPrice">Booking Price</span></dt>
+        <dd>
+          <span>{{ room.bookingPrice }}</span>
+        </dd>
       </dl>
 
       <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">

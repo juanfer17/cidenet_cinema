@@ -9,6 +9,7 @@ export interface IFilm {
   duration?: number;
   active?: boolean | null;
   date?: dayjs.Dayjs | null;
+  description?: string;
 }
 
 export class Film implements IFilm {
@@ -20,7 +21,8 @@ export class Film implements IFilm {
     public urlImage?: string,
     public duration?: number,
     public active?: boolean | null,
-    public date?: dayjs.Dayjs | null
+    public date?: dayjs.Dayjs | null,
+    public description?: string
   ) {
     this.active = this.active ?? false;
   }

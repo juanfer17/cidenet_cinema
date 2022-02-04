@@ -42,6 +42,10 @@ public class Room implements Serializable {
     @Column(name = "status_room", nullable = false)
     private Boolean statusRoom;
 
+    @NotNull
+    @Column(name = "booking_price", nullable = false)
+    private Double bookingPrice;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
     public Long getId() {
@@ -122,6 +126,19 @@ public class Room implements Serializable {
         this.statusRoom = statusRoom;
     }
 
+    public Double getBookingPrice() {
+        return this.bookingPrice;
+    }
+
+    public Room bookingPrice(Double bookingPrice) {
+        this.setBookingPrice(bookingPrice);
+        return this;
+    }
+
+    public void setBookingPrice(Double bookingPrice) {
+        this.bookingPrice = bookingPrice;
+    }
+
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
@@ -151,6 +168,7 @@ public class Room implements Serializable {
             ", row=" + getRow() +
             ", column=" + getColumn() +
             ", statusRoom='" + getStatusRoom() + "'" +
+            ", bookingPrice=" + getBookingPrice() +
             "}";
     }
 }

@@ -30,6 +30,9 @@ public class RoomDTO implements Serializable {
     @NotNull
     private Boolean statusRoom;
 
+    @NotNull
+    private Double bookingPrice;
+
     public Long getId() {
         return id;
     }
@@ -78,6 +81,14 @@ public class RoomDTO implements Serializable {
         this.statusRoom = statusRoom;
     }
 
+    public Double getBookingPrice() {
+        return bookingPrice;
+    }
+
+    public void setBookingPrice(Double bookingPrice) {
+        this.bookingPrice = bookingPrice;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -109,6 +120,7 @@ public class RoomDTO implements Serializable {
             ", row=" + getRow() +
             ", column=" + getColumn() +
             ", statusRoom='" + getStatusRoom() + "'" +
+            ", bookingPrice=" + getBookingPrice() +
             "}";
     }
 }

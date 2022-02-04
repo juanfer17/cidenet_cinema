@@ -30,6 +30,11 @@
       "fieldName": "statusRoom",
       "fieldType": "Boolean",
       "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "bookingPrice",
+      "fieldType": "Double",
+      "fieldValidateRules": ["required"]
     }
   ],
   "relationships": [],

@@ -10,15 +10,12 @@ import { ASC, DESC, ITEMS_PER_PAGE, SORT } from 'app/config/pagination.constants
 import { FilmService } from '../service/film.service';
 import { FilmDeleteDialogComponent } from '../delete/film-delete-dialog.component';
 import { DataUtils } from 'app/core/util/data-util.service';
-import { Account } from 'app/core/auth/account.model';
 
 @Component({
   selector: 'jhi-film',
   templateUrl: './film.component.html',
-  styleUrls: ['./film.component.scss'],
 })
 export class FilmComponent implements OnInit {
-  account: Account | null = null;
   films?: IFilm[];
   isLoading = false;
   totalItems = 0;

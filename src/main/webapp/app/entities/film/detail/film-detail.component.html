@@ -21,23 +21,22 @@
         </div>
 
         <div>
-          <span>Genero: </span>
-          <span>{{ film.genre }}</span>
-          <br />
-          <span>Duracion: </span>
-          <span>{{ film.duration }} min</span>
-          <br />
+          <div class="detail">
+            <span>Genero: </span>
+            <span>{{ film.genre }}</span>
+            <br />
+            <span>Duracion: </span>
+            <span>{{ film.duration }} min</span>
+            <br />
 
-          <span>Fecha estreno: </span>
-          <span>{{ film.date | formatMediumDate }}</span>
-          <br />
+            <span>Fecha estreno: </span>
+            <span>{{ film.date | formatMediumDate }}</span>
+            <br />
 
-          <span>Descripcion: </span>
-          <span
-            >Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur, facilis tempora similique ipsa sed provident! Corporis
-            perspiciatis vel debitis ipsam perferendis quas, aliquam necessitatibus at iure reiciendis, dolores obcaecati alias.</span
-          >
-          <br />
+            <span>Descripcion: </span>
+            <span> {{ film.description }} </span>
+            <br />
+          </div>
 
           <div class="reserva">
             <h1>FUNCIONES DISPONIBLES</h1>
@@ -45,7 +44,7 @@
             <div class="funcion" *ngFor="let function of functionFilms">
               <h4 class="text-reserva">Fecha: {{ function.dateFunction | formatMediumDate }}</h4>
               <h4 class="text-reserva">Formato: {{ function.room?.roomType }}</h4>
-              <h4 class="text-reserva">Precio: 12.000 COP</h4>
+              <h4 class="text-reserva">Precio: {{ function.room?.bookingPrice }}</h4>
 
               <br />
 
