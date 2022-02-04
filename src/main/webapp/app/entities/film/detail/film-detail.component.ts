@@ -85,7 +85,15 @@ export class FilmDetailComponent implements OnInit {
     // eslint-disable-next-line no-console
     console.log(chairSelectedLocation.login);
 
-    this.bookingSelected?.push(chairSelectedLocation);
+    const index = this.bookingSelected?.indexOf(chairSelectedLocation);
+    if (index !== undefined) {
+      if (index > -1) {
+        this.bookingSelected?.splice(index, 1); // 2nd parametro significa que solo remueve un elemento
+      } else {
+        this.bookingSelected?.push(chairSelectedLocation);
+      }
+    }
+
     // eslint-disable-next-line no-console
     console.log(this.bookingSelected?.length);
   }
