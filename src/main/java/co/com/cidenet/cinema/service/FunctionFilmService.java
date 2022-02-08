@@ -1,7 +1,9 @@
 package co.com.cidenet.cinema.service;
 
 import co.com.cidenet.cinema.domain.FunctionFilm;
+import co.com.cidenet.cinema.service.dto.DataFilmDTO;
 import co.com.cidenet.cinema.service.dto.FunctionFilmDTO;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
@@ -51,4 +53,6 @@ public interface FunctionFilmService {
     void delete(Long id);
 
     List<FunctionFilm> functionByFilm(Long id);
+
+    List<FunctionFilm> functionByDateFunction(DataFilmDTO dateFunction);
 }

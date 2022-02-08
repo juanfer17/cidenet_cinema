@@ -3,6 +3,7 @@ package co.com.cidenet.cinema.web.rest;
 import co.com.cidenet.cinema.domain.FunctionFilm;
 import co.com.cidenet.cinema.repository.FunctionFilmRepository;
 import co.com.cidenet.cinema.service.FunctionFilmService;
+import co.com.cidenet.cinema.service.dto.DataFilmDTO;
 import co.com.cidenet.cinema.service.dto.FunctionFilmDTO;
 import co.com.cidenet.cinema.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
@@ -190,5 +191,12 @@ public class FunctionFilmResource {
     public ResponseEntity<List<FunctionFilm>> functionByFilm(@PathVariable Long id) {
         log.debug("REST request to find Film by Function : {}", id);
         return ResponseEntity.ok().body(functionFilmService.functionByFilm(id));
+    }
+
+    @GetMapping("/function-films/date")
+    public ResponseEntity<List<FunctionFilm>> getFunctionByDateFunction(DataFilmDTO dataFilmDTO) {
+        log.debug("REST request to get a page of FunctionByDateFunctions");
+        List<FunctionFilm> page = functionFilmService.functionByDateFunction(dataFilmDTO);
+        return ResponseEntity.ok(page);
     }
 }

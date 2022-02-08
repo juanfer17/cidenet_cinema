@@ -42,7 +42,7 @@ export class FilmDetailComponent implements OnInit {
     this.activatedRoute.data.subscribe(({ film }) => {
       this.film = film;
     });
-    this.queryFunctionByFilm();
+    // this.queryFunctionByFilm();
 
     this.accountService
       .getAuthenticationState()
@@ -63,9 +63,13 @@ export class FilmDetailComponent implements OnInit {
   }
 
   queryFunctionByFilm(): void {
-    const idFilm = this.film?.id;
-    if (idFilm !== undefined) {
-      this.functionFilmService.findByFilm(idFilm).subscribe(dataResponse => {
+    const filmId = this.film?.id;
+    if (filmId !== undefined) {
+      const dataRequest = {
+        idFilm: filmId,
+        dateFunction: '',
+      };
+      this.functionFilmService.findByDate(dataRequest).subscribe(dataResponse => {
         if (dataResponse.body !== null) {
           this.functionFilms = dataResponse.body;
           this.unitPrice = this.functionFilms[0].room?.bookingPrice;

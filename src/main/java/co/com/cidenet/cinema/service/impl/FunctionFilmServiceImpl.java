@@ -6,8 +6,10 @@ import co.com.cidenet.cinema.repository.BookingRepository;
 import co.com.cidenet.cinema.repository.FilmRepository;
 import co.com.cidenet.cinema.repository.FunctionFilmRepository;
 import co.com.cidenet.cinema.service.FunctionFilmService;
+import co.com.cidenet.cinema.service.dto.DataFilmDTO;
 import co.com.cidenet.cinema.service.dto.FunctionFilmDTO;
 import co.com.cidenet.cinema.service.mapper.FunctionFilmMapper;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import org.slf4j.Logger;
@@ -109,5 +111,10 @@ public class FunctionFilmServiceImpl implements FunctionFilmService {
                 bookingRepository.save(booking);
             }
         }
+    }
+
+    @Override
+    public List<FunctionFilm> functionByDateFunction(DataFilmDTO dateFunction) {
+        return functionFilmRepository.findByDateFunctionAndFilmId(dateFunction.getDateFunction(), dateFunction.getIdFilm());
     }
 }
