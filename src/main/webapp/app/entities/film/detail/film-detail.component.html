@@ -44,7 +44,7 @@
             <div class="funcion" *ngFor="let function of functionFilms">
               <h4 class="text-reserva">Fecha: {{ function.dateFunction | formatMediumDate }}</h4>
               <h4 class="text-reserva">Formato: {{ function.room?.roomType }}</h4>
-              <h4 class="text-reserva">Precio: {{ function.room?.bookingPrice }}</h4>
+              <h4 class="text-reserva">Precio: {{ function.room?.bookingPrice }} COP</h4>
 
               <br />
 
@@ -115,7 +115,11 @@
           </div>
         </div>
         <div class="modal-footer">
-          <p><strong>Precio total: </strong></p>
+          <div class="price" *ngFor="let function of functionFilms">
+            <p>
+              <strong>Precio total: {{ this.totalPrice }} COP </strong>
+            </p>
+          </div>
 
           <button type="button" class="btn btn-secondary" data-dismiss="modal" data-backdrop="false">Cerrar</button>
           <button

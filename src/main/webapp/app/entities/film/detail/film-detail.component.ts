@@ -11,6 +11,7 @@ import { Account } from 'app/core/auth/account.model';
 import { AccountService } from 'app/core/auth/account.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { getRoomIdentifier, Room } from 'app/entities/room/room.model';
 
 @Component({
   selector: 'jhi-film-detail',
@@ -19,11 +20,13 @@ import { takeUntil } from 'rxjs/operators';
 })
 export class FilmDetailComponent implements OnInit {
   film: IFilm | null = null;
-  functionFilms?: IFunctionFilm[];
+  functionFilms: IFunctionFilm[] = [];
   bookings?: IBooking[];
   bookingSelected?: IBooking[] = [];
   account: Account | null = null;
   success = false;
+  totalPrice = 0;
+  unitPrice: any = 0;
 
   private readonly destroy$ = new Subject<void>();
 
@@ -65,6 +68,7 @@ export class FilmDetailComponent implements OnInit {
       this.functionFilmService.findByFilm(idFilm).subscribe(dataResponse => {
         if (dataResponse.body !== null) {
           this.functionFilms = dataResponse.body;
+          this.unitPrice = this.functionFilms[0].room?.bookingPrice;
         }
       });
     }
@@ -82,6 +86,7 @@ export class FilmDetailComponent implements OnInit {
 
   chairSelected(chairSelectedLocation: IBooking): void {
     chairSelectedLocation.login = this.account?.login;
+
     // eslint-disable-next-line no-console
     console.log(chairSelectedLocation.login);
 
@@ -96,6 +101,15 @@ export class FilmDetailComponent implements OnInit {
 
     // eslint-disable-next-line no-console
     console.log(this.bookingSelected?.length);
+
+    const bookingLength = this.bookingSelected?.length;
+
+    if (bookingLength !== undefined) {
+      // eslint-disable-next-line no-console
+      console.log(this.unitPrice * bookingLength);
+
+      this.totalPrice = this.unitPrice * bookingLength;
+    }
   }
 
   confirmChairSelected(): void {

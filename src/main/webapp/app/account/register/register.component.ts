@@ -42,11 +42,11 @@ export class RegisterComponent implements AfterViewInit {
     ],
     password: [
       '',
-      [Validators.required, Validators.minLength(5), Validators.maxLength(50), Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z]).{5, 50}$')],
+      [Validators.required, Validators.minLength(5), Validators.maxLength(50), Validators.pattern('^[a-zA-Z0-9!$&*+=?^_`{|}~.-]+$')],
     ],
     confirmPassword: [
       '',
-      [Validators.required, Validators.minLength(5), Validators.maxLength(50), Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z]).{5, 50}$')],
+      [Validators.required, Validators.minLength(5), Validators.maxLength(50), Validators.pattern('^[a-zA-Z0-9!$&*+=?^_`{|}~.-]+$')],
     ],
   });
 

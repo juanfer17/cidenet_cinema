@@ -14,6 +14,7 @@ import { DataUtils, FileLoadError } from 'app/core/util/data-util.service';
 @Component({
   selector: 'jhi-film-update',
   templateUrl: './film-update.component.html',
+  styleUrls: ['./film-update.component.scss'],
 })
 export class FilmUpdateComponent implements OnInit {
   isSaving = false;
