@@ -193,9 +193,10 @@ public class FunctionFilmResource {
         return ResponseEntity.ok().body(functionFilmService.functionByFilm(id));
     }
 
-    @GetMapping("/function-films/date")
-    public ResponseEntity<List<FunctionFilm>> getFunctionByDateFunction(DataFilmDTO dataFilmDTO) {
+    @PostMapping("/function-films/date")
+    public ResponseEntity<List<FunctionFilm>> getFunctionByDateFunction(@RequestBody DataFilmDTO dataFilmDTO) {
         log.debug("REST request to get a page of FunctionByDateFunctions");
+        System.out.println("Fecha:  " + dataFilmDTO.getDateFunction());
         List<FunctionFilm> page = functionFilmService.functionByDateFunction(dataFilmDTO);
         return ResponseEntity.ok(page);
     }

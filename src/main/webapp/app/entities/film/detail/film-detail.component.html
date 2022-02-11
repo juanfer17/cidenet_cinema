@@ -41,6 +41,29 @@
           <div class="reserva">
             <h1>FUNCIONES DISPONIBLES</h1>
 
+            <form name="editForm" role="form" [formGroup]="editForm">
+              <div class="form-group">
+                <div class="input-group">
+                  <input
+                    id="field_dateFunction"
+                    data-cy="dateFunction"
+                    type="text"
+                    class="form-control"
+                    name="dateFunction"
+                    ngbDatepicker
+                    #dateFunctionDp="ngbDatepicker"
+                    formControlName="dateFunction"
+                    (ngModelChange)="queryFunctionByFilm()"
+                  />
+                  <span class="input-group-append">
+                    <button type="button" class="btn btn-secondary" (click)="dateFunctionDp.toggle()">
+                      <fa-icon icon="calendar-alt"></fa-icon>
+                    </button>
+                  </span>
+                </div>
+              </div>
+            </form>
+
             <div class="funcion" *ngFor="let function of functionFilms">
               <h4 class="text-reserva">Fecha: {{ function.dateFunction | formatMediumDate }}</h4>
               <h4 class="text-reserva">Formato: {{ function.room?.roomType }}</h4>

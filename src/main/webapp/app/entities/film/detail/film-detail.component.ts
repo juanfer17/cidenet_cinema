@@ -11,7 +11,10 @@ import { Account } from 'app/core/auth/account.model';
 import { AccountService } from 'app/core/auth/account.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { getRoomIdentifier, Room } from 'app/entities/room/room.model';
+import { getRoomIdentifier, IRoom, Room } from 'app/entities/room/room.model';
+import { FormBuilder } from '@angular/forms';
+import { RoomService } from 'app/entities/room/service/room.service';
+import { FilmService } from '../service/film.service';
 
 @Component({
   selector: 'jhi-film-detail',
@@ -28,6 +31,11 @@ export class FilmDetailComponent implements OnInit {
   totalPrice = 0;
   unitPrice: any = 0;
 
+  editForm = this.fb.group({
+    id: [],
+    dateFunction: [null],
+  });
+
   private readonly destroy$ = new Subject<void>();
 
   constructor(
@@ -35,12 +43,14 @@ export class FilmDetailComponent implements OnInit {
     protected activatedRoute: ActivatedRoute,
     protected functionFilmService: FunctionFilmService,
     protected bookingService: BookingService,
-    private accountService: AccountService
+    private accountService: AccountService,
+    protected fb: FormBuilder
   ) {}
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ film }) => {
       this.film = film;
+      this.updateForm(film);
     });
     // this.queryFunctionByFilm();
 
@@ -67,7 +77,7 @@ export class FilmDetailComponent implements OnInit {
     if (filmId !== undefined) {
       const dataRequest = {
         idFilm: filmId,
-        dateFunction: '',
+        dateFunction: this.editForm.get(['dateFunction'])!.value,
       };
       this.functionFilmService.findByDate(dataRequest).subscribe(dataResponse => {
         if (dataResponse.body !== null) {
@@ -124,5 +134,21 @@ export class FilmDetailComponent implements OnInit {
         this.success = true;
       });
     }
+  }
+
+  prueba(event: any): void {
+    alert('prueba');
+  }
+  protected updateForm(functionFilm: IFunctionFilm): void {
+    this.editForm.patchValue({
+      id: functionFilm.id,
+      dateFunction: functionFilm.dateFunction,
+    });
+  }
+  protected createFromForm(): IFunctionFilm {
+    return {
+      id: this.editForm.get(['id'])!.value,
+      dateFunction: this.editForm.get(['dateFunction'])!.value,
+    };
   }
 }

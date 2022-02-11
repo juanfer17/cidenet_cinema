@@ -2,6 +2,7 @@ package co.com.cidenet.cinema.repository;
 
 import co.com.cidenet.cinema.domain.FunctionFilm;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;

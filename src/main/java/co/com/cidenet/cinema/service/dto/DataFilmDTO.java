@@ -1,20 +1,10 @@
 package co.com.cidenet.cinema.service.dto;
 
-import java.time.LocalDate;
-
 public class DataFilmDTO {
 
     private Long idFilm;
 
-    private LocalDate dateFunction;
-
-    public LocalDate getDateFunction() {
-        return dateFunction;
-    }
-
-    public void setDateFunction(LocalDate dateFunction) {
-        this.dateFunction = dateFunction;
-    }
+    private String dateFunction;
 
     public Long getIdFilm() {
         return idFilm;
@@ -22,5 +12,13 @@ public class DataFilmDTO {
 
     public void setIdFilm(Long idFilm) {
         this.idFilm = idFilm;
+    }
+
+    public String getDateFunction() {
+        return dateFunction;
+    }
+
+    public void setDateFunction(String dateFunction) {
+        this.dateFunction = dateFunction;
     }
 }
