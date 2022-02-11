@@ -50,7 +50,6 @@ export class FilmDetailComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ film }) => {
       this.film = film;
-      this.updateForm(film);
     });
     // this.queryFunctionByFilm();
 
@@ -134,21 +133,5 @@ export class FilmDetailComponent implements OnInit {
         this.success = true;
       });
     }
-  }
-
-  prueba(event: any): void {
-    alert('prueba');
-  }
-  protected updateForm(functionFilm: IFunctionFilm): void {
-    this.editForm.patchValue({
-      id: functionFilm.id,
-      dateFunction: functionFilm.dateFunction,
-    });
-  }
-  protected createFromForm(): IFunctionFilm {
-    return {
-      id: this.editForm.get(['id'])!.value,
-      dateFunction: this.editForm.get(['dateFunction'])!.value,
-    };
   }
 }
