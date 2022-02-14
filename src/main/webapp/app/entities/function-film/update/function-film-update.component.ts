@@ -25,6 +25,7 @@ export class FunctionFilmUpdateComponent implements OnInit {
   editForm = this.fb.group({
     id: [],
     dateFunction: [null, [Validators.required]],
+    timeFunction: [null, [Validators.required]],
     room: [null, Validators.required],
     film: [null, Validators.required],
   });
@@ -90,6 +91,7 @@ export class FunctionFilmUpdateComponent implements OnInit {
     this.editForm.patchValue({
       id: functionFilm.id,
       dateFunction: functionFilm.dateFunction,
+      timeFunction: functionFilm.timeFunction,
       room: functionFilm.room,
       film: functionFilm.film,
     });
@@ -117,6 +119,7 @@ export class FunctionFilmUpdateComponent implements OnInit {
       ...new FunctionFilm(),
       id: this.editForm.get(['id'])!.value,
       dateFunction: this.editForm.get(['dateFunction'])!.value,
+      timeFunction: this.editForm.get(['timeFunction'])!.value,
       room: this.editForm.get(['room'])!.value,
       film: this.editForm.get(['film'])!.value,
     };

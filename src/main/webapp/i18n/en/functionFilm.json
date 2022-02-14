@@ -19,6 +19,7 @@
       },
       "id": "ID",
       "dateFunction": "Date Function",
+      "timeFunction": "Time Function",
       "room": "Room",
       "film": "Film"
     }

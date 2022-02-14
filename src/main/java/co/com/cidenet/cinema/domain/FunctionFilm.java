@@ -23,6 +23,10 @@ public class FunctionFilm implements Serializable {
     @Column(name = "date_function", nullable = false)
     private LocalDate dateFunction;
 
+    @NotNull
+    @Column(name = "time_function", nullable = false)
+    private String timeFunction;
+
     @ManyToOne(optional = false)
     @NotNull
     private Room room;
@@ -56,6 +60,19 @@ public class FunctionFilm implements Serializable {
 
     public void setDateFunction(LocalDate dateFunction) {
         this.dateFunction = dateFunction;
+    }
+
+    public String getTimeFunction() {
+        return this.timeFunction;
+    }
+
+    public FunctionFilm timeFunction(String timeFunction) {
+        this.setTimeFunction(timeFunction);
+        return this;
+    }
+
+    public void setTimeFunction(String timeFunction) {
+        this.timeFunction = timeFunction;
     }
 
     public Room getRoom() {
@@ -109,6 +126,7 @@ public class FunctionFilm implements Serializable {
         return "FunctionFilm{" +
             "id=" + getId() +
             ", dateFunction='" + getDateFunction() + "'" +
+            ", timeFunction='" + getTimeFunction() + "'" +
             "}";
     }
 }

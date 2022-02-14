@@ -15,6 +15,9 @@ public class FunctionFilmDTO implements Serializable {
     @NotNull
     private LocalDate dateFunction;
 
+    @NotNull
+    private String timeFunction;
+
     private RoomDTO room;
 
     private FilmDTO film;
@@ -33,6 +36,14 @@ public class FunctionFilmDTO implements Serializable {
 
     public void setDateFunction(LocalDate dateFunction) {
         this.dateFunction = dateFunction;
+    }
+
+    public String getTimeFunction() {
+        return timeFunction;
+    }
+
+    public void setTimeFunction(String timeFunction) {
+        this.timeFunction = timeFunction;
     }
 
     public RoomDTO getRoom() {
@@ -78,6 +89,7 @@ public class FunctionFilmDTO implements Serializable {
         return "FunctionFilmDTO{" +
             "id=" + getId() +
             ", dateFunction='" + getDateFunction() + "'" +
+            ", timeFunction='" + getTimeFunction() + "'" +
             ", room=" + getRoom() +
             ", film=" + getFilm() +
             "}";

@@ -41,7 +41,7 @@
 
         <div class="form-group">
           <label class="form-control-label" jhiTranslate="cinemaCidenetApp.film.genre" for="field_genre">Genre</label>
-          <input type="text" class="form-control" name="genre" id="field_genre" data-cy="genre" formControlName="genre" />
+          <input list="genres" class="form-control" name="genre" id="field_genre" data-cy="genre" formControlName="genre" />
           <div *ngIf="editForm.get('genre')!.invalid && (editForm.get('genre')!.dirty || editForm.get('genre')!.touched)">
             <small class="form-text text-danger" *ngIf="editForm.get('genre')?.errors?.required" jhiTranslate="entity.validation.required">
               This field is required.
@@ -63,6 +63,14 @@
               This field cannot be longer than 30 characters.
             </small>
           </div>
+
+          <datalist id="genres">
+            <option value="Ciencia Ficcion"></option>
+            <option value="Comedia"></option>
+            <option value="Drama"></option>
+            <option value="Terror"></option>
+            <option value="Suspenso"></option>
+          </datalist>
         </div>
 
         <div class="form-group">

@@ -26,6 +26,7 @@ describe('FunctionFilm Service', () => {
     elemDefault = {
       id: 0,
       dateFunction: currentDate,
+      timeFunction: 'AAAAAAA',
     };
   });
 
@@ -73,6 +74,7 @@ describe('FunctionFilm Service', () => {
         {
           id: 1,
           dateFunction: currentDate.format(DATE_FORMAT),
+          timeFunction: 'BBBBBB',
         },
         elemDefault
       );
@@ -120,6 +122,7 @@ describe('FunctionFilm Service', () => {
         {
           id: 1,
           dateFunction: currentDate.format(DATE_FORMAT),
+          timeFunction: 'BBBBBB',
         },
         elemDefault
       );
@@ -176,7 +179,7 @@ describe('FunctionFilm Service', () => {
       });
 
       it('should add only unique FunctionFilm to an array', () => {
-        const functionFilmArray: IFunctionFilm[] = [{ id: 123 }, { id: 456 }, { id: 3515 }];
+        const functionFilmArray: IFunctionFilm[] = [{ id: 123 }, { id: 456 }, { id: 24890 }];
         const functionFilmCollection: IFunctionFilm[] = [{ id: 123 }];
         expectedResult = service.addFunctionFilmToCollectionIfMissing(functionFilmCollection, ...functionFilmArray);
         expect(expectedResult).toHaveLength(3);

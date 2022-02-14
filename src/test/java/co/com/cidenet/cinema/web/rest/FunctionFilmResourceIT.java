@@ -37,6 +37,9 @@ class FunctionFilmResourceIT {
     private static final LocalDate DEFAULT_DATE_FUNCTION = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_DATE_FUNCTION = LocalDate.now(ZoneId.systemDefault());
 
+    private static final String DEFAULT_TIME_FUNCTION = "AAAAAAAAAA";
+    private static final String UPDATED_TIME_FUNCTION = "BBBBBBBBBB";
+
     private static final String ENTITY_API_URL = "/api/function-films";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
@@ -64,7 +67,7 @@ class FunctionFilmResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static FunctionFilm createEntity(EntityManager em) {
-        FunctionFilm functionFilm = new FunctionFilm().dateFunction(DEFAULT_DATE_FUNCTION);
+        FunctionFilm functionFilm = new FunctionFilm().dateFunction(DEFAULT_DATE_FUNCTION).timeFunction(DEFAULT_TIME_FUNCTION);
         // Add required entity
         Room room;
         if (TestUtil.findAll(em, Room.class).isEmpty()) {
@@ -85,7 +88,7 @@ class FunctionFilmResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static FunctionFilm createUpdatedEntity(EntityManager em) {
-        FunctionFilm functionFilm = new FunctionFilm().dateFunction(UPDATED_DATE_FUNCTION);
+        FunctionFilm functionFilm = new FunctionFilm().dateFunction(UPDATED_DATE_FUNCTION).timeFunction(UPDATED_TIME_FUNCTION);
         // Add required entity
         Room room;
         if (TestUtil.findAll(em, Room.class).isEmpty()) {
@@ -121,6 +124,7 @@ class FunctionFilmResourceIT {
         assertThat(functionFilmList).hasSize(databaseSizeBeforeCreate + 1);
         FunctionFilm testFunctionFilm = functionFilmList.get(functionFilmList.size() - 1);
         assertThat(testFunctionFilm.getDateFunction()).isEqualTo(DEFAULT_DATE_FUNCTION);
+        assertThat(testFunctionFilm.getTimeFunction()).isEqualTo(DEFAULT_TIME_FUNCTION);
     }
 
     @Test
@@ -166,6 +170,26 @@ class FunctionFilmResourceIT {
 
     @Test
     @Transactional
+    void checkTimeFunctionIsRequired() throws Exception {
+        int databaseSizeBeforeTest = functionFilmRepository.findAll().size();
+        // set the field null
+        functionFilm.setTimeFunction(null);
+
+        // Create the FunctionFilm, which fails.
+        FunctionFilmDTO functionFilmDTO = functionFilmMapper.toDto(functionFilm);
+
+        restFunctionFilmMockMvc
+            .perform(
+                post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(functionFilmDTO))
+            )
+            .andExpect(status().isBadRequest());
+
+        List<FunctionFilm> functionFilmList = functionFilmRepository.findAll();
+        assertThat(functionFilmList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     void getAllFunctionFilms() throws Exception {
         // Initialize the database
         functionFilmRepository.saveAndFlush(functionFilm);
@@ -176,7 +200,8 @@ class FunctionFilmResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(functionFilm.getId().intValue())))
-            .andExpect(jsonPath("$.[*].dateFunction").value(hasItem(DEFAULT_DATE_FUNCTION.toString())));
+            .andExpect(jsonPath("$.[*].dateFunction").value(hasItem(DEFAULT_DATE_FUNCTION.toString())))
+            .andExpect(jsonPath("$.[*].timeFunction").value(hasItem(DEFAULT_TIME_FUNCTION)));
     }
 
     @Test
@@ -191,7 +216,8 @@ class FunctionFilmResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(functionFilm.getId().intValue()))
-            .andExpect(jsonPath("$.dateFunction").value(DEFAULT_DATE_FUNCTION.toString()));
+            .andExpect(jsonPath("$.dateFunction").value(DEFAULT_DATE_FUNCTION.toString()))
+            .andExpect(jsonPath("$.timeFunction").value(DEFAULT_TIME_FUNCTION));
     }
 
     @Test
@@ -213,7 +239,7 @@ class FunctionFilmResourceIT {
         FunctionFilm updatedFunctionFilm = functionFilmRepository.findById(functionFilm.getId()).get();
         // Disconnect from session so that the updates on updatedFunctionFilm are not directly saved in db
         em.detach(updatedFunctionFilm);
-        updatedFunctionFilm.dateFunction(UPDATED_DATE_FUNCTION);
+        updatedFunctionFilm.dateFunction(UPDATED_DATE_FUNCTION).timeFunction(UPDATED_TIME_FUNCTION);
         FunctionFilmDTO functionFilmDTO = functionFilmMapper.toDto(updatedFunctionFilm);
 
         restFunctionFilmMockMvc
@@ -229,6 +255,7 @@ class FunctionFilmResourceIT {
         assertThat(functionFilmList).hasSize(databaseSizeBeforeUpdate);
         FunctionFilm testFunctionFilm = functionFilmList.get(functionFilmList.size() - 1);
         assertThat(testFunctionFilm.getDateFunction()).isEqualTo(UPDATED_DATE_FUNCTION);
+        assertThat(testFunctionFilm.getTimeFunction()).isEqualTo(UPDATED_TIME_FUNCTION);
     }
 
     @Test
@@ -310,7 +337,7 @@ class FunctionFilmResourceIT {
         FunctionFilm partialUpdatedFunctionFilm = new FunctionFilm();
         partialUpdatedFunctionFilm.setId(functionFilm.getId());
 
-        partialUpdatedFunctionFilm.dateFunction(UPDATED_DATE_FUNCTION);
+        partialUpdatedFunctionFilm.dateFunction(UPDATED_DATE_FUNCTION).timeFunction(UPDATED_TIME_FUNCTION);
 
         restFunctionFilmMockMvc
             .perform(
@@ -325,6 +352,7 @@ class FunctionFilmResourceIT {
         assertThat(functionFilmList).hasSize(databaseSizeBeforeUpdate);
         FunctionFilm testFunctionFilm = functionFilmList.get(functionFilmList.size() - 1);
         assertThat(testFunctionFilm.getDateFunction()).isEqualTo(UPDATED_DATE_FUNCTION);
+        assertThat(testFunctionFilm.getTimeFunction()).isEqualTo(UPDATED_TIME_FUNCTION);
     }
 
     @Test
@@ -339,7 +367,7 @@ class FunctionFilmResourceIT {
         FunctionFilm partialUpdatedFunctionFilm = new FunctionFilm();
         partialUpdatedFunctionFilm.setId(functionFilm.getId());
 
-        partialUpdatedFunctionFilm.dateFunction(UPDATED_DATE_FUNCTION);
+        partialUpdatedFunctionFilm.dateFunction(UPDATED_DATE_FUNCTION).timeFunction(UPDATED_TIME_FUNCTION);
 
         restFunctionFilmMockMvc
             .perform(
@@ -354,6 +382,7 @@ class FunctionFilmResourceIT {
         assertThat(functionFilmList).hasSize(databaseSizeBeforeUpdate);
         FunctionFilm testFunctionFilm = functionFilmList.get(functionFilmList.size() - 1);
         assertThat(testFunctionFilm.getDateFunction()).isEqualTo(UPDATED_DATE_FUNCTION);
+        assertThat(testFunctionFilm.getTimeFunction()).isEqualTo(UPDATED_TIME_FUNCTION);
     }
 
     @Test

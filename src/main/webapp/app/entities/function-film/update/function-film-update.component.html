@@ -52,6 +52,31 @@
         </div>
 
         <div class="form-group">
+          <label class="form-control-label" jhiTranslate="cinemaCidenetApp.functionFilm.timeFunction" for="field_timeFunction"
+            >Time Function</label
+          >
+          <input
+            type="time"
+            class="form-control"
+            name="timeFunction"
+            id="field_timeFunction"
+            data-cy="timeFunction"
+            formControlName="timeFunction"
+          />
+          <div
+            *ngIf="editForm.get('timeFunction')!.invalid && (editForm.get('timeFunction')!.dirty || editForm.get('timeFunction')!.touched)"
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('timeFunction')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
           <label class="form-control-label" jhiTranslate="cinemaCidenetApp.functionFilm.room" for="field_room">Room</label>
           <select class="form-control" id="field_room" data-cy="room" name="room" formControlName="room">
             <option *ngIf="!editForm.get('room')!.value" [ngValue]="null" selected></option>
@@ -72,7 +97,7 @@
         <div class="form-group">
           <label class="form-control-label" jhiTranslate="cinemaCidenetApp.functionFilm.film" for="field_film">Film</label>
           <select class="form-control" id="field_film" data-cy="film" name="film" formControlName="film">
-            <option *ngIf="editForm.get(['film'])!.value == null" [ngValue]="null" selected></option>
+            <option [ngValue]="null"></option>
             <option
               [ngValue]="filmOption.id === editForm.get('film')!.value?.id ? editForm.get('film')!.value : filmOption"
               *ngFor="let filmOption of filmsCollection; trackBy: trackFilmById"
@@ -80,11 +105,6 @@
               {{ filmOption.id }}
             </option>
           </select>
-        </div>
-        <div *ngIf="editForm.get(['film'])!.invalid && (editForm.get(['film'])!.dirty || editForm.get(['film'])!.touched)">
-          <small class="form-text text-danger" *ngIf="editForm.get(['film'])?.errors?.required" jhiTranslate="entity.validation.required">
-            This field is required.
-          </small>
         </div>
       </div>
 
