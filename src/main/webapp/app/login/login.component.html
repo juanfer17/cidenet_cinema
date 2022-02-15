@@ -7,16 +7,16 @@
       </div>
       <form class="form" role="form" (ngSubmit)="login()" [formGroup]="loginForm">
         <div class="form-group">
-          <label class="username-label" for="username" jhiTranslate="global.form.username.label">Login</label>
+          <label class="email-label" for="email" jhiTranslate="global.form.email.label">Email</label>
           <input
-            type="text"
+            type="email"
             class="form-control"
-            name="username"
-            id="username"
-            placeholder="{{ 'global.form.username.placeholder' | translate }}"
+            name="email"
+            id="email"
+            placeholder="{{ 'global.form.email.placeholder' | translate }}"
             formControlName="username"
             #username
-            data-cy="username"
+            data-cy="email"
           />
         </div>
 

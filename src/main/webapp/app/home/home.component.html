@@ -1,7 +1,7 @@
 <div [ngSwitch]="account !== null">
   <div class="title" *ngSwitchCase="true">
-    <h1 id="home-logged-message" *ngIf="account" jhiTranslate="home.logged.message" [translateValues]="{ username: account.login }">
-      You are logged in as user{{ account.login }}
+    <h1 id="home-logged-message" *ngIf="account" jhiTranslate="home.logged.message" [translateValues]="{ username: account.firstName }">
+      You are logged in as user{{ account.email }}
     </h1>
     <span>Te echamos de menos...</span>
   </div>

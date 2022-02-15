@@ -64,10 +64,10 @@ spring:
     # Remove 'faker' if you do not want the sample data to be loaded automatically
     contexts: dev, faker
   mail:
-    host: mail.monkeysolution.com.co
-    port: 26
-    username: cinemacidenet@monkeysolution.com.co
-    password: JuanferCidenet2021.
+    host: smtp.hostinger.com
+    port: 465
+    username: cinemacidenet@cyvservice.com.co
+    password: Juanfer123.
   messages:
     cache-duration: PT1S # 1 second, see the ISO 8601 standard
   thymeleaf:

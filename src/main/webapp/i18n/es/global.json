@@ -39,6 +39,10 @@
     "form": {
       "username.label": "Usuario",
       "username.placeholder": "Nombre de usuario",
+      "name.label": "Nombres",
+      "name.placeholder": "Ingrese Nombres",
+      "lastName.label": "Apellidos",
+      "lastName.placeholder": "Ingrese Apellidos",
       "currentpassword.label": "Contraseña actual",
       "currentpassword.placeholder": "Contraseña actual",
       "newpassword.label": "Nueva contraseña",
@@ -46,7 +50,9 @@
       "confirmpassword.label": "Confirmación de la nueva contraseña",
       "confirmpassword.placeholder": "Confirmación de la nueva contraseña",
       "email.label": "Correo electrónico",
-      "email.placeholder": "Su correo electrónico"
+      "email.placeholder": "Su correo electrónico",
+      "confirmemail.label": "Confirmar Correo electrónico",
+      "confirmemail.placeholder": "Confirmar su correo electrónico"
     },
     "messages": {
       "info": {
@@ -78,6 +84,13 @@
           "maxlength": "Su contraseña de confirmación no puede tener más de 50 caracteres"
         },
         "email": {
+          "required": "Se requiere un correo electrónico.",
+          "invalid": "Su correo electrónico no es válido.",
+          "minlength": "Se requiere que su correo electrónico tenga por lo menos 5 caracteres",
+          "maxlength": "Su correo electrónico no puede tener más de 50 caracteres"
+        },
+
+        "confirmemail": {
           "required": "Se requiere un correo electrónico.",
           "invalid": "Su correo electrónico no es válido.",
           "minlength": "Se requiere que su correo electrónico tenga por lo menos 5 caracteres",
