@@ -52,7 +52,11 @@
       "email.label": "Correo electrónico",
       "email.placeholder": "Su correo electrónico",
       "confirmemail.label": "Confirmar Correo electrónico",
-      "confirmemail.placeholder": "Confirmar su correo electrónico"
+      "confirmemail.placeholder": "Confirmar su correo electrónico",
+      "documentType.label": "Tipo de documento",
+      "documentType.placeholder": "Selecciona su tipo de documento",
+      "documentNumber.label": "Numero de documento",
+      "documentNumber.placeholder": "Ingrese su numero de documento"
     },
     "messages": {
       "info": {
@@ -91,7 +95,7 @@
         },
 
         "confirmemail": {
-          "required": "Se requiere un correo electrónico.",
+          "required": "Se requiere que confirme el correo electrónico.",
           "invalid": "Su correo electrónico no es válido.",
           "minlength": "Se requiere que su correo electrónico tenga por lo menos 5 caracteres",
           "maxlength": "Su correo electrónico no puede tener más de 50 caracteres"

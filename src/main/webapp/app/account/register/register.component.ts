@@ -41,10 +41,24 @@ export class RegisterComponent implements AfterViewInit {
         Validators.pattern('^[a-zA-Z0-9!$&*+=?^_`{|}~.-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$|^[_.@A-Za-z0-9-]+$'),
       ],
     ],
+
+    // Agregar campos nuevos
+    documentType: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(10)]],
+
+    documentNumber: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(15)]],
+
     firstName: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(30), Validators.pattern('')]],
     lastName: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(30), Validators.pattern('')]],
 
-    password: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(50), Validators.pattern('')]],
+    password: [
+      '',
+      [
+        Validators.required,
+        Validators.minLength(5),
+        Validators.maxLength(50),
+        Validators.pattern('^(?=.[a-z])(?=.[A-Z])(?=.*\\d)[a-zA-Z\\d]{5,}$'),
+      ],
+    ],
     confirmPassword: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(50), Validators.pattern('')]],
   });
 
@@ -65,16 +79,20 @@ export class RegisterComponent implements AfterViewInit {
     const firstName = this.registerForm.get(['firstName'])!.value;
     const lastName = this.registerForm.get(['lastName'])!.value;
     const password = this.registerForm.get(['password'])!.value;
+    const documentType = this.registerForm.get(['documentType'])!.value;
+    const documentNumber = this.registerForm.get(['documentNumber'])!.value;
     if (password !== this.registerForm.get(['confirmPassword'])!.value) {
       this.doNotMatch = true;
     } else {
       const email = this.registerForm.get(['email'])!.value;
       const login = email;
 
-      this.registerService.save({ login, email, password, firstName, lastName, langKey: this.translateService.currentLang }).subscribe(
-        () => (this.success = true),
-        response => this.processError(response)
-      );
+      this.registerService
+        .save({ login, email, password, documentNumber, documentType, firstName, lastName, langKey: this.translateService.currentLang })
+        .subscribe(
+          () => (this.success = true),
+          response => this.processError(response)
+        );
     }
   }
 

@@ -29,6 +29,32 @@
     <div class="col-md-8">
       <form name="form" role="form" (ngSubmit)="register()" [formGroup]="registerForm" *ngIf="!success">
         <div class="form-group">
+          <label list="documentType" class="form-control-label" for="documentType" jhiTranslate="global.form.documentType.label"
+            >Document Type</label
+          >
+          <select class="form-control" id="documentType" name="documentType" data-cy="documentType" formControlName="documentType">
+            <option value="Option" disabled>Selecciona una opcion</option>
+            <option value="C.C">Cedula de Ciudadania</option>
+            <option value="T.I">Tarjeta de Identidad</option>
+            <option value="P.A">Pasaporte</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="name" jhiTranslate="global.form.documentNumber.label">Document Number</label>
+          <input
+            type="number"
+            class="form-control"
+            id="documentNumber"
+            name="documentNumber"
+            placeholder="{{ 'global.form.documentNumber.placeholder' | translate }}"
+            formControlName="documentNumber"
+            data-cy="documentNumber"
+            #name
+          />
+        </div>
+
+        <div class="form-group">
           <label class="form-control-label" for="name" jhiTranslate="global.form.name.label">Name</label>
           <input
             type="text"
@@ -54,6 +80,53 @@
             data-cy="lastName"
             #lastName
           />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="email" jhiTranslate="global.form.email.label">Email</label>
+          <input
+            type="email"
+            class="form-control"
+            id="email"
+            name="email"
+            placeholder="{{ 'global.form.email.placeholder' | translate }}"
+            formControlName="email"
+            data-cy="email"
+          />
+
+          <div *ngIf="registerForm.get('email')!.invalid && (registerForm.get('email')!.dirty || registerForm.get('email')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="registerForm.get('email')?.errors?.required"
+              jhiTranslate="global.messages.validate.email.required"
+            >
+              Your email is required.
+            </small>
+
+            <small
+              class="form-text text-danger"
+              *ngIf="registerForm.get('email')?.errors?.invalid"
+              jhiTranslate="global.messages.validate.email.invalid"
+            >
+              Your email is invalid.
+            </small>
+
+            <small
+              class="form-text text-danger"
+              *ngIf="registerForm.get('email')?.errors?.minlength"
+              jhiTranslate="global.messages.validate.email.minlength"
+            >
+              Your email is required to be at least 5 characters.
+            </small>
+
+            <small
+              class="form-text text-danger"
+              *ngIf="registerForm.get('email')?.errors?.maxlength"
+              jhiTranslate="global.messages.validate.email.maxlength"
+            >
+              Your email cannot be longer than 100 characters.
+            </small>
+          </div>
         </div>
 
         <div class="form-group">
@@ -98,53 +171,6 @@
               class="form-text text-danger"
               *ngIf="registerForm.get('email')?.errors?.maxlength"
               jhiTranslate="global.messages.validate.confirmemail.maxlength"
-            >
-              Your email cannot be longer than 100 characters.
-            </small>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label class="form-control-label" for="email" jhiTranslate="global.form.email.label">Email</label>
-          <input
-            type="email"
-            class="form-control"
-            id="email"
-            name="email"
-            placeholder="{{ 'global.form.email.placeholder' | translate }}"
-            formControlName="email"
-            data-cy="email"
-          />
-
-          <div *ngIf="registerForm.get('email')!.invalid && (registerForm.get('email')!.dirty || registerForm.get('email')!.touched)">
-            <small
-              class="form-text text-danger"
-              *ngIf="registerForm.get('email')?.errors?.required"
-              jhiTranslate="global.messages.validate.email.required"
-            >
-              Your email is required.
-            </small>
-
-            <small
-              class="form-text text-danger"
-              *ngIf="registerForm.get('email')?.errors?.invalid"
-              jhiTranslate="global.messages.validate.email.invalid"
-            >
-              Your email is invalid.
-            </small>
-
-            <small
-              class="form-text text-danger"
-              *ngIf="registerForm.get('email')?.errors?.minlength"
-              jhiTranslate="global.messages.validate.email.minlength"
-            >
-              Your email is required to be at least 5 characters.
-            </small>
-
-            <small
-              class="form-text text-danger"
-              *ngIf="registerForm.get('email')?.errors?.maxlength"
-              jhiTranslate="global.messages.validate.email.maxlength"
             >
               Your email cannot be longer than 100 characters.
             </small>

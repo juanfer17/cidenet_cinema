@@ -56,6 +56,7 @@
           <li>
             <a
               class="dropdown-item"
+              *jhiHasAnyAuthority="'ROLE_ADMIN'"
               routerLink="room"
               routerLinkActive="active"
               [routerLinkActiveOptions]="{ exact: true }"
@@ -68,6 +69,7 @@
           <li>
             <a
               class="dropdown-item"
+              *jhiHasAnyAuthority="'ROLE_ADMIN'"
               routerLink="function-film"
               routerLinkActive="active"
               [routerLinkActiveOptions]="{ exact: true }"

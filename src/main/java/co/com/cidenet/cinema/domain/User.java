@@ -34,6 +34,30 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @Column(length = 50, unique = true, nullable = false)
     private String login;
 
+    @Size(max = 10)
+    @Column(name = "document_type", length = 10)
+    private String documentType;
+
+    @Size(max = 15)
+    @Column(name = "document_ident", length = 15)
+    private String documentNumber;
+
+    public String getDocumentType() {
+        return documentType;
+    }
+
+    public void setDocumentType(String documentType) {
+        this.documentType = documentType;
+    }
+
+    public String getDocumentNumber() {
+        return documentNumber;
+    }
+
+    public void setDocumentNumber(String documentNumber) {
+        this.documentNumber = documentNumber;
+    }
+
     @JsonIgnore
     @NotNull
     @Size(min = 60, max = 60)

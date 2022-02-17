@@ -14,8 +14,16 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" jhiTranslate="cinemaCidenetApp.room.roomName" for="field_roomName">Room Name</label>
-          <input type="text" class="form-control" name="roomName" id="field_roomName" data-cy="roomName" formControlName="roomName" />
+          <label list="roomName" class="form-control-label" jhiTranslate="cinemaCidenetApp.room.roomName" for="roomName">Room Name</label>
+          <select class="form-control" id="roomName" name="roomName" data-cy="roomName" formControlName="roomName">
+            <option value="Option" disabled>Selecciona una opcion</option>
+            <option value="Sala 1">Sala 1</option>
+            <option value="Sala 2">Sala 2</option>
+            <option value="Sala 3">Sala 3</option>
+            <option value="Sala 4">Sala 4</option>
+            <option value="Sala 5">Sala 5</option>
+          </select>
+
           <div *ngIf="editForm.get('roomName')!.invalid && (editForm.get('roomName')!.dirty || editForm.get('roomName')!.touched)">
             <small
               class="form-text text-danger"
@@ -44,8 +52,13 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" jhiTranslate="cinemaCidenetApp.room.roomType" for="field_roomType">Room Type</label>
-          <input type="text" class="form-control" name="roomType" id="field_roomType" data-cy="roomType" formControlName="roomType" />
+          <label list="roomType" class="form-control-label" jhiTranslate="cinemaCidenetApp.room.roomType" for="roomType">Room Type</label>
+          <select class="form-control" id="roomType" name="roomType" data-cy="roomType" formControlName="roomType">
+            <option value="Option" disabled>Selecciona una opcion</option>
+            <option value="2D">2D</option>
+            <option value="3D">3D</option>
+          </select>
+
           <div *ngIf="editForm.get('roomType')!.invalid && (editForm.get('roomType')!.dirty || editForm.get('roomType')!.touched)">
             <small
               class="form-text text-danger"

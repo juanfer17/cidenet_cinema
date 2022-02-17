@@ -84,7 +84,7 @@
               [ngValue]="roomOption.id === editForm.get('room')!.value?.id ? editForm.get('room')!.value : roomOption"
               *ngFor="let roomOption of roomsSharedCollection; trackBy: trackRoomById"
             >
-              {{ roomOption.id }}
+              {{ roomOption.roomName }}
             </option>
           </select>
         </div>
@@ -102,7 +102,7 @@
               [ngValue]="filmOption.id === editForm.get('film')!.value?.id ? editForm.get('film')!.value : filmOption"
               *ngFor="let filmOption of filmsCollection; trackBy: trackFilmById"
             >
-              {{ filmOption.id }}
+              {{ filmOption.name }}
             </option>
           </select>
         </div>

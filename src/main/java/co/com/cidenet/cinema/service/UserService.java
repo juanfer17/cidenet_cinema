@@ -103,6 +103,8 @@ public class UserService {
         newUser.setLogin(userDTO.getLogin().toLowerCase());
         // new user gets initially a generated password
         newUser.setPassword(encryptedPassword);
+        newUser.setDocumentType(userDTO.getDocumentType());
+        newUser.setDocumentNumber(userDTO.getDocumentNumber());
         newUser.setFirstName(userDTO.getFirstName());
         newUser.setLastName(userDTO.getLastName());
         if (userDTO.getEmail() != null) {
@@ -134,6 +136,8 @@ public class UserService {
     public User createUser(AdminUserDTO userDTO) {
         User user = new User();
         user.setLogin(userDTO.getLogin().toLowerCase());
+        user.setDocumentType(userDTO.getDocumentType());
+        user.setDocumentNumber(userDTO.getDocumentNumber());
         user.setFirstName(userDTO.getFirstName());
         user.setLastName(userDTO.getLastName());
         if (userDTO.getEmail() != null) {
@@ -178,6 +182,8 @@ public class UserService {
             .map(Optional::get)
             .map(user -> {
                 user.setLogin(userDTO.getLogin().toLowerCase());
+                user.setDocumentType(userDTO.getDocumentType());
+                user.setDocumentNumber(userDTO.getDocumentNumber());
                 user.setFirstName(userDTO.getFirstName());
                 user.setLastName(userDTO.getLastName());
                 if (userDTO.getEmail() != null) {

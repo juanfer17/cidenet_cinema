@@ -53,7 +53,7 @@
           <td>{{ functionFilm.dateFunction | formatMediumDate }}</td>
           <td>
             <div *ngIf="functionFilm.room">
-              <a [routerLink]="['/room', functionFilm.room?.id, 'view']">{{ functionFilm.room?.id }}</a>
+              <a [routerLink]="['/room', functionFilm.room?.id, 'view']">{{ functionFilm.room?.id }} {{ functionFilm.room?.roomName }}</a>
             </div>
           </td>
           <td>

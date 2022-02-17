@@ -6,6 +6,7 @@ import { FilmComponent } from '../list/film.component';
 import { FilmDetailComponent } from '../detail/film-detail.component';
 import { FilmUpdateComponent } from '../update/film-update.component';
 import { FilmRoutingResolveService } from './film-routing-resolve.service';
+import { Authority } from 'app/config/authority.constants';
 
 const filmRoute: Routes = [
   {
@@ -13,6 +14,7 @@ const filmRoute: Routes = [
     component: FilmComponent,
     data: {
       defaultSort: 'id,asc',
+      authorities: [Authority.ADMIN],
     },
     canActivate: [UserRouteAccessService],
   },
@@ -26,6 +28,9 @@ const filmRoute: Routes = [
   },
   {
     path: 'new',
+    data: {
+      authorities: [Authority.ADMIN],
+    },
     component: FilmUpdateComponent,
     resolve: {
       film: FilmRoutingResolveService,
@@ -34,6 +39,9 @@ const filmRoute: Routes = [
   },
   {
     path: ':id/edit',
+    data: {
+      authorities: [Authority.ADMIN],
+    },
     component: FilmUpdateComponent,
     resolve: {
       film: FilmRoutingResolveService,

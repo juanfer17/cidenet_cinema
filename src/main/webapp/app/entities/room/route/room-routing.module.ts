@@ -6,6 +6,7 @@ import { RoomComponent } from '../list/room.component';
 import { RoomDetailComponent } from '../detail/room-detail.component';
 import { RoomUpdateComponent } from '../update/room-update.component';
 import { RoomRoutingResolveService } from './room-routing-resolve.service';
+import { Authority } from 'app/config/authority.constants';
 
 const roomRoute: Routes = [
   {
@@ -13,6 +14,7 @@ const roomRoute: Routes = [
     component: RoomComponent,
     data: {
       defaultSort: 'id,asc',
+      authorities: [Authority.ADMIN],
     },
     canActivate: [UserRouteAccessService],
   },
@@ -26,6 +28,9 @@ const roomRoute: Routes = [
   },
   {
     path: 'new',
+    data: {
+      authorities: [Authority.ADMIN],
+    },
     component: RoomUpdateComponent,
     resolve: {
       room: RoomRoutingResolveService,
@@ -34,6 +39,9 @@ const roomRoute: Routes = [
   },
   {
     path: ':id/edit',
+    data: {
+      authorities: [Authority.ADMIN],
+    },
     component: RoomUpdateComponent,
     resolve: {
       room: RoomRoutingResolveService,

@@ -2,6 +2,7 @@ package co.com.cidenet.cinema.web.rest;
 
 import co.com.cidenet.cinema.domain.Film;
 import co.com.cidenet.cinema.repository.FilmRepository;
+import co.com.cidenet.cinema.security.AuthoritiesConstants;
 import co.com.cidenet.cinema.service.FilmService;
 import co.com.cidenet.cinema.service.dto.FilmDTO;
 import co.com.cidenet.cinema.web.rest.errors.BadRequestAlertException;
@@ -20,6 +21,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import tech.jhipster.web.util.HeaderUtil;
@@ -57,6 +59,7 @@ public class FilmResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/films")
+    @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
     public ResponseEntity<FilmDTO> createFilm(@Valid @RequestBody FilmDTO filmDTO) throws URISyntaxException {
         log.debug("REST request to save Film : {}", filmDTO);
         if (filmDTO.getId() != null) {
@@ -115,6 +118,7 @@ public class FilmResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PatchMapping(value = "/films/{id}", consumes = { "application/json", "application/merge-patch+json" })
+    @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
     public ResponseEntity<FilmDTO> partialUpdateFilm(
         @PathVariable(value = "id", required = false) final Long id,
         @NotNull @RequestBody FilmDTO filmDTO
@@ -173,6 +177,7 @@ public class FilmResource {
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
     @DeleteMapping("/films/{id}")
+    @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
     public ResponseEntity<Void> deleteFilm(@PathVariable Long id) {
         log.debug("REST request to delete Film : {}", id);
         filmService.delete(id);

@@ -20,6 +20,12 @@ public class AdminUserDTO {
     @Size(min = 1, max = 50)
     private String login;
 
+    @Size(max = 10)
+    private String documentType;
+
+    @Size(max = 15)
+    private String documentNumber;
+
     @Size(max = 50)
     private String firstName;
 
@@ -55,6 +61,8 @@ public class AdminUserDTO {
     public AdminUserDTO(User user) {
         this.id = user.getId();
         this.login = user.getLogin();
+        this.documentType = user.getDocumentType();
+        this.documentNumber = user.getDocumentNumber();
         this.firstName = user.getFirstName();
         this.lastName = user.getLastName();
         this.email = user.getEmail();
@@ -74,6 +82,22 @@ public class AdminUserDTO {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getDocumentType() {
+        return documentType;
+    }
+
+    public void setDocumentType(String documentType) {
+        this.documentType = documentType;
+    }
+
+    public String getDocumentNumber() {
+        return documentNumber;
+    }
+
+    public void setDocumentNumber(String documentNumber) {
+        this.documentNumber = documentNumber;
     }
 
     public String getLogin() {
