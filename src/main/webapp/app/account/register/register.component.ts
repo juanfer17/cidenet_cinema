@@ -56,10 +56,12 @@ export class RegisterComponent implements AfterViewInit {
         Validators.required,
         Validators.minLength(5),
         Validators.maxLength(50),
-        Validators.pattern('^(?=.[a-z])(?=.[A-Z])(?=.*\\d)[a-zA-Z\\d]{5,}$'),
+        Validators.pattern(/\d/),
+        Validators.pattern(/[A-Z]/),
+        Validators.pattern(/[a-z]/),
       ],
     ],
-    confirmPassword: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(50), Validators.pattern('')]],
+    confirmPassword: [null, Validators.minLength(5), Validators.maxLength(50), Validators.compose([Validators.required])],
   });
 
   constructor(private translateService: TranslateService, private registerService: RegisterService, private fb: FormBuilder) {}
