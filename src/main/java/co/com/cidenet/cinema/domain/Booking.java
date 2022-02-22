@@ -33,7 +33,7 @@ public class Booking implements Serializable {
 
     @ManyToOne(optional = false)
     @NotNull
-    @JsonIgnoreProperties(value = { "room", "film" }, allowSetters = true)
+    // @JsonIgnoreProperties(value = { "room", "film" }, allowSetters = true, allowGetters = true)
     private FunctionFilm functionFilm;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here

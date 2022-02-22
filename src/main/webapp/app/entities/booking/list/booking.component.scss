@@ -1,3 +1,40 @@
 .table {
   color: white;
 }
+
+.card {
+  color: black;
+  margin: 20px 20px 20px 60px;
+}
+
+.card-body {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.tbody {
+  display: flex;
+  flex-wrap: wrap;
+  height: auto;
+}
+
+.btn {
+  margin-right: 10px;
+}
+.btn-group {
+  display: flex;
+  justify-content: space-around;
+}
+
+.btn-danger {
+  background-color: #750000;
+  border: 2px double #750000;
+}
+
+.btn-danger.focus,
+.btn-danger:focus {
+  color: #fff;
+  background-color: #750000;
+  border-color: #750000;
+  box-shadow: 0 0 0 0.2rem #750000;
+}

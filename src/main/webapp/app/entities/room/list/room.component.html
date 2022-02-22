@@ -29,48 +29,19 @@
   </div>
 
   <div class="table-responsive" id="entities" *ngIf="rooms && rooms.length > 0">
-    <table class="table table-striped" aria-describedby="page-heading">
-      <thead>
-        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="loadPage()">
-          <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
-          <th scope="col" jhiSortBy="roomName">
-            <span jhiTranslate="cinemaCidenetApp.room.roomName">Room Name</span> <fa-icon icon="sort"></fa-icon>
-          </th>
-          <th scope="col" jhiSortBy="roomType">
-            <span jhiTranslate="cinemaCidenetApp.room.roomType">Room Type</span> <fa-icon icon="sort"></fa-icon>
-          </th>
-          <th scope="col" jhiSortBy="row"><span jhiTranslate="cinemaCidenetApp.room.row">Row</span> <fa-icon icon="sort"></fa-icon></th>
-          <th scope="col" jhiSortBy="column">
-            <span jhiTranslate="cinemaCidenetApp.room.column">Column</span> <fa-icon icon="sort"></fa-icon>
-          </th>
-          <th scope="col" jhiSortBy="statusRoom">
-            <span jhiTranslate="cinemaCidenetApp.room.statusRoom">Status Room</span> <fa-icon icon="sort"></fa-icon>
-          </th>
-          <th scope="col" jhiSortBy="bookingPrice">
-            <span jhiTranslate="cinemaCidenetApp.room.bookingPrice">Booking Price</span> <fa-icon icon="sort"></fa-icon>
-          </th>
-          <th scope="col"></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let room of rooms; trackBy: trackId" data-cy="entityTable">
-          <td>
-            <a [routerLink]="['/room', room.id, 'view']">{{ room.id }}</a>
-          </td>
-          <td>{{ room.roomName }}</td>
-          <td>{{ room.roomType }}</td>
-          <td>{{ room.row }}</td>
-          <td>{{ room.column }}</td>
-          <td>{{ room.statusRoom }}</td>
-          <td>{{ room.bookingPrice }}</td>
-          <td class="text-right">
-            <div class="btn-group">
-              <button type="submit" [routerLink]="['/room', room.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
-                <fa-icon icon="eye"></fa-icon>
-                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
-              </button>
+    <td class="tbody">
+      <tr *ngFor="let room of rooms; trackBy: trackId" data-cy="entityTable">
+        <div class="card" style="width: 18rem">
+          <img class="card-img-top" src="../../../../../../content/images/room-img.jpg" alt="Card image cap" />
+          <div class="card-body">
+            <h5 class="card-title">{{ room.roomName }}</h5>
 
-              <button type="submit" [routerLink]="['/room', room.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+            <td>Formato de sala: {{ room.roomType }}</td>
+            <td>Tamaño sala: {{ room.row }} x {{ room.column }}</td>
+            <td>Disponibilidad sala: {{ room.statusRoom }}</td>
+            <td>Precio boleta: {{ room.bookingPrice }} COP</td>
+            <div class="btn-group">
+              <button type="submit" [routerLink]="['/room', room.id, 'edit']" class="btn btn-secondary btn-sm" data-cy="entityEditButton">
                 <fa-icon icon="pencil-alt"></fa-icon>
                 <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
               </button>
@@ -80,10 +51,10 @@
                 <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
               </button>
             </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+          </div>
+        </div>
+      </tr>
+    </td>
   </div>
 
   <div *ngIf="rooms && rooms.length > 0">

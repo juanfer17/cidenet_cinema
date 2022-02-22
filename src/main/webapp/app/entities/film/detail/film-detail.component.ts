@@ -15,6 +15,7 @@ import { getRoomIdentifier, IRoom, Room } from 'app/entities/room/room.model';
 import { FormBuilder } from '@angular/forms';
 import { RoomService } from 'app/entities/room/service/room.service';
 import { FilmService } from '../service/film.service';
+import { NgbDate, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'jhi-film-detail',
@@ -30,6 +31,12 @@ export class FilmDetailComponent implements OnInit {
   success = false;
   totalPrice = 0;
   unitPrice: any = 0;
+  bookingLength: any = 0;
+  year = 0;
+  day = 0;
+  month = 0;
+  minDate: any = '';
+  maxDate: any = '';
 
   editForm = this.fb.group({
     id: [],
@@ -51,6 +58,19 @@ export class FilmDetailComponent implements OnInit {
     this.activatedRoute.data.subscribe(({ film }) => {
       this.film = film;
     });
+
+    const now = new Date();
+    this.year = now.getFullYear();
+    this.month = now.getMonth();
+    this.day = now.getDate();
+    this.minDate = { year: this.year, month: this.month + 1, day: this.day };
+    this.maxDate = { year: this.year, month: this.month + 3, day: this.day + 10 };
+
+    // eslint-disable-next-line no-console
+    console.log('Aqui va el año');
+    // eslint-disable-next-line no-console
+    console.log('year:', this.year, 'month:', this.month, 'day:', this.day);
+
     // this.queryFunctionByFilm();
 
     this.accountService
@@ -78,6 +98,11 @@ export class FilmDetailComponent implements OnInit {
         idFilm: filmId,
         dateFunction: this.editForm.get(['dateFunction'])!.value,
       };
+      // eslint-disable-next-line no-console
+      console.log('Aqui va el año');
+      // eslint-disable-next-line no-console
+      console.log(dataRequest.dateFunction);
+
       this.functionFilmService.findByDate(dataRequest).subscribe(dataResponse => {
         if (dataResponse.body !== null) {
           this.functionFilms = dataResponse.body;
@@ -115,21 +140,29 @@ export class FilmDetailComponent implements OnInit {
     // eslint-disable-next-line no-console
     console.log(this.bookingSelected?.length);
 
-    const bookingLength = this.bookingSelected?.length;
+    this.bookingLength = this.bookingSelected?.length;
 
-    if (bookingLength !== undefined) {
+    if (this.bookingLength !== undefined) {
       // eslint-disable-next-line no-console
-      console.log(this.unitPrice * bookingLength);
+      console.log(this.unitPrice * this.bookingLength);
 
-      this.totalPrice = this.unitPrice * bookingLength;
+      this.totalPrice = this.unitPrice * this.bookingLength;
     }
   }
 
+  clean(): void {
+    this.totalPrice = 0;
+    this.bookingLength = 0;
+    this.bookingSelected = [];
+  }
   confirmChairSelected(): void {
     if (this.bookingSelected !== undefined) {
       this.bookingService.createBookingList(this.bookingSelected).subscribe(dataResponse => {
         // eslint-disable-next-line no-console
         console.log(`Sillas reservadas`);
+
+        this.clean();
+
         this.success = true;
       });
     }

@@ -29,41 +29,17 @@
   </div>
 
   <div class="table-responsive" id="entities" *ngIf="bookings && bookings.length > 0">
-    <table class="table table-striped" aria-describedby="page-heading">
-      <thead>
-        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="loadPage()">
-          <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
-          <th scope="col" jhiSortBy="chairLocation">
-            <span jhiTranslate="cinemaCidenetApp.booking.chairLocation">Chair Location</span> <fa-icon icon="sort"></fa-icon>
-          </th>
-          <th scope="col" jhiSortBy="status">
-            <span jhiTranslate="cinemaCidenetApp.booking.status">Status</span> <fa-icon icon="sort"></fa-icon>
-          </th>
-          <th scope="col" jhiSortBy="user">
-            <span jhiTranslate="cinemaCidenetApp.booking.user">User</span> <fa-icon icon="sort"></fa-icon>
-          </th>
-          <th scope="col" jhiSortBy="functionFilm.id">
-            <span jhiTranslate="cinemaCidenetApp.booking.functionFilm">Function Film</span> <fa-icon icon="sort"></fa-icon>
-          </th>
-          <th scope="col"></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let booking of bookings; trackBy: trackId" data-cy="entityTable">
-          <td>
-            <a [routerLink]="['/booking', booking.id, 'view']">{{ booking.id }}</a>
-          </td>
-          <td>{{ booking.chairLocation }}</td>
-          <td>{{ booking.status }}</td>
-          <td>{{ booking.user }}</td>
-          <td>
-            <div *ngIf="booking.functionFilm">
-              <a [routerLink]="['/function-film', booking.functionFilm?.id, 'view']">{{ booking.functionFilm?.id }}</a>
-            </div>
-          </td>
-          <td class="text-right">
+    <tbody class="tbody">
+      <tr *ngFor="let booking of bookings" data-cy="entityTable">
+        <div class="card" style="width: 18rem">
+          <img class="card-img-top" src="..." alt="Card image cap" />
+          <div class="card-body">
+            <td>Sillas: {{ booking.chairLocation }}</td>
+            <td>ID Funcion: {{ booking.functionFilm?.id }}</td>
+            <td>Fecha: {{ booking.functionFilm?.dateFunction }}</td>
+
             <div class="btn-group">
-              <button type="submit" (click)="delete(booking)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+              <button type="submit" (click)="delete(booking)" class="btn btn-secondary btn-sm" data-cy="entityDeleteButton">
                 <fa-icon icon="times"></fa-icon>
                 <span class="d-none d-md-inline">Liberar Asiento</span>
               </button>
@@ -74,10 +50,10 @@
                 <span class="d-none d-md-inline">Cancelar Reserva</span>
               </button>
             </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+          </div>
+        </div>
+      </tr>
+    </tbody>
   </div>
 
   <div *ngIf="bookings && bookings.length > 0">

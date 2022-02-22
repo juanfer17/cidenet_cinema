@@ -61,7 +61,11 @@ export class RegisterComponent implements AfterViewInit {
         Validators.pattern(/[a-z]/),
       ],
     ],
-    confirmPassword: [null, Validators.minLength(5), Validators.maxLength(50), Validators.compose([Validators.required])],
+
+    confirmPassword: [
+      '',
+      [Validators.required, Validators.minLength(5), Validators.maxLength(50), Validators.compose([Validators.required])],
+    ],
   });
 
   constructor(private translateService: TranslateService, private registerService: RegisterService, private fb: FormBuilder) {}
@@ -83,10 +87,13 @@ export class RegisterComponent implements AfterViewInit {
     const password = this.registerForm.get(['password'])!.value;
     const documentType = this.registerForm.get(['documentType'])!.value;
     const documentNumber = this.registerForm.get(['documentNumber'])!.value;
+    const email = this.registerForm.get(['email'])!.value;
+
     if (password !== this.registerForm.get(['confirmPassword'])!.value) {
-      this.doNotMatch = true;
+      if (this.registerForm.get(['login']) !== email) {
+        this.doNotMatch = true;
+      }
     } else {
-      const email = this.registerForm.get(['email'])!.value;
       const login = email;
 
       this.registerService

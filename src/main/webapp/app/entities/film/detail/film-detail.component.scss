@@ -15,10 +15,46 @@
   flex-direction: column;
 }
 
-.funcion {
-  border: 2px inset white;
-  margin-bottom: 15px;
+.acordeon input {
+  display: none;
+}
+
+.acordeon__titulo {
+  display: block;
   padding: 15px;
+  background-color: #2a2a2a;
+  counter-reset: #fff;
+  cursor: pointer;
+  font-size: 20px;
+  border-bottom: 1px solid #fff;
+  width: auto;
+  height: 62px;
+}
+.acordeon__titulo:hover {
+  background-color: #181818;
+}
+
+.acordeon__contenido {
+  display: flex;
+  justify-content: center;
+  height: 0;
+  overflow: hidden;
+  margin: 0;
+  transition: all 0.5s;
+  background-color: #36316928;
+}
+
+.acordeon__data {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-right: 20px;
+}
+
+.acordeon input:checked ~ .acordeon__contenido {
+  height: 128px;
+  margin: 15px 0;
 }
 
 .modal {
@@ -30,17 +66,22 @@
 .btn-primary {
   background-color: #3c3774;
   color: white;
-  border-color: #ffffff91;
+  border-color: white;
+  width: auto;
+  height: auto;
 }
+
 .modal-dialog {
   background-color: #3c3774;
   display: flex;
   justify-content: center;
+  background-color: #e5e2ff;
 }
 
 .modal-footer {
   padding-bottom: 2rem;
   padding-right: 1rem;
+  background-color: #e5e2ff;
 }
 
 .radio-buttons {
@@ -79,6 +120,7 @@
 
 .modal-content {
   width: 900px;
+  background-color: #e5e2ff;
 }
 
 .close {
@@ -89,6 +131,7 @@
   justify-content: center;
   align-items: center;
   padding: 0;
+  background-color: #e5e2ff;
 }
 
 .modal-body {
@@ -96,7 +139,7 @@
   justify-content: center;
   flex-wrap: wrap;
   width: 835px;
-  background-color: rgb(255, 255, 255);
+  background-color: #e5e2ff;
   padding: 0;
 }
 

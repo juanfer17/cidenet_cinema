@@ -45,9 +45,12 @@
               <div class="form-group">
                 <div class="input-group">
                   <input
+                    [minDate]="minDate"
+                    [maxDate]="maxDate"
                     id="field_dateFunction"
                     data-cy="dateFunction"
                     type="text"
+                    value="minDate"
                     class="form-control"
                     name="dateFunction"
                     ngbDatepicker
@@ -65,28 +68,34 @@
             </form>
 
             <div class="funcion" *ngFor="let function of functionFilms">
-              <h4 class="text-reserva">Fecha: {{ function.dateFunction | formatMediumDate }}</h4>
-              <h4 class="text-reserva">Formato: {{ function.room?.roomType }}</h4>
-              <h4 class="text-reserva">Hora: {{ function.timeFunction }}</h4>
-              <h4 class="text-reserva">Precio: {{ function.room?.bookingPrice }} COP</h4>
-
-              <br />
-
-              <button
-                type="button"
-                (click)="queryChairByFunction(function.id)"
-                class="btn btn-primary"
-                data-toggle="modal"
-                data-target="#modal-selection"
-                data-backdrop="false"
-              >
-                Reservar Ahora
-              </button>
-
-              <br />
-              <br />
-
-              <!-- Button trigger modal -->
+              <div class="acordeon">
+                <div class="acordeon__item">
+                  <input type="radio" name="acordeon" id="{{ function.id }}" />
+                  <label for="{{ function.id }}" class="acordeon__titulo">{{ function.room?.roomName }} ID: {{ function.id }}</label>
+                  <div class="acordeon__contenido">
+                    <div class="acordeon__data">
+                      <h4 class="text-reserva">Fecha: {{ function.dateFunction | formatMediumDate }}</h4>
+                      <h4 class="text-reserva">Formato: {{ function.room?.roomType }}</h4>
+                    </div>
+                    <div class="acordeon__data">
+                      <h4 class="text-reserva">Hora: {{ function.timeFunction }}</h4>
+                      <h4 class="text-reserva">Precio: {{ function.room?.bookingPrice }} COP</h4>
+                    </div>
+                    <div class="acordeon__data">
+                      <button
+                        type="button"
+                        (click)="queryChairByFunction(function.id)"
+                        class="btn btn-primary"
+                        data-toggle="modal"
+                        data-target="#modal-selection"
+                        data-backdrop="false"
+                      >
+                        Reservar Ahora
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -111,7 +120,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title">SELECCION DE SILLAS</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <button type="button" (click)="clean()" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
@@ -143,7 +152,7 @@
             <strong>Precio total: {{ this.totalPrice }} COP </strong>
           </p>
 
-          <button type="button" class="btn btn-secondary" data-dismiss="modal" data-backdrop="false">Cerrar</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" data-backdrop="false" (click)="clean()">Cerrar</button>
           <button
             type="button"
             class="btn btn-primary"

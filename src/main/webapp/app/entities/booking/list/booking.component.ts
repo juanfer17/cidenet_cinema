@@ -14,6 +14,10 @@ import { AccountService } from 'app/core/auth/account.service';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { DeleteAllComponent } from '../delete-all/delete-all.component';
+import { FilmService } from 'app/entities/film/service/film.service';
+import { FunctionFilmService } from 'app/entities/function-film/service/function-film.service';
+import { IFilm } from 'app/entities/film/film.model';
+import { IFunctionFilm } from 'app/entities/function-film/function-film.model';
 
 @Component({
   selector: 'jhi-booking',
@@ -30,6 +34,7 @@ export class BookingComponent implements OnInit {
   ascending!: boolean;
   ngbPaginationPage = 1;
   account: Account | null = null;
+  functionFilms?: IFunctionFilm[];
 
   private readonly destroy$ = new Subject<void>();
 
@@ -38,7 +43,8 @@ export class BookingComponent implements OnInit {
     protected activatedRoute: ActivatedRoute,
     protected router: Router,
     protected modalService: NgbModal,
-    private accountService: AccountService
+    private accountService: AccountService,
+    protected functionFilmService: FunctionFilmService
   ) {}
 
   loadPage(page?: number, dontNavigate?: boolean): void {

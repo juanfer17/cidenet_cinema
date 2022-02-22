@@ -29,30 +29,24 @@
   </div>
 
   <div class="table-responsive" id="entities" *ngIf="films && films.length > 0">
-    <table class="table table-striped" aria-describedby="page-heading">
-      <tbody>
-        <tr *ngFor="let film of films; trackBy: trackId" data-cy="entityTable">
-          <td>
-            <a [routerLink]="['/film', film.id, 'view']">{{ film.id }}</a>
-          </td>
-          <td>Titulo: {{ film.name }}</td>
-          <td>Genero: {{ film.genre }}</td>
-          <td>
-            <a *ngIf="film.urlImage" (click)="openFile(film.urlImage, film.urlImageContentType)">
-              <img [src]="'data:' + film.urlImageContentType + ';base64,' + film.urlImage" style="max-height: 200px" alt="film image" />
-            </a>
-          </td>
-          <td>Duracion: {{ film.duration }} min</td>
-          <td>En cartelera: {{ film.active }}</td>
-          <td>Fecha lanzamiento: {{ film.date | formatMediumDate }}</td>
-          <td class="text-right">
-            <div class="btn-group">
-              <button type="submit" [routerLink]="['/film', film.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
-                <fa-icon icon="eye"></fa-icon>
-                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
-              </button>
+    <td class="tbody">
+      <tr *ngFor="let film of films; trackBy: trackId" data-cy="entityTable">
+        <div class="card" style="width: 18rem">
+          <img
+            class="card-img-top"
+            [src]="'data:' + film.urlImageContentType + ';base64,' + film.urlImage"
+            style="max-width: 100%; height: 350px; border-radius: 20px"
+            alt="film image"
+          />
+          <div class="card-body">
+            <h5 class="card-title">{{ film.name }}</h5>
+            <td>Genero: {{ film.genre }}</td>
+            <td>Duracion: {{ film.duration }} min</td>
+            <td>En cartelera: {{ film.active }}</td>
+            <td>Fecha lanzamiento: {{ film.date | formatMediumDate }}</td>
 
-              <button type="submit" [routerLink]="['/film', film.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+            <div class="btn-group">
+              <button type="submit" [routerLink]="['/film', film.id, 'edit']" class="btn btn-secondary btn-sm" data-cy="entityEditButton">
                 <fa-icon icon="pencil-alt"></fa-icon>
                 <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
               </button>
@@ -62,10 +56,10 @@
                 <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
               </button>
             </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+          </div>
+        </div>
+      </tr>
+    </td>
   </div>
 
   <div *ngIf="films && films.length > 0">

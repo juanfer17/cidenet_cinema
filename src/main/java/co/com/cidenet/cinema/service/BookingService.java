@@ -54,7 +54,7 @@ public interface BookingService {
 
     List<Booking> bookingChairConfirm(List<BookingDTO> chairSelected);
 
-    Page<BookingDTO> bookingByUserPage(String user, Pageable pageable);
+    Page<Booking> bookingByUserPage(String user, Pageable pageable);
 
     void deleteAll(Long id);
 }

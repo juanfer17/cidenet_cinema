@@ -104,9 +104,10 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
-    public Page<BookingDTO> bookingByUserPage(String user, Pageable pageable) {
+    public Page<Booking> bookingByUserPage(String user, Pageable pageable) {
         User userData = userRepository.findOneByLogin(user).get();
-        return bookingRepository.findByUser(userData.getId(), pageable).map(bookingMapper::toDto);
+        // return bookingRepository.findByUser(userData.getId(), pageable).map(bookingMapper::toDto);
+        return bookingRepository.findByUser(userData.getId(), pageable);
     }
 
     @Override

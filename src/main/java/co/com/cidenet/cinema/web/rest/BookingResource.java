@@ -197,9 +197,9 @@ public class BookingResource {
     }
 
     @GetMapping("/bookings/user/{user}")
-    public ResponseEntity<List<BookingDTO>> getAllBookingsByUser(@PathVariable String user, Pageable pageable) {
+    public ResponseEntity<List<Booking>> getAllBookingsByUser(@PathVariable String user, Pageable pageable) {
         log.debug("REST request to get a page of Bookings");
-        Page<BookingDTO> page = bookingService.bookingByUserPage(user, pageable);
+        Page<Booking> page = bookingService.bookingByUserPage(user, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
