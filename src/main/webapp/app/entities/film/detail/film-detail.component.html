@@ -15,27 +15,16 @@
         <div class="img" *ngIf="film.urlImage">
           <img
             [src]="'data:' + film.urlImageContentType + ';base64,' + film.urlImage"
-            style="max-width: 100%; height: 460px"
+            style="max-width: 270px; height: 460px"
             alt="film image"
           />
         </div>
-
-        <div>
+        <div class="box-detail">
           <div class="detail">
-            <span>Genero: </span>
-            <span>{{ film.genre }}</span>
-            <br />
-            <span>Duracion: </span>
-            <span>{{ film.duration }} min</span>
-            <br />
-
-            <span>Fecha estreno: </span>
-            <span>{{ film.date | formatMediumDate }}</span>
-            <br />
-
-            <span>Descripcion: </span>
-            <span> {{ film.description }} </span>
-            <br />
+            <h3 class="text-detail">Genero:{{ film.genre }}</h3>
+            <h3 class="text-detail">Duracion: {{ film.duration }} min</h3>
+            <h3 class="text-detail">Fecha estreno: {{ film.date | formatMediumDate }}</h3>
+            <h3 class="text-detail">Descripcion: {{ film.description }}</h3>
           </div>
 
           <div class="reserva">
@@ -87,7 +76,7 @@
                         (click)="queryChairByFunction(function.id)"
                         class="btn btn-primary"
                         data-toggle="modal"
-                        data-target="#modal-selection"
+                        data-target="#myModal"
                         data-backdrop="false"
                       >
                         Reservar Ahora
@@ -112,59 +101,21 @@
       </div>
     </div>
   </div>
+</div>
 
-  <!-- Modal seleccion de sillas-->
-
-  <div class="modal fade" tabindex="-1" id="modal-selection">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">SELECCION DE SILLAS</h5>
-          <button type="button" (click)="clean()" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="screen"></div>
-        <div class="screen-text"><h3>PANTALLA</h3></div>
-        <div class="modal-body">
-          <div *ngFor="let booking of bookings">
-            <div class="radio-buttons" *ngIf="booking.status === 'Reserved'">
-              <label class="custom-radio">
-                <input type="checkbox" (click)="chairSelected(booking)" disabled />
-                <span class="radio-btn reserved"
-                  ><img src="https://img.icons8.com/material-rounded/28/000000/camping-chair.png" /> {{ booking.chairLocation }}
-                </span>
-              </label>
-            </div>
-
-            <div class="radio-buttons" *ngIf="booking.status === 'Available'">
-              <label class="custom-radio">
-                <input type="checkbox" id="selected" (click)="chairSelected(booking)" />
-                <span class="radio-btn"
-                  ><img src="https://img.icons8.com/material-rounded/28/000000/camping-chair.png" /> {{ booking.chairLocation }}
-                </span>
-              </label>
-            </div>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <p>
-            <strong>Precio total: {{ this.totalPrice }} COP </strong>
-          </p>
-
-          <button type="button" class="btn btn-secondary" data-dismiss="modal" data-backdrop="false" (click)="clean()">Cerrar</button>
-          <button
-            type="button"
-            class="btn btn-primary"
-            data-toggle="modal"
-            data-target="#modal-confirm"
-            data-backdrop="false"
-            data-dismiss="modal"
-            (click)="confirmChairSelected()"
-          >
-            Confirmar Reserva
-          </button>
-        </div>
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Modal Header</h4>
+      </div>
+      <div class="modal-body">
+        <p>Some text in the modal.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>

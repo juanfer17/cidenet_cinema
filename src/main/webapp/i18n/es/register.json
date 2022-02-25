@@ -15,7 +15,7 @@
       },
       "success": "<strong>¡Registro guardado!</strong> Por favor, revise su correo electrónico para confirmar.",
       "error": {
-        "fail": "<strong>¡El registro ha fallado!</strong> Por favor, inténtelo de nuevo más tarde.",
+        "fail": "<strong>¡El registro ha fallado!</strong> Por favor, valide los campos e inténtelo de nuevo.",
         "userexists": "<strong>¡El correo electrónico ya está en uso!</strong> Por favor, escoja otro email.",
         "emailexists": "<strong>¡El correo electrónico ya está en uso!</strong> Por favor, escoja otro email."
       }

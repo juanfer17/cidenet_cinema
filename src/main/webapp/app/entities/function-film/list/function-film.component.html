@@ -32,10 +32,19 @@
     <td class="tbody">
       <tr *ngFor="let functionFilm of functionFilms; trackBy: trackId" data-cy="entityTable">
         <div class="card" style="width: 18rem">
-          <img class="card-img-top" src="../../../../content/images/functionfilm.jpg" alt="Card image cap" />
+          <img
+            class="card-img-top"
+            [src]="'data:' + functionFilm.film?.urlImageContentType + ';base64,' + functionFilm.film?.urlImage"
+            style="max-width: 100%; height: 350px; border-radius: 20px"
+            alt="film image"
+          />
           <div class="card-body">
-            <h5 class="card-title">{{ functionFilm.dateFunction | formatMediumDate }}</h5>
+            <h5 class="card-title">{{ functionFilm.film?.name }}</h5>
+            <h5 class="card-title">Fecha: {{ functionFilm.dateFunction | formatMediumDate }}</h5>
             <td>Hora de la funcion: {{ functionFilm.timeFunction }}</td>
+            <td>Sala asignada: {{ functionFilm.room?.roomName }}</td>
+            <td>Formato de la sala: {{ functionFilm.room?.roomType }}</td>
+            <td>Valor boleta: {{ functionFilm.room?.bookingPrice }} COP</td>
             <div class="btn-group">
               <button
                 type="submit"

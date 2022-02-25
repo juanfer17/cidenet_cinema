@@ -8,7 +8,7 @@
       </div>
 
       <div class="alert alert-danger" *ngIf="error" jhiTranslate="register.messages.error.fail">
-        <strong>Registration failed!</strong> Please try again later.
+        <strong>¡El registro ha fallado!</strong> Por favor, valide los campos e inténtelo de nuevo.
       </div>
 
       <div class="alert alert-danger" *ngIf="errorUserExists" jhiTranslate="register.messages.error.userexists">
@@ -21,6 +21,9 @@
 
       <div class="alert alert-danger" *ngIf="doNotMatch" jhiTranslate="global.messages.error.dontmatch">
         The password and its confirmation do not match!
+      </div>
+      <div class="alert alert-danger" *ngIf="doNotMatchEmail" jhiTranslate="global.messages.error.dontmatchemail">
+        The email and its email confirmation do not match!
       </div>
     </div>
   </div>

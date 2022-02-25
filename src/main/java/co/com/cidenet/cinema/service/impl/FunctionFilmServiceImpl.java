@@ -78,9 +78,9 @@ public class FunctionFilmServiceImpl implements FunctionFilmService {
 
     @Override
     @Transactional(readOnly = true)
-    public Page<FunctionFilmDTO> findAll(Pageable pageable) {
+    public Page<FunctionFilm> findAll(Pageable pageable) {
         log.debug("Request to get all FunctionFilms");
-        return functionFilmRepository.findAll(pageable).map(functionFilmMapper::toDto);
+        return functionFilmRepository.findAll(pageable);
     }
 
     @Override

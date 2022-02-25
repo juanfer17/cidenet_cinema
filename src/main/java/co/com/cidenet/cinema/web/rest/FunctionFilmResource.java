@@ -151,9 +151,9 @@ public class FunctionFilmResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of functionFilms in body.
      */
     @GetMapping("/function-films")
-    public ResponseEntity<List<FunctionFilmDTO>> getAllFunctionFilms(Pageable pageable) {
+    public ResponseEntity<List<FunctionFilm>> getAllFunctionFilms(Pageable pageable) {
         log.debug("REST request to get a page of FunctionFilms");
-        Page<FunctionFilmDTO> page = functionFilmService.findAll(pageable);
+        Page<FunctionFilm> page = functionFilmService.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }

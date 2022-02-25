@@ -11,6 +11,7 @@ import { RoomService } from '../service/room.service';
 @Component({
   selector: 'jhi-room-update',
   templateUrl: './room-update.component.html',
+  styleUrls: ['./room-update.component.scss'],
 })
 export class RoomUpdateComponent implements OnInit {
   isSaving = false;

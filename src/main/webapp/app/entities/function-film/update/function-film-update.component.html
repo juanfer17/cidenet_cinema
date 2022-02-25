@@ -57,12 +57,22 @@
           >
           <input
             type="time"
+            list="listalimitestiempo"
             class="form-control"
             name="timeFunction"
             id="field_timeFunction"
             data-cy="timeFunction"
             formControlName="timeFunction"
           />
+
+          <datalist id="listalimitestiempo">
+            <option value="14:00"></option>
+            <option value="17:00"></option>
+            <option value="16:00"></option>
+            <option value="20:00"></option>
+            <option value="22:00"></option>
+          </datalist>
+
           <div
             *ngIf="editForm.get('timeFunction')!.invalid && (editForm.get('timeFunction')!.dirty || editForm.get('timeFunction')!.touched)"
           >
@@ -84,7 +94,7 @@
               [ngValue]="roomOption.id === editForm.get('room')!.value?.id ? editForm.get('room')!.value : roomOption"
               *ngFor="let roomOption of roomsSharedCollection; trackBy: trackRoomById"
             >
-              {{ roomOption.roomName }}
+              {{ roomOption.roomName }} | | {{ roomOption.roomType }} | | {{ roomOption.column }} x {{ roomOption.row }}
             </option>
           </select>
         </div>

@@ -13,11 +13,13 @@ Main page styles
   display: flex;
   flex-wrap: wrap;
   border: 1px solid #333;
+  justify-content: center;
   width: 322px;
   height: 460px;
   box-sizing: border-box;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
+  margin-bottom: 20px;
 }
 .actionImg4 {
   overflow: hidden;
@@ -80,6 +82,7 @@ Main page styles
   justify-content: space-evenly;
   align-items: center;
   margin-bottom: 70px;
+  flex-wrap: wrap;
 }
 
 .carousel-inner {

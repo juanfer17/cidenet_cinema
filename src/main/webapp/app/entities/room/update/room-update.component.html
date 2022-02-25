@@ -128,25 +128,26 @@
           </div>
         </div>
 
-        <div class="form-group">
-          <label class="form-control-label" jhiTranslate="cinemaCidenetApp.room.statusRoom" for="field_statusRoom">Status Room</label>
+        <div class="custom-control custom-switch">
           <input
             type="checkbox"
-            class="form-check"
+            class="custom-control-input"
+            id="customSwitch1"
             name="statusRoom"
-            id="field_statusRoom"
             data-cy="statusRoom"
             formControlName="statusRoom"
           />
-          <div *ngIf="editForm.get('statusRoom')!.invalid && (editForm.get('statusRoom')!.dirty || editForm.get('statusRoom')!.touched)">
-            <small
-              class="form-text text-danger"
-              *ngIf="editForm.get('statusRoom')?.errors?.required"
-              jhiTranslate="entity.validation.required"
-            >
-              This field is required.
-            </small>
-          </div>
+          <label class="custom-control-label" for="customSwitch1" jhiTranslate="cinemaCidenetApp.room.statusRoom">Status Room</label>
+        </div>
+
+        <div *ngIf="editForm.get('statusRoom')!.invalid && (editForm.get('statusRoom')!.dirty || editForm.get('statusRoom')!.touched)">
+          <small
+            class="form-text text-danger"
+            *ngIf="editForm.get('statusRoom')?.errors?.required"
+            jhiTranslate="entity.validation.required"
+          >
+            This field is required.
+          </small>
         </div>
 
         <div class="form-group">

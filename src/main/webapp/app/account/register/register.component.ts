@@ -15,6 +15,7 @@ export class RegisterComponent implements AfterViewInit {
   login?: ElementRef;
 
   doNotMatch = false;
+  doNotMatchEmail = false;
   error = false;
   errorEmailExists = false;
   errorUserExists = false;
@@ -47,8 +48,8 @@ export class RegisterComponent implements AfterViewInit {
 
     documentNumber: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(15)]],
 
-    firstName: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(30), Validators.pattern('')]],
-    lastName: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(30), Validators.pattern('')]],
+    firstName: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(30), Validators.pattern(/[a-z]/)]],
+    lastName: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(30), Validators.pattern(/[a-z]/)]],
 
     password: [
       '',
@@ -78,6 +79,7 @@ export class RegisterComponent implements AfterViewInit {
 
   register(): void {
     this.doNotMatch = false;
+    this.doNotMatchEmail = false;
     this.error = false;
     this.errorEmailExists = false;
     this.errorUserExists = false;
@@ -89,10 +91,17 @@ export class RegisterComponent implements AfterViewInit {
     const documentNumber = this.registerForm.get(['documentNumber'])!.value;
     const email = this.registerForm.get(['email'])!.value;
 
-    if (password !== this.registerForm.get(['confirmPassword'])!.value) {
-      if (this.registerForm.get(['login']) !== email) {
-        this.doNotMatch = true;
-      }
+    const myText = 'palabravalida';
+    /^([a-zA-ZñÑáéíóúÁÉÍÓÚ])+$/i.test(myText);
+
+    if (!/^([a-zA-ZñÑáéíóúÁÉÍÓÚ ])+$/i.test(firstName)) {
+      this.error = true;
+    } else if (!/^([a-zA-ZñÑáéíóúÁÉÍÓÚ ])+$/i.test(lastName)) {
+      this.error = true;
+    } else if (password !== this.registerForm.get(['confirmPassword'])!.value) {
+      this.doNotMatch = true;
+    } else if (this.registerForm.get(['login'])!.value !== email) {
+      this.doNotMatchEmail = true;
     } else {
       const login = email;
 

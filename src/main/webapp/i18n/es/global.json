@@ -71,7 +71,8 @@
         }
       },
       "error": {
-        "dontmatch": "¡La contraseña y la confirmación de contraseña no coinciden!"
+        "dontmatch": "¡La contraseña y la confirmación de contraseña no coinciden!",
+        "dontmatchemail": "¡El email y la confirmacion de email no coinciden!"
       },
       "validate": {
         "newpassword": {

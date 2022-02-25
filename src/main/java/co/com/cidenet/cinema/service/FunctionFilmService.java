@@ -35,7 +35,7 @@ public interface FunctionFilmService {
      * @param pageable the pagination information.
      * @return the list of entities.
      */
-    Page<FunctionFilmDTO> findAll(Pageable pageable);
+    Page<FunctionFilm> findAll(Pageable pageable);
 
     /**
      * Get the "id" functionFilm.
