@@ -15,7 +15,8 @@ import { getRoomIdentifier, IRoom, Room } from 'app/entities/room/room.model';
 import { FormBuilder } from '@angular/forms';
 import { RoomService } from 'app/entities/room/service/room.service';
 import { FilmService } from '../service/film.service';
-import { NgbDate, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDate, NgbDateStruct, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { FilmDeleteDialogComponent } from '../delete/film-delete-dialog.component';
 
 @Component({
   selector: 'jhi-film-detail',
@@ -37,6 +38,7 @@ export class FilmDetailComponent implements OnInit {
   month = 0;
   minDate: any = '';
   maxDate: any = '';
+  show = false;
 
   editForm = this.fb.group({
     id: [],
@@ -51,7 +53,8 @@ export class FilmDetailComponent implements OnInit {
     protected functionFilmService: FunctionFilmService,
     protected bookingService: BookingService,
     private accountService: AccountService,
-    protected fb: FormBuilder
+    protected fb: FormBuilder,
+    protected modalService: NgbModal
   ) {}
 
   ngOnInit(): void {
@@ -113,6 +116,10 @@ export class FilmDetailComponent implements OnInit {
   }
 
   queryChairByFunction(idFunction?: number): void {
+    const modalRef = this.modalService.open(FilmDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
+    modalRef.componentInstance.idFunction = idFunction;
+
+    /* this.showModal(); */
     if (idFunction !== undefined) {
       this.bookingService.bookingByFunction(idFunction).subscribe(dataResponse => {
         if (dataResponse.body !== null) {
@@ -166,5 +173,13 @@ export class FilmDetailComponent implements OnInit {
         this.success = true;
       });
     }
+  }
+
+  showModal(): void {
+    this.show = true;
+  }
+
+  hidenModal(): void {
+    this.show = false;
   }
 }

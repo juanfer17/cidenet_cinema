@@ -19,42 +19,45 @@
             alt="film image"
           />
         </div>
-        <div class="box-detail">
-          <div class="detail">
-            <h3 class="text-detail">Genero:{{ film.genre }}</h3>
-            <h3 class="text-detail">Duracion: {{ film.duration }} min</h3>
-            <h3 class="text-detail">Fecha estreno: {{ film.date | formatMediumDate }}</h3>
-            <h3 class="text-detail">Descripcion: {{ film.description }}</h3>
-          </div>
 
-          <div class="reserva">
-            <h1>FUNCIONES DISPONIBLES</h1>
+        <div class="reserva">
+          <div class="box-detail">
+            <div class="detail">
+              <h3 class="text-detail">Genero:{{ film.genre }}</h3>
+              <h3 class="text-detail">Duracion: {{ film.duration }} min</h3>
+              <h3 class="text-detail">Fecha estreno: {{ film.date | formatMediumDate }}</h3>
+              <h3 class="text-detail">Descripcion: {{ film.description }}</h3>
+            </div>
 
-            <form name="editForm" role="form" [formGroup]="editForm">
-              <div class="form-group">
-                <div class="input-group">
-                  <input
-                    [minDate]="minDate"
-                    [maxDate]="maxDate"
-                    id="field_dateFunction"
-                    data-cy="dateFunction"
-                    type="text"
-                    value="minDate"
-                    class="form-control"
-                    name="dateFunction"
-                    ngbDatepicker
-                    #dateFunctionDp="ngbDatepicker"
-                    formControlName="dateFunction"
-                    (ngModelChange)="queryFunctionByFilm()"
-                  />
-                  <span class="input-group-append">
-                    <button type="button" class="btn btn-secondary" (click)="dateFunctionDp.toggle()">
-                      <fa-icon icon="calendar-alt"></fa-icon>
-                    </button>
-                  </span>
+            <div class="box-date">
+              <h1>FUNCIONES DISPONIBLES</h1>
+
+              <form name="editForm" role="form" [formGroup]="editForm">
+                <div class="form-group">
+                  <div class="input-group">
+                    <input
+                      [minDate]="minDate"
+                      [maxDate]="maxDate"
+                      id="field_dateFunction"
+                      data-cy="dateFunction"
+                      type="text"
+                      value="minDate"
+                      class="form-control"
+                      name="dateFunction"
+                      ngbDatepicker
+                      #dateFunctionDp="ngbDatepicker"
+                      formControlName="dateFunction"
+                      (ngModelChange)="queryFunctionByFilm()"
+                    />
+                    <span class="input-group-append">
+                      <button type="button" class="btn btn-secondary" (click)="dateFunctionDp.toggle()">
+                        <fa-icon icon="calendar-alt"></fa-icon>
+                      </button>
+                    </span>
+                  </div>
                 </div>
-              </div>
-            </form>
+              </form>
+            </div>
 
             <div class="funcion" *ngFor="let function of functionFilms">
               <div class="acordeon">
@@ -72,14 +75,13 @@
                     </div>
                     <div class="acordeon__data">
                       <button
-                        type="button"
+                        type="submit"
                         (click)="queryChairByFunction(function.id)"
-                        class="btn btn-primary"
-                        data-toggle="modal"
-                        data-target="#myModal"
-                        data-backdrop="false"
+                        class="btn btn-danger btn-sm"
+                        data-cy="entityDeleteButton"
                       >
-                        Reservar Ahora
+                        <fa-icon icon="times"></fa-icon>
+                        <span class="d-none d-md-inline">Reservar Ahora</span>
                       </button>
                     </div>
                   </div>
@@ -98,24 +100,6 @@
 
       <div class="alert alert-success" *ngIf="success">
         <strong>Reserva realizada con exito!</strong>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div id="myModal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Modal Header</h4>
-      </div>
-      <div class="modal-body">
-        <p>Some text in the modal.</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>

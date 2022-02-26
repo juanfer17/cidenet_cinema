@@ -9,6 +9,7 @@ import { BookingService } from '../service/booking.service';
 })
 export class BookingDeleteDialogComponent {
   booking?: IBooking;
+  bookingSelected?: number[] = [];
 
   constructor(protected bookingService: BookingService, protected activeModal: NgbActiveModal) {}
 
@@ -16,8 +17,10 @@ export class BookingDeleteDialogComponent {
     this.activeModal.dismiss();
   }
 
-  confirmDelete(id: number): void {
-    this.bookingService.delete(id).subscribe(() => {
+  confirmDelete(bookingSelected: number[]): void {
+    // eslint-disable-next-line no-console
+    console.log(bookingSelected);
+    this.bookingService.delete(bookingSelected).subscribe(() => {
       this.activeModal.close('deleted');
     });
   }

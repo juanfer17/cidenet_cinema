@@ -14,6 +14,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface BookingRepository extends JpaRepository<Booking, Long> {
     List<Booking> findByFunctionFilmId(Long id);
-    Page<Booking> findByUser(Long user, Pageable pageable);
+    List<Booking> findByUser(Long user);
     List<Booking> findByFunctionFilmIdAndUser(Long id, Long user);
 }

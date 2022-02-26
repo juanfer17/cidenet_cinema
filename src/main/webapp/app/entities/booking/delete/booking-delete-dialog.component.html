@@ -1,4 +1,4 @@
-<form *ngIf="booking" name="deleteForm" (ngSubmit)="confirmDelete(booking.id!)">
+<form *ngIf="bookingSelected" name="deleteForm" (ngSubmit)="confirmDelete(bookingSelected)">
   <div class="modal-header">
     <h4 class="modal-title" data-cy="bookingDeleteDialogHeading" jhiTranslate="entity.delete.title">Confirm delete operation</h4>
 
@@ -8,7 +8,7 @@
   <div class="modal-body">
     <jhi-alert-error></jhi-alert-error>
 
-    <p id="jhi-delete-booking-heading" jhiTranslate="cinemaCidenetApp.booking.delete.question" [translateValues]="{ id: booking.id }">
+    <p id="jhi-delete-booking-heading" jhiTranslate="cinemaCidenetApp.booking.delete.question" [translateValues]="{ id: bookingSelected }">
       Are you sure you want to delete this Booking?
     </p>
   </div>

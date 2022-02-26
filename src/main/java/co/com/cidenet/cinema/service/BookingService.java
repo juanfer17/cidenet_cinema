@@ -2,6 +2,7 @@ package co.com.cidenet.cinema.service;
 
 import co.com.cidenet.cinema.domain.Booking;
 import co.com.cidenet.cinema.service.dto.BookingDTO;
+import co.com.cidenet.cinema.service.dto.FunctionFilmWithChairDTO;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
@@ -48,13 +49,13 @@ public interface BookingService {
      *
      * @param id the id of the entity.
      */
-    void delete(Long id);
+    void delete(List<Long> id);
 
     List<Booking> bookingByFunction(Long id);
 
     List<Booking> bookingChairConfirm(List<BookingDTO> chairSelected);
 
-    Page<Booking> bookingByUserPage(String user, Pageable pageable);
+    List<FunctionFilmWithChairDTO> bookingByUserPage(String user);
 
     void deleteAll(Long id);
 }

@@ -18,6 +18,7 @@ import { FilmService } from 'app/entities/film/service/film.service';
 import { FunctionFilmService } from 'app/entities/function-film/service/function-film.service';
 import { IFilm } from 'app/entities/film/film.model';
 import { IFunctionFilm } from 'app/entities/function-film/function-film.model';
+import { IBookingByUser } from './bookingByUser.model';
 
 @Component({
   selector: 'jhi-booking',
@@ -25,7 +26,8 @@ import { IFunctionFilm } from 'app/entities/function-film/function-film.model';
   styleUrls: ['./booking.component.scss'],
 })
 export class BookingComponent implements OnInit {
-  bookings?: IBooking[];
+  bookings?: IBookingByUser[];
+  bookingSelected?: number[] = [];
   isLoading = false;
   totalItems = 0;
   itemsPerPage = ITEMS_PER_PAGE;
@@ -60,7 +62,7 @@ export class BookingComponent implements OnInit {
           sort: this.sort(),
         })
         .subscribe(
-          (res: HttpResponse<IBooking[]>) => {
+          (res: HttpResponse<IBookingByUser[]>) => {
             this.isLoading = false;
             this.onSuccess(res.body, res.headers, pageToLoad, !dontNavigate);
           },
@@ -85,9 +87,25 @@ export class BookingComponent implements OnInit {
     return item.id!;
   }
 
-  delete(booking: IBooking): void {
+  chairSelected(chairSelectedLocation: any): void {
+    const index = this.bookingSelected?.indexOf(chairSelectedLocation);
+    if (index !== undefined) {
+      if (index > -1) {
+        this.bookingSelected?.splice(index, 1); // 2nd parametro significa que solo remueve un elemento
+      } else {
+        this.bookingSelected?.push(chairSelectedLocation);
+      }
+    }
+
+    // eslint-disable-next-line no-console
+    console.log(this.bookingSelected);
+    // eslint-disable-next-line no-console
+    console.log('Este es el tamaño del booking para eliminar');
+  }
+
+  delete(): void {
     const modalRef = this.modalService.open(BookingDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
-    modalRef.componentInstance.booking = booking;
+    modalRef.componentInstance.bookingSelected = this.bookingSelected;
     // unsubscribe not needed because closed completes on modal close
     modalRef.closed.subscribe(reason => {
       if (reason === 'deleted') {
@@ -96,9 +114,11 @@ export class BookingComponent implements OnInit {
     });
   }
 
-  deleteAll(booking: IBooking): void {
+  deleteAll(booking: IBookingByUser): void {
+    // eslint-disable-next-line no-console
+    console.log(booking);
     const modalRef = this.modalService.open(DeleteAllComponent, { size: 'lg', backdrop: 'static' });
-    modalRef.componentInstance.booking = booking;
+    modalRef.componentInstance.booking = booking.chairList?.[0];
     // unsubscribe not needed because closed completes on modal close
     modalRef.closed.subscribe(reason => {
       if (reason === 'deleted') {
@@ -130,7 +150,7 @@ export class BookingComponent implements OnInit {
     });
   }
 
-  protected onSuccess(data: IBooking[] | null, headers: HttpHeaders, page: number, navigate: boolean): void {
+  protected onSuccess(data: IBookingByUser[] | null, headers: HttpHeaders, page: number, navigate: boolean): void {
     this.totalItems = Number(headers.get('X-Total-Count'));
     this.page = page;
     if (navigate) {

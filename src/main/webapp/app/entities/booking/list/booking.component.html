@@ -3,11 +3,6 @@
     <span jhiTranslate="cinemaCidenetApp.booking.home.title">Bookings</span>
 
     <div class="d-flex justify-content-end">
-      <button class="btn btn-info mr-2" (click)="loadPage()" [disabled]="isLoading">
-        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
-        <span jhiTranslate="cinemaCidenetApp.booking.home.refreshListLabel">Refresh List</span>
-      </button>
-
       <button
         id="jh-create-entity"
         data-cy="entityCreateButton"
@@ -30,22 +25,38 @@
 
   <div class="table-responsive" id="entities" *ngIf="bookings && bookings.length > 0">
     <tbody class="tbody">
-      <tr *ngFor="let booking of bookings" data-cy="entityTable">
+      <tr *ngFor="let function of bookings" data-cy="entityTable">
         <div class="card" style="width: 18rem">
-          <img class="card-img-top" src="..." alt="Card image cap" />
+          <img
+            class="card-img-top"
+            [src]="'data:' + function.functionFilmData?.film?.urlImageContentType + ';base64,' + function.functionFilmData?.film?.urlImage"
+            style="max-width: 100%; height: 350px; border-radius: 20px"
+            alt="film image"
+          />
           <div class="card-body">
-            <td>Sillas: {{ booking.chairLocation }}</td>
-            <td>ID Funcion: {{ booking.functionFilm?.id }}</td>
-            <td>Fecha: {{ booking.functionFilm?.dateFunction }}</td>
-
+            <h5 class="card-title">{{ function.functionFilmData?.film?.name }}</h5>
+            <div class="card-data">
+              <td>Formato: {{ function.functionFilmData?.room?.roomType }}</td>
+              <td>Fecha: {{ function.functionFilmData?.dateFunction }}</td>
+              <td>Hora: {{ function.functionFilmData?.timeFunction }}</td>
+              <td>Referencia de reserva: {{ function.functionFilmData?.id }}</td>
+            </div>
+            <div class="" *ngFor="let chairs of function.chairList">
+              <div class="radio-buttons">
+                <label class="custom-radio">
+                  <input type="checkbox" (click)="chairSelected(chairs.id)" />
+                  {{ chairs?.chairLocation }}
+                </label>
+              </div>
+            </div>
             <div class="btn-group">
-              <button type="submit" (click)="delete(booking)" class="btn btn-secondary btn-sm" data-cy="entityDeleteButton">
+              <button type="submit" (click)="delete()" class="btn btn-secondary btn-sm" data-cy="entityDeleteButton">
                 <fa-icon icon="times"></fa-icon>
                 <span class="d-none d-md-inline">Liberar Asiento</span>
               </button>
               <br />
               <br />
-              <button type="submit" (click)="deleteAll(booking)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+              <button type="submit" (click)="deleteAll(function)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
                 <fa-icon icon="times"></fa-icon>
                 <span class="d-none d-md-inline">Cancelar Reserva</span>
               </button>
@@ -54,23 +65,5 @@
         </div>
       </tr>
     </tbody>
-  </div>
-
-  <div *ngIf="bookings && bookings.length > 0">
-    <div class="row justify-content-center">
-      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
-    </div>
-
-    <div class="row justify-content-center">
-      <ngb-pagination
-        [collectionSize]="totalItems"
-        [(page)]="ngbPaginationPage"
-        [pageSize]="itemsPerPage"
-        [maxSize]="5"
-        [rotate]="true"
-        [boundaryLinks]="true"
-        (pageChange)="loadPage($event)"
-      ></ngb-pagination>
-    </div>
   </div>
 </div>

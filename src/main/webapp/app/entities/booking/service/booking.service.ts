@@ -6,9 +6,11 @@ import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
 import { IBooking, getBookingIdentifier } from '../booking.model';
+import { IBookingByUser } from '../list/bookingByUser.model';
 
 export type EntityResponseType = HttpResponse<IBooking>;
 export type EntityArrayResponseType = HttpResponse<IBooking[]>;
+export type EntityArrayResponseTypeByUser = HttpResponse<IBookingByUser[]>;
 
 @Injectable({ providedIn: 'root' })
 export class BookingService {
@@ -37,8 +39,8 @@ export class BookingService {
     return this.http.get<IBooking[]>(this.resourceUrl, { params: options, observe: 'response' });
   }
 
-  delete(id: number): Observable<HttpResponse<{}>> {
-    return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
+  delete(id: number[]): Observable<HttpResponse<{}>> {
+    return this.http.post(`${this.resourceUrl}/delete`, id, { observe: 'response' });
   }
 
   createBookingList(booking: IBooking[]): Observable<EntityArrayResponseType> {
@@ -67,9 +69,9 @@ export class BookingService {
     return this.http.get<IBooking[]>(`${this.resourceUrl}/byFunction/${req}`, { params: options, observe: 'response' });
   }
 
-  queryByUser(user: string, req?: any): Observable<EntityArrayResponseType> {
+  queryByUser(user: string, req?: any): Observable<EntityArrayResponseTypeByUser> {
     const options = createRequestOption(req);
-    return this.http.get<IBooking[]>(`${this.resourceUrl}/user/${user}`, { params: options, observe: 'response' });
+    return this.http.get<IBookingByUser[]>(`${this.resourceUrl}/user/${user}`, { params: options, observe: 'response' });
   }
 
   deleteAll(id: number): Observable<HttpResponse<{}>> {

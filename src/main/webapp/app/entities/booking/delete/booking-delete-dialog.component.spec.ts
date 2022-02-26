@@ -38,11 +38,11 @@ describe('Booking Management Delete Component', () => {
         jest.spyOn(service, 'delete').mockReturnValue(of(new HttpResponse({})));
 
         // WHEN
-        comp.confirmDelete(123);
+        comp.confirmDelete([123]);
         tick();
 
         // THEN
-        expect(service.delete).toHaveBeenCalledWith(123);
+        expect(service.delete).toHaveBeenCalledWith([123]);
         expect(mockActiveModal.close).toHaveBeenCalledWith('deleted');
       })
     ));

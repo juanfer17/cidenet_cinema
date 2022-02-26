@@ -4,6 +4,7 @@ import co.com.cidenet.cinema.domain.Booking;
 import co.com.cidenet.cinema.repository.BookingRepository;
 import co.com.cidenet.cinema.service.BookingService;
 import co.com.cidenet.cinema.service.dto.BookingDTO;
+import co.com.cidenet.cinema.service.dto.FunctionFilmWithChairDTO;
 import co.com.cidenet.cinema.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -172,8 +173,8 @@ public class BookingResource {
      * @param id the id of the bookingDTO to delete.
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
-    @DeleteMapping("/bookings/{id}")
-    public ResponseEntity<Void> deleteBooking(@PathVariable Long id) {
+    @PostMapping("/bookings/delete")
+    public ResponseEntity<Void> deleteBooking(@RequestBody List<Long> id) {
         log.debug("REST request to delete Booking : {}", id);
         bookingService.delete(id);
         return ResponseEntity
@@ -197,11 +198,10 @@ public class BookingResource {
     }
 
     @GetMapping("/bookings/user/{user}")
-    public ResponseEntity<List<Booking>> getAllBookingsByUser(@PathVariable String user, Pageable pageable) {
+    public ResponseEntity<List<FunctionFilmWithChairDTO>> getAllBookingsByUser(@PathVariable String user, Pageable pageable) {
         log.debug("REST request to get a page of Bookings");
-        Page<Booking> page = bookingService.bookingByUserPage(user, pageable);
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
-        return ResponseEntity.ok().headers(headers).body(page.getContent());
+        List<FunctionFilmWithChairDTO> page = bookingService.bookingByUserPage(user);
+        return ResponseEntity.ok().body(page);
     }
 
     @DeleteMapping("/bookings/all/{id}")

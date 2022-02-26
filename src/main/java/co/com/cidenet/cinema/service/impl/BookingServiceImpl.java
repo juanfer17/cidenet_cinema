@@ -1,15 +1,24 @@
 package co.com.cidenet.cinema.service.impl;
 
 import co.com.cidenet.cinema.domain.Booking;
+import co.com.cidenet.cinema.domain.FunctionFilm;
 import co.com.cidenet.cinema.domain.User;
 import co.com.cidenet.cinema.repository.BookingRepository;
 import co.com.cidenet.cinema.repository.UserRepository;
 import co.com.cidenet.cinema.service.BookingService;
 import co.com.cidenet.cinema.service.dto.BookingDTO;
+import co.com.cidenet.cinema.service.dto.FunctionFilmWithChairDTO;
 import co.com.cidenet.cinema.service.mapper.BookingMapper;
 import co.com.cidenet.cinema.service.mapper.UtilMapperBooking;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
+import com.google.gson.Gson;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -76,12 +85,14 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
-    public void delete(Long id) {
+    public void delete(List<Long> id) {
         log.debug("Request to delete Booking : {}", id);
-        Booking booking = bookingRepository.getById(id);
-        booking.setUser(null);
-        booking.setStatus("Available");
-        bookingRepository.save(booking);
+        for (Long charId : id) {
+            Booking booking = bookingRepository.getById(charId);
+            booking.setUser(null);
+            booking.setStatus("Available");
+            bookingRepository.save(booking);
+        }
     }
 
     @Override
@@ -104,10 +115,85 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
-    public Page<Booking> bookingByUserPage(String user, Pageable pageable) {
+    public List<FunctionFilmWithChairDTO> bookingByUserPage(String user) {
         User userData = userRepository.findOneByLogin(user).get();
-        // return bookingRepository.findByUser(userData.getId(), pageable).map(bookingMapper::toDto);
-        return bookingRepository.findByUser(userData.getId(), pageable);
+        List<Booking> bookingByUser = bookingRepository.findByUser(userData.getId());
+        List<FunctionFilmWithChairDTO> functionFilmWithChairDTO = new ArrayList<>();
+        // List<FunctionFilmWithChairDTO> aux = new  ArrayList<>();
+        FunctionFilm functionFilmData = new FunctionFilm();
+        System.out.println(
+            "#############################################################################################XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX INICIO DEL PRIMERO"
+        );
+        for (Booking bookingByUserData : bookingByUser) {
+            FunctionFilmWithChairDTO functionFilmWithChair = new FunctionFilmWithChairDTO();
+
+            functionFilmData = bookingByUserData.getFunctionFilm();
+            List<Booking> bookingByFunctionUser = new ArrayList<>();
+            for (Booking bookingByUserChairs : bookingByUser) {
+                if (bookingByUserData.getFunctionFilm().getId() == bookingByUserChairs.getFunctionFilm().getId()) {
+                    bookingByFunctionUser.add(bookingByUserChairs);
+                }
+            }
+            int contadorExiste = 0;
+            System.out.println(
+                "#############################################################################################XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX TAMAÑO DE LA LISTA: " +
+                functionFilmWithChairDTO.size()
+            );
+            for (FunctionFilmWithChairDTO functionFilmWithChairDTOValidator : functionFilmWithChairDTO) {
+                System.out.println(
+                    "#############################################################################################XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX VALOR DEL CONTADOR: " +
+                    contadorExiste
+                );
+                System.out.println(
+                    "#############################################################################################XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX VALOR ID: " +
+                    functionFilmData.getId() +
+                    "------------" +
+                    functionFilmWithChairDTOValidator.getFunctionFilmData().getId()
+                );
+                if (functionFilmData.getId() == functionFilmWithChairDTOValidator.getFunctionFilmData().getId()) {
+                    contadorExiste++;
+                    System.out.println(
+                        "#############################################################################################XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX ENTRO A LA CONDICIONAL ESTADO CONTADOR: " +
+                        contadorExiste
+                    );
+                }
+            }
+
+            System.out.println(
+                "#############################################################################################XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX VALOR FINAL CONTADOR: " +
+                contadorExiste
+            );
+            if (contadorExiste < 1) {
+                System.out.println(
+                    "#############################################################################################XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX ENTRO AL ULTIMO CONDICIONAL: " +
+                    contadorExiste
+                );
+                functionFilmWithChair.setFunctionFilmData(functionFilmData);
+                functionFilmWithChair.setChairList(bookingByFunctionUser);
+                functionFilmWithChairDTO.add(functionFilmWithChair);
+            }
+        }
+
+        System.out.println(
+            "#############################################################################################XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX FIN DE LOS FOR: "
+        );
+
+        // aux = functionFilmWithChairDTO;
+        // System.out.println("#############################################################################################XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"+aux.size());
+        // for (int i = 0; i <= aux.size(); i++ ) {
+        //     FunctionFilmWithChairDTO functionFilmDTOAux = aux.get(i);
+        //     int contadorAuxiliar = 0;
+        //     for (FunctionFilmWithChairDTO functionFilmWithChairsOriginal : functionFilmWithChairDTO) {
+        //         if ( functionFilmDTOAux.getFunctionFilmData().getId() == functionFilmWithChairsOriginal.getFunctionFilmData().getId()){
+        //             contadorAuxiliar++;
+        //         }
+        //     }
+        //     if(contadorAuxiliar >= 1 ){
+        //         aux.remove(i);
+        //     }
+        // }
+
+        return functionFilmWithChairDTO;
     }
 
     @Override
