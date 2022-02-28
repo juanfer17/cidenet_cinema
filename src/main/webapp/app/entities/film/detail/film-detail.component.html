@@ -1,6 +1,10 @@
 <div class="row justify-content-center">
   <div class="col-8">
     <div *ngIf="film">
+      <div class="alert alert-success" *ngIf="success">
+        <strong>Reserva realizada con exito!</strong>
+      </div>
+
       <h2 data-cy="filmDetailsHeading">
         <span>{{ film.name }}</span>
       </h2>
@@ -78,7 +82,8 @@
                         type="submit"
                         (click)="queryChairByFunction(function.id)"
                         class="btn btn-danger btn-sm"
-                        data-cy="entityDeleteButton"
+                        data-toggle="modal"
+                        data-target=".bd-example-modal-lg"
                       >
                         <fa-icon icon="times"></fa-icon>
                         <span class="d-none d-md-inline">Reservar Ahora</span>
@@ -97,9 +102,72 @@
       </button>
       <br />
       <br />
+    </div>
+  </div>
+</div>
 
-      <div class="alert alert-success" *ngIf="success">
-        <strong>Reserva realizada con exito!</strong>
+<div
+  class="modal fade bd-example-modal-lg"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="myLargeModalLabel"
+  aria-hidden="true"
+  data-backdrop="false"
+>
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">SELECCION DE SILLAS</h5>
+        <button type="button" (click)="clean()" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="screen"></div>
+      <div class="screen-text"><h3>PANTALLA</h3></div>
+      <div class="modal-body">
+        <div *ngFor="let booking of bookings">
+          <div class="radio-buttons">
+            <div *ngIf="booking?.status === 'Reserved'">
+              <label class="custom-radio">
+                <input type="checkbox" (click)="chairSelected(booking)" disabled />
+                <span class="radio-btn"
+                  ><img src="https://img.icons8.com/material-rounded/28/000000/camping-chair.png" class="chair" />
+                  <div class="chairLocation">{{ booking.chairLocation }}</div>
+                </span>
+              </label>
+            </div>
+          </div>
+
+          <div class="radio-buttons">
+            <div *ngIf="booking?.status === 'Available'">
+              <label class="custom-radio">
+                <input type="checkbox" id="selected" (click)="chairSelected(booking)" />
+                <span class="radio-btn"
+                  ><img src="https://img.icons8.com/material-rounded/28/000000/camping-chair.png" class="chair" />
+                  <div class="chairLocation">{{ booking.chairLocation }}</div>
+                </span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <p>
+          <strong>Precio total: {{ this.totalPrice }} COP </strong>
+        </p>
+
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" data-backdrop="false" (click)="clean()">Cerrar</button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          data-toggle="modal"
+          data-target="#modal-confirm"
+          data-backdrop="false"
+          data-dismiss="modal"
+          (click)="confirmChairSelected()"
+        >
+          Confirmar Reserva
+        </button>
       </div>
     </div>
   </div>

@@ -1,6 +1,13 @@
 html body {
   height: 100%;
 }
+.modal {
+  overflow-y: auto;
+  background-color: rgba(0, 0, 0, 0.342);
+}
+.row {
+  justify-content: center;
+}
 .screen {
   display: flex;
   align-items: center;
@@ -18,7 +25,25 @@ html body {
   color: #61616160;
   align-items: center;
   justify-content: center;
-  margin-bottom: 30px;
+  margin-bottom: 10px;
+}
+.modal-open {
+  background-color: #181818;
+}
+
+.modal-body {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-items: center;
+  color: #2a2a2a;
+  background-color: #e5e2ff;
+  padding: 0;
+}
+
+.modal-content {
+  color: #181818;
+  background-color: #e5e2ff;
 }
 
 .modal-footer {
@@ -112,13 +137,13 @@ html body {
 
 .radio-btn {
   margin: 5px;
-  width: 48px;
+  width: 55px;
   height: 55px;
   border: 3px solid transparent;
   display: inline-block;
-  border-radius: 10px;
   position: relative;
   text-align: center;
+  border-radius: 30%;
   box-shadow: 0 0 20px #3c3774;
   cursor: pointer;
 }
@@ -180,13 +205,24 @@ input[type='radio'] {
   font-size: 18px;
 }
 
-.modal-body {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  width: 835px;
-  background-color: #e5e2ff;
-  padding: 0;
+.vertical-alignment-helper {
+  display: table;
+  height: 100%;
+  width: 100%;
+  pointer-events: none;
+}
+.vertical-align-center {
+  /* To center vertically */
+  display: table-cell;
+  vertical-align: middle;
+  pointer-events: none;
+}
+.modal-content {
+  /* Bootstrap sets the size of the modal in the modal-dialog class, we need to inherit it */
+  width: inherit;
+  height: inherit;
+  /* To center horizontally */
+  margin: 0 auto;
 }
 
 @media screen and (max-width: 1370px) {
@@ -195,21 +231,39 @@ input[type='radio'] {
     flex-wrap: wrap;
     margin-bottom: 130px;
   }
+  .screen {
+    width: 500px;
+  }
+  .vertical-alignment-helper {
+    height: 20%;
+  }
 }
 
 @media screen and (max-width: 500px) {
+  .chair {
+    height: 20px;
+    width: 20px;
+  }
   .modal-content {
-    width: auto;
+    width: 80%;
+    height: 80%;
+    font-size: 15px;
+    overflow-x: scroll;
+    overflow-y: scroll;
   }
-
+  .radio-btn {
+    width: 30px;
+    height: 40px;
+  }
   .screen {
-    width: 320px;
+    width: 220px;
   }
-
-  .modal-dialog {
-    width: 350px;
+  .screen-text {
+    display: none;
   }
-
+  .chairLocation {
+    font-size: 10px;
+  }
   .modal-body {
     padding: 0.5rem;
   }

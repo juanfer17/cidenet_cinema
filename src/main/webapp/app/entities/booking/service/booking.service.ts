@@ -7,6 +7,7 @@ import { ApplicationConfigService } from 'app/core/config/application-config.ser
 import { createRequestOption } from 'app/core/request/request-util';
 import { IBooking, getBookingIdentifier } from '../booking.model';
 import { IBookingByUser } from '../list/bookingByUser.model';
+import { IFunctionFilm } from 'app/entities/function-film/function-film.model';
 
 export type EntityResponseType = HttpResponse<IBooking>;
 export type EntityArrayResponseType = HttpResponse<IBooking[]>;

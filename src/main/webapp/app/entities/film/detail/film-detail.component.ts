@@ -17,6 +17,7 @@ import { RoomService } from 'app/entities/room/service/room.service';
 import { FilmService } from '../service/film.service';
 import { NgbDate, NgbDateStruct, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FilmDeleteDialogComponent } from '../delete/film-delete-dialog.component';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'jhi-film-detail',
@@ -116,10 +117,7 @@ export class FilmDetailComponent implements OnInit {
   }
 
   queryChairByFunction(idFunction?: number): void {
-    const modalRef = this.modalService.open(FilmDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
-    modalRef.componentInstance.idFunction = idFunction;
-
-    /* this.showModal(); */
+    this.showModal();
     if (idFunction !== undefined) {
       this.bookingService.bookingByFunction(idFunction).subscribe(dataResponse => {
         if (dataResponse.body !== null) {

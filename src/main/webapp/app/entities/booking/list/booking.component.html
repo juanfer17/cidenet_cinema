@@ -1,18 +1,6 @@
 <div>
   <h2 id="page-heading" data-cy="BookingHeading">
     <span jhiTranslate="cinemaCidenetApp.booking.home.title">Bookings</span>
-
-    <div class="d-flex justify-content-end">
-      <button
-        id="jh-create-entity"
-        data-cy="entityCreateButton"
-        class="btn btn-primary jh-create-entity create-booking"
-        [routerLink]="['/booking/new']"
-      >
-        <fa-icon icon="plus"></fa-icon>
-        <span jhiTranslate="cinemaCidenetApp.booking.home.createLabel"> Create a new Booking </span>
-      </button>
-    </div>
   </h2>
 
   <jhi-alert-error></jhi-alert-error>
