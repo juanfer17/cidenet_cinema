@@ -11,7 +11,7 @@ html body {
 .screen {
   display: flex;
   align-items: center;
-  width: 700px;
+  width: 80%;
   height: 20px;
   border-radius: 30%;
   background: #2a2a2a;
@@ -200,26 +200,6 @@ input[type='radio'] {
   font-size: 18px;
 }
 
-.vertical-alignment-helper {
-  display: table;
-  height: 100%;
-  width: 100%;
-  pointer-events: none;
-}
-.vertical-align-center {
-  /* To center vertically */
-  display: table-cell;
-  vertical-align: middle;
-  pointer-events: none;
-}
-.modal-content {
-  /* Bootstrap sets the size of the modal in the modal-dialog class, we need to inherit it */
-  width: inherit;
-  height: inherit;
-  /* To center horizontally */
-  margin: 0 auto;
-}
-
 @media screen and (max-width: 1370px) {
   .jh-entity-details {
     display: flex;
@@ -227,7 +207,7 @@ input[type='radio'] {
     margin-bottom: 130px;
   }
   .screen {
-    width: 500px;
+    width: 80%;
   }
   .vertical-alignment-helper {
     height: 20%;
@@ -259,6 +239,10 @@ input[type='radio'] {
 }
 
 @media screen and (max-width: 500px) {
+  .vertical-alignment-helper {
+    height: 80%;
+    width: 80%;
+  }
   .chair {
     height: 20px;
     width: 20px;
@@ -274,9 +258,7 @@ input[type='radio'] {
     width: 30px;
     height: 40px;
   }
-  .screen {
-    width: 220px;
-  }
+
   .screen-text {
     display: none;
   }
