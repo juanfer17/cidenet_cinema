@@ -19,7 +19,7 @@
         <div class="img" *ngIf="film.urlImage">
           <img
             [src]="'data:' + film.urlImageContentType + ';base64,' + film.urlImage"
-            style="max-width: 270px; height: 460px"
+            style="max-width: 270px; height: 460px; margin-bottom: 130px"
             alt="film image"
           />
         </div>
@@ -134,7 +134,7 @@
                 <div *ngIf="booking?.status === 'Reserved'">
                   <label class="custom-radio">
                     <input type="checkbox" (click)="chairSelected(booking)" disabled />
-                    <span class="radio-btn"
+                    <span class="radio-btn reserved"
                       ><img src="https://img.icons8.com/material-rounded/28/000000/camping-chair.png" class="chair" />
                       <div class="chairLocation">{{ booking.chairLocation }}</div>
                     </span>

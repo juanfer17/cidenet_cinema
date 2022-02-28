@@ -29,11 +29,14 @@
               <td>Hora: {{ function.functionFilmData?.timeFunction }}</td>
               <td>Referencia de reserva: {{ function.functionFilmData?.id }}</td>
             </div>
-            <div class="" *ngFor="let chairs of function.chairList">
-              <div class="radio-buttons">
+            <div class="radio-buttons">
+              <div *ngFor="let chairs of function.chairList">
                 <label class="custom-radio">
-                  <input type="checkbox" (click)="chairSelected(chairs.id)" />
-                  {{ chairs?.chairLocation }}
+                  <input class="form-check-input" Type="checkbox" (click)="chairSelected(chairs.id)" />
+                  <span class="radio-btn"
+                    ><img src="https://img.icons8.com/material-rounded/28/000000/camping-chair.png" class="chair" />
+                    <div class="chairLocation">{{ chairs?.chairLocation }}</div>
+                  </span>
                 </label>
               </div>
             </div>
