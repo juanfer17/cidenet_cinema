@@ -60,6 +60,8 @@ html body {
 
 .jh-entity-details {
   display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
   margin-bottom: 130px;
 }
 
@@ -176,20 +178,13 @@ input[type='radio'] {
   flex-wrap: wrap;
 }
 
-.box-detail {
-  margin-bottom: 130px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-}
-
 .box-date {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
   flex-direction: column;
+  padding-left: 25px;
 }
 
 .detail {
@@ -198,8 +193,8 @@ input[type='radio'] {
   flex-wrap: wrap;
   width: 100%;
   height: auto;
-  padding: 25px;
-  margin-top: -25px;
+  padding-left: 25px;
+  margin-top: 25px;
 }
 .text-detail {
   font-size: 18px;
@@ -236,6 +231,30 @@ input[type='radio'] {
   }
   .vertical-alignment-helper {
     height: 20%;
+  }
+}
+
+@media screen and (max-width: 1366px) {
+  .reserva {
+    width: 500px;
+  }
+}
+
+@media screen and (max-width: 1234px) {
+  .reserva {
+    width: 400px;
+  }
+}
+
+@media screen and (max-width: 1088px) {
+  .reserva {
+    width: 300px;
+  }
+}
+
+@media screen and (max-width: 942px) {
+  .reserva {
+    width: 200px;
   }
 }
 
