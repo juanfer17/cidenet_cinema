@@ -2,7 +2,7 @@
   "cinemaCidenetApp": {
     "film": {
       "home": {
-        "title": "Films",
+        "title": "Filmes",
         "refreshListLabel": "Atualizar lista",
         "createLabel": "Criar novo Film",
         "createOrEditLabel": "Criar ou editar Film",
@@ -18,13 +18,13 @@
         "title": "Film"
       },
       "id": "ID",
-      "name": "Name",
-      "genre": "Genre",
-      "urlImage": "Url Image",
-      "duration": "Duration",
-      "active": "Active",
-      "date": "Date",
-      "description": "Description"
+      "name": "Nome",
+      "genre": "Gênero",
+      "urlImage": "Imagem de URL",
+      "duration": "Duração",
+      "active": "Ativo",
+      "date": "Data",
+      "description": "Descrição"
     }
   }
 }

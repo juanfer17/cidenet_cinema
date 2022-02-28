@@ -2,7 +2,7 @@
   "cinemaCidenetApp": {
     "functionFilm": {
       "home": {
-        "title": "Function Films",
+        "title": "Funções",
         "refreshListLabel": "Atualizar lista",
         "createLabel": "Criar novo Function Film",
         "createOrEditLabel": "Criar ou editar Function Film",
@@ -18,10 +18,10 @@
         "title": "Function Film"
       },
       "id": "ID",
-      "dateFunction": "Date Function",
-      "timeFunction": "Time Function",
-      "room": "Room",
-      "film": "Film"
+      "dateFunction": "Data Função",
+      "timeFunction": "Hora Função",
+      "room": "Quarto",
+      "film": "Filme"
     }
   }
 }

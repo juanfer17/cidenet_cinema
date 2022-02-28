@@ -3,7 +3,7 @@
     <h1 id="home-logged-message" *ngIf="account" jhiTranslate="home.logged.message" [translateValues]="{ username: account.firstName }">
       You are logged in as user{{ account.email }}
     </h1>
-    <span>Te echamos de menos...</span>
+    <span jhiTranslate="home.logged.message2">Te echamos de menos...</span>
   </div>
 
   <div class="jhi-home">
@@ -49,7 +49,7 @@
   </div>
 
   <div class="title">
-    <h1>Peliculas en Cartelera</h1>
+    <h1 jhiTranslate="home.logged.filmsActive">Peliculas en Cartelera</h1>
   </div>
 
   <div class="films">
@@ -61,10 +61,10 @@
             {{ film.name }}
           </span>
           <div class="desc">
-            <h1 style="font-size: 14px">Duracion: {{ film.duration }} min</h1>
-            <h1 style="font-size: 14px">Genero: {{ film.genre }}</h1>
+            <h1 class="text-card">{{ film.duration }} min</h1>
+            <h1 class="text-card">{{ film.genre }}</h1>
 
-            <button [routerLink]="['/film', film.id, 'view']">
+            <button jhiTranslate="home.logged.booking" [routerLink]="['/film', film.id, 'view']">
               RESERVAR
               <span></span>
             </button>

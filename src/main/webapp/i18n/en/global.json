@@ -46,7 +46,13 @@
       "confirmpassword.label": "New password confirmation",
       "confirmpassword.placeholder": "Confirm the new password",
       "email.label": "Email",
-      "email.placeholder": "Your email"
+      "email.placeholder": "Your email",
+      "confirmEmail.label": "Confirm the new Email",
+      "confirmEmail.placeholder": "Confirm the new Email",
+      "documentType.label": "Document Type",
+      "documentType.placeholder": "Select your document type",
+      "documentNumber.label": "Document Number",
+      "documentNumber.placeholder": "Enter your document number"
     },
     "messages": {
       "info": {

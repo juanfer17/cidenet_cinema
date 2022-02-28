@@ -3,7 +3,13 @@
     "title": "Cinema Cidenet",
     "subtitle": "Esta é a página principal",
     "logged": {
-      "message": "Bem-vindo {{username}}"
+      "message": "Bem-vindo {{username}}",
+      "message2": "Sentimos sua falta...",
+      "filmsActive": "Filmes nos cinemas",
+      "title": "Título",
+      "duration": "Duração",
+      "genre": "Gênero",
+      "booking": "RESERVA"
     },
     "question": "Em caso de dúvida sobre o JHipster:",
     "link": {

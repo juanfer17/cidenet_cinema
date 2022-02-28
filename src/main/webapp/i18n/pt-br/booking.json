@@ -2,7 +2,7 @@
   "cinemaCidenetApp": {
     "booking": {
       "home": {
-        "title": "Bookings",
+        "title": "Reservas",
         "refreshListLabel": "Atualizar lista",
         "createLabel": "Criar novo Booking",
         "createOrEditLabel": "Criar ou editar Booking",

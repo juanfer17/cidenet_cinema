@@ -22,7 +22,7 @@
       "roomType": "Room Type",
       "row": "Row",
       "column": "Column",
-      "statusRoom": "Status Room",
+      "statusRoom": "Available",
       "bookingPrice": "Booking Price"
     }
   }

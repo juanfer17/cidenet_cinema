@@ -21,6 +21,11 @@ export class FunctionFilmUpdateComponent implements OnInit {
 
   roomsSharedCollection: IRoom[] = [];
   filmsCollection: IFilm[] = [];
+  year = 0;
+  day = 0;
+  month = 0;
+  minDate: any = '';
+  maxDate: any = '';
 
   editForm = this.fb.group({
     id: [],
@@ -44,6 +49,12 @@ export class FunctionFilmUpdateComponent implements OnInit {
 
       this.loadRelationshipsOptions();
     });
+    const now = new Date();
+    this.year = now.getFullYear();
+    this.month = now.getMonth();
+    this.day = now.getDate();
+    this.minDate = { year: this.year, month: this.month + 1, day: this.day };
+    this.maxDate = { year: this.year, month: this.month + 2, day: this.day + 10 };
   }
 
   previousState(): void {

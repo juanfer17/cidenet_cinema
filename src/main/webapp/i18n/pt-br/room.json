@@ -2,7 +2,7 @@
   "cinemaCidenetApp": {
     "room": {
       "home": {
-        "title": "Rooms",
+        "title": "Quartos",
         "refreshListLabel": "Atualizar lista",
         "createLabel": "Criar novo Room",
         "createOrEditLabel": "Criar ou editar Room",
@@ -18,12 +18,12 @@
         "title": "Room"
       },
       "id": "ID",
-      "roomName": "Room Name",
-      "roomType": "Room Type",
-      "row": "Row",
-      "column": "Column",
-      "statusRoom": "Status Room",
-      "bookingPrice": "Booking Price"
+      "roomName": "Nome do Quarto",
+      "roomType": "Formato",
+      "row": "Linhas",
+      "column": "Coluna",
+      "statusRoom": "Disponível",
+      "bookingPrice": "Preço do bilhete"
     }
   }
 }

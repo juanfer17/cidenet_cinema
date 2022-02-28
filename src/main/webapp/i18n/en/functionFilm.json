@@ -2,7 +2,7 @@
   "cinemaCidenetApp": {
     "functionFilm": {
       "home": {
-        "title": "Function Films",
+        "title": "Functions",
         "refreshListLabel": "Refresh list",
         "createLabel": "Create a new Function Film",
         "createOrEditLabel": "Create or edit a Function Film",

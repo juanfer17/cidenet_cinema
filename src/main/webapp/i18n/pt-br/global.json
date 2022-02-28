@@ -39,6 +39,10 @@
     "form": {
       "username.label": "Usuário",
       "username.placeholder": "Seu usuário",
+      "name.label": "Nomes",
+      "name.placeholder": "Digite seus nomes",
+      "lastName.label": "Sobrenomes",
+      "lastName.placeholder": "Digite Sobrenomes",
       "currentpassword.label": "Senha atual",
       "currentpassword.placeholder": "Senha atual",
       "newpassword.label": "Nova senha",
@@ -46,7 +50,13 @@
       "confirmpassword.label": "Confirmação de nova senha",
       "confirmpassword.placeholder": "Confirme a nova senha",
       "email.label": "E-mail",
-      "email.placeholder": "Seu e-mail"
+      "email.placeholder": "Seu e-mail",
+      "confirmEmail.label": "Confirme o novo Email",
+      "confirmEmail.placeholder": "Confirme o novo Email",
+      "documentType.label": "Tipo de Documento",
+      "documentType.placeholder": "Selecione seu tipo de documento",
+      "documentNumber.label": "Número do documento",
+      "documentNumber.placeholder": "Digite o número do seu documento"
     },
     "messages": {
       "info": {

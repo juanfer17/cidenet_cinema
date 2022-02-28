@@ -45,6 +45,13 @@ html body {
   color: #181818;
   background-color: #e5e2ff;
 }
+.modal-title {
+  margin-bottom: 0;
+  line-height: 1.5;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
 
 .modal-footer {
   padding-bottom: 2rem;
